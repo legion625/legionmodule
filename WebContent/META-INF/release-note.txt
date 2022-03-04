@@ -1,0 +1,92 @@
+v0.7.1 released by Jason, 2018.12.30
+[change]
+1. [LUIS]Add attribute 'resolution' to LuisEntity.
+
+v0.7.0 released by Jason, 2018.12.30
+[change]
+1. Add security module.
+
+v0.6.7 released by Jason, 2018.12.30
+[bug]
+1. [DAO]Fix some bugs.
+
+v0.6.6 released by Jason, 2018.12.30
+[change]
+1. [LUIS]Add 'publish' method.
+
+v0.6.5 released by Jason, 2018.12.29
+[change]
+1. [LUIS]Add 'addUtterance' and 'train' methods.
+
+v0.6.4 released by Jason, 2018.12.29
+[change]
+1. [LUIS]Add 'getAllIntents', 'getIntent', and 'createIntent' methods.
+
+v0.6.3 released by Jason, 2018.12.27
+[change]
+1. Offer google search funtion.
+
+v0.6.2 released by Jason, 2018.12.27
+[bug]
+1. Fix bugs.
+
+v0.6.1 released by Jason, 2018.12.25
+[bug]
+1. Fix bugs.
+
+v0.6.0 released by Jason, 2018.12.25
+[change]
+1. 提供Luis模組。
+
+v0.5.1 released by Jason, 2018.12.22
+[bug]
+1. Fix minor errors.
+
+v0.5.0 released by Jason, 2018.12.22
+[change]
+1. 提供SearchOperation框架。
+
+v0.4.0 released by Jason, 2018.12.21
+[change]
+1. 提供DocFile檔案儲存機制。
+
+v0.3.0 released by Jason, 2018.12.19
+[change]
+1. 調整LegionObject架構。
+  -1. 時間改用LocalDateTime。
+2. [DataFO]提供自動補足字串的功能。
+
+[bug]
+1. [CSS]修正gridBorderNone的bug。
+
+[deployment]
+1. 調整LegionObject架構。
+
+v0.2.0 released by Jason, 2018.12.16
+[change]
+1. 提供FnCntTemplate框架。
+
+v0.1.1 released by Jason, 2018.12.16
+
+v0.1.0 released by Jason, 2018.12.16
+重新訂版 
+
+v0.0.4 released by Jason, 2018.03.06
+[change]
+1. 調整LegionObject結構。
+2. JsonUtil和DateFormatUtil新增方法。
+
+v0.0.3 released by Jason, 2017.12.31
+[changes]
+1. 新增font-awesome。
+2. minor fix.
+
+v0.0.2 released by Jason, 2017.10
+[changes]
+1. 新增各項基本工具類別。
+2. 新增Field介面，有在資料庫存取的類型列舉，必須實作此介面。
+3. 新增LegionObject，
+
+
+[changes]
+[bugs]

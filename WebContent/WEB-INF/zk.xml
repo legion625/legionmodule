@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Created by ZK Studio -->
+
+<zk>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/timeout.zul</timeout-uri><!-- An empty URL can cause the browser to reload the same URL -->
+	</device-config>
+	<!-- LegionModule -->
+	<!-- stylesheet -->
+	<desktop-config>
+		<theme-uri>/legionmodule/css/legionmodule_zk_default.css</theme-uri>
+		<theme-uri>/legionmodule/css/fontawesome-all.css</theme-uri>
+	</desktop-config>
+	
+	<library-property>
+		<name>org.zkoss.theme.preferred</name>
+		<value>iceblue_c</value>
+	</library-property>
+
+	
+</zk>

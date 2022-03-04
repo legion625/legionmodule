@@ -1,0 +1,11 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<panel>
+		<panelchildren>
+			<vlayout>
+				<button id="btnUpload" label="Upload staff config" upload="true"></button>
+				<textbox id="txbStaffConfigFile" readonly="true" />
+			</vlayout>
+		</panelchildren>
+	</panel>
+</zk>

@@ -1,0 +1,12 @@
+<?page id="fnCntTemplateRoot" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<borderlayout id="fnCntTemplateRoot" vflex="1"
+		apply="legion.web.control.zk.legionmodule.pageTemplate.FnCntTemplateComposer">
+		<west id="layoutRegionFn" width="25%" collapsible="true" splittable="true" >
+			<include id="iclFn" />
+		</west>
+		<center>
+			<include id="iclCnt" />
+		</center>
+	</borderlayout>
+</zk>

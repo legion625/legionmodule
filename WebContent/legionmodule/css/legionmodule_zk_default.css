@@ -1,0 +1,10 @@
+@charset "UTF8";
+
+.gridBordnerNone, 
+.gridBordnerNone .z-row .z-cell{ 
+	border:none; border-top:none 
+}
+
+.gridBgTransparent .z-grid-body .z-cell{
+	background:transparent;
+}
