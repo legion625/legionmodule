@@ -1,4 +1,9 @@
-[temp]
+Min-Hua, 2022.03.14
+[deployment]
+1. 新增deployment資料夾，把WEB-INF的內容放一份在該資料夾中，並在.gitignore中過濾掉WEB-INF。
+
+Min-Hua, 2022.03.13
+[lab]
  - 採用logback-classic的jar檔，可以成功在console裡print出log。
  - 後續還要實踐用讀設定檔的方式。
 
@@ -100,4 +105,6 @@ v0.0.2 released by Jason, 2017.10
 # annotations
  - [changes]
  - [bugs]
+ - [lab]
  - [lib]
+ - [deployment]
