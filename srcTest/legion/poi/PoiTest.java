@@ -41,7 +41,7 @@ public class PoiTest {
 		// 表個數。
 		int numberOfSheets = workbook.getNumberOfSheets();
 		
-		log.info("numberOfSheets:\t " + numberOfSheets);
+//		log.info("numberOfSheets:\t " + numberOfSheets);
 		
 		// 遍歷表。
 		for (int i = 0; i < numberOfSheets; i++) {
@@ -64,14 +64,14 @@ public class PoiTest {
 //				Row r = sheet.getRow(row);
 			Row r = sheet.getRow(2);
 //				for (int col = 0; col < cells; col++) {
-			for (int col = 0; col < 4; col++) {
-					Cell c = r.getCell(col);
-					System.out.print("col"+col+":\t"+(c==null?"":r.getCell(col).toString()+" "));
-					System.out.println();	
-				}
-
-				// 換行。
-				System.out.println("----------------------------------------------------------");
+//			for (int col = 0; col < 4; col++) {
+//					Cell c = r.getCell(col);
+//					System.out.print("col"+col+":\t"+(c==null?"":r.getCell(col).toString()+" "));
+//					System.out.println();	
+//				}
+//
+//				// 換行。
+//				System.out.println("----------------------------------------------------------");
 //			}
 		}
 		

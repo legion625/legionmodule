@@ -5,3 +5,4 @@ syntax: glob
 WebContent/WEB-INF/lib/*
 WebContent/META-INF/MANIFEST.MF
 *.class
+/bin/

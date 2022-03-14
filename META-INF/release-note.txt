@@ -1,3 +1,13 @@
+[temp]
+ - 採用logback-classic的jar檔，可以成功在console裡print出log。
+ - 後續還要實踐用讀設定檔的方式。
+
+[lib]
+1. 設定slf4j+logback架構
+  -1. slf4j-1.7.36
+  -2. logback-core-1.2.11
+  -3. logback-classic-1.2.11
+
 v0.7.1 released by Jason, 2018.12.30
 [change]
 1. [LUIS]Add attribute 'resolution' to LuisEntity.
@@ -87,6 +97,7 @@ v0.0.2 released by Jason, 2017.10
 2. 新增Field介面，有在資料庫存取的類型列舉，必須實作此介面。
 3. 新增LegionObject，
 
-
-[changes]
-[bugs]
+# annotations
+ - [changes]
+ - [bugs]
+ - [lib]
