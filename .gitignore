@@ -6,3 +6,4 @@ WebContent/WEB-INF/*
 *.class
 /bin/
 classes/*
+/WEB-INF/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!-- BusinessService -->
+	<BusinessService id="businessService"></BusinessService>
+	<!-- IntegrationService -->
+	<IntegrationService id="integrationService">
+		<Service class="legion.data.LegionDataService" imp="legion.data.LegionDataServiceImp">
+			<param name="legion" src="xxx" />
+		</Service>
+	</IntegrationService>
+</root>

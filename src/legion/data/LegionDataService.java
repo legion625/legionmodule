@@ -1,6 +1,6 @@
 package legion.data;
 
-import legion.service.IntegrationService;
+import legion.IntegrationService;
 
 public interface LegionDataService extends IntegrationService{
 

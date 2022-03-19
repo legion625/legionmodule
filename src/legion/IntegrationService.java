@@ -1,4 +1,4 @@
-package legion.service;
+package legion;
 
 import java.util.Map;
 
