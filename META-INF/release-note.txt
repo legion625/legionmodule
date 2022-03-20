@@ -1,7 +1,11 @@
-legion, 2022.03.17
+Min-Hua, 2022.03.17
 [changes]
 1. Server啟動時讀取設定檔的機制。
-  - 在WEB-INF中設定ServiceModule.xml，
+  - 新增BusinessServiceFactory。(其中的BeanUtil尚未實作，待測試。)
+  - 在WEB-INF中設定ServiceModule.xml。
+
+[lib]
+1. 新增jdom_2.0.6.1。
 
 Min-Hua, 2022.03.14
 [deployment]
