@@ -1,11 +1,14 @@
 package legion.web;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSessionEvent;
@@ -22,26 +25,88 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import legion.BusinessServiceFactory;
 import legion.IntegrationService;
 
-public class InitWebAppListener implements ServletContextListener {
+public class InitWebAppsListener implements ServletContextListener {
 
-	private Logger log = LoggerFactory.getLogger(InitWebAppListener.class);
+	private Logger log = LoggerFactory.getLogger(InitWebAppsListener.class);
 
+	// -------------------------------------------------------------------------------
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
+		log.info("InitWebAppListener.contextInitialized......");
+		log.warn("InitWebAppListener.contextInitialized......");
+//		initLog(sce); TODO
+//		initSystemInfo(sce); TODO
+//		registerClientRmiSSL(sce); TODO
+//		initDataSource(sce); TODO
+//		initIntegrationServiceModule(sce); TODO
+		initBusinessServiceModule(sce);
+//		initAspectManager(sce); TODO
+//		initMenu(sce); TODO
+//		initMimeType(sce); TODO
+		
+//		initIppmCrossResourceLink(sce); TODO
+//		initLinkModuleView(sce); TODO
+//		initQuickLinkModuleView(sce); TODO
+//		initPersonalNotification(sce); TODO
+		
+		
+		
 		// TODO Auto-generated method stub
-		log.warn("InitWebAppListener.sessionCreated");
-		System.out.println("InitWebAppListener.sessionCreated");
-		initServiceModule();
+//		log.warn("InitWebAppListener.sessionCreated");
+//		System.out.println("InitWebAppListener.sessionCreated");
+//		initServiceModule();
 	}
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		// TODO Auto-generated method stub
+		log.info("InitWebAppsListener.contextDestroyed......");
+		log.info("Destroy all business services......");
+		BusinessServiceFactory.getInstance().destroyAllServices();
+		log.info("Destroy all integration services......");
+//		DataServiceFactory.getInstance().destoryAllServices(); TODO
+		
+		log.info("Destroy datasources......");
+//		destroyDataSources(); TODO
+		log.info("Destroy personal notifications......");
+//		destroyPersonalNotifications(); TODO
 		
 	}
 	
+	// -------------------------------------------------------------------------------
+	protected void initBusinessServiceModule(ServletContextEvent sce) {
+		log.info("initBusinessServiceModule......");
+		ServletContext sc = sce.getServletContext();
+		FileInputStream fis = null;
+		String filePath = sc.getRealPath("/")+sc.getInitParameter("service-module-file");
+		log.debug("sc.getInitParameter(\"service-module-file\"): {}", sc.getInitParameter("service-module-file"));
+		log.info("BusinessServiceModule filePath: {}", filePath);
+		// Business Service
+		try {
+			fis = new FileInputStream(filePath);
+			BusinessServiceFactory.getInstance().regiesterService(fis);
+			
+//			log.info("*.Legion Module Version [{}]", LegionContext.getInstance().getVersion()); // XXX 這裡在讀BusinessServiceModule，有需要SHOW版本嗎?
+//			LegionContext.getInstance().getSystemInfo().putAttribute("legionmodule.version"
+//					,LegionContext.getInstance().getVersion()
+//					);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error(e.getMessage());
+		}finally {
+			try {
+				if(fis!=null)fis.close();
+			}catch (IOException e) {
+				log.error(e.getMessage());
+			}
+		}
+		//
+	}
+	
+	// -------------------------------------------------------------------------------
+	@Deprecated
 	private void initServiceModule() {
 //		log.warn("initBusinessService");
 		System.out.println("initBusinessService");

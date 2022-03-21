@@ -98,12 +98,12 @@ public class BusinessServiceFactory {
 	 *
 	 */
 	private static class ServiceInfo {
-		private String name = "", interf = "", imp = "";
+		private String name = "", itf = "", imp = "";
 		private Map<String, String> params;
 
-		ServiceInfo(String name, String interf, String imp) {
+		ServiceInfo(String name, String itf, String imp) {
 			this.name = name;
-			this.interf = interf;
+			this.itf = itf;
 			this.imp = imp;
 		}
 
@@ -143,11 +143,11 @@ public class BusinessServiceFactory {
 		}
 	}
 	
-	public synchronized boolean regiesterService(InputStream _inXmlStream) throws Exception{
+	public synchronized boolean regiesterService(InputStream _is) throws Exception{
 		try {
 			serviceInstanceMap.clear();
 			serviceInfoMap.clear();
-			parse(_inXmlStream);
+			parse(_is);
 			initService();
 			return true;
 		} catch (Exception e) {
@@ -175,26 +175,26 @@ public class BusinessServiceFactory {
 	
 	private void initService(ServiceInfo serviceInfo, boolean _reInit)throws Exception{
 		// 判別是否已註冊
-		Class<?> serviceInter = Class.forName(serviceInfo.interf);
-		if(!_reInit && serviceInstanceMap.containsKey(serviceInter)) {
-			log.info("[{}]", serviceInfo.interf);
+		Class<?> serviceItf = Class.forName(serviceInfo.itf);
+		if(!_reInit && serviceInstanceMap.containsKey(serviceItf)) {
+			log.info("[{}]", serviceInfo.itf);
 			return; // 已經註冊，且_reInit=false，不重覆註冊，結束。
 		}
 		
 		// 釋放原有服務
-		destroyService(serviceInter);
+		destroyService(serviceItf);
 		
 		// 此時一定是未註冊狀態->初始服務
-		Class<?> serviceClass = Class.forName(serviceInfo.imp);
+		Class<?> serviceImp = Class.forName(serviceInfo.imp);
 		// 驗證ServiceImp是否為實作指定的BusinessService介面。
-		if (!serviceInter.isAssignableFrom(serviceClass)) {
+		if (!serviceItf.isAssignableFrom(serviceImp)) {
 			log.error("BusinessService.xml.Service[{} - {}]沒有實作指定的服務[{}]介面!!", serviceInfo.name, serviceInfo.imp,
-					serviceInfo.interf);
+					serviceInfo.itf);
 			throw new Exception("BusinessService.xml.Service[" + serviceInfo.name + " - " + serviceInfo.imp
-					+ "]沒有實作指定的服務[" + serviceInfo.interf + "]介面!!");
+					+ "]沒有實作指定的服務[" + serviceInfo.itf + "]介面!!");
 		}
 		// 驗證ServiceImp是否實作BusinessService介面
-		if(!BusinessService.class.isAssignableFrom(serviceClass)) {
+		if(!BusinessService.class.isAssignableFrom(serviceImp)) {
 			log.error("BusinessService.xml.Service[{} - {}]沒有實作BusinessService介面!!", serviceInfo.name, serviceInfo.imp);
 			throw new Exception("BusinessService.xml.Service[" + serviceInfo.name + " - " + serviceInfo.imp
 					+ "]沒有實作BusinessService介面!!");
@@ -203,7 +203,8 @@ public class BusinessServiceFactory {
 		// 建構Service物件
 		BusinessService service = null;
 		BusinessService serviceInstance =(BusinessService) BeanUtil.serviceInstance(serviceInfo.imp);
-		log.info("**.建構 Business Service[{}]-Interface[{}]", serviceInfo.imp, serviceInter);
+		log.warn("serviceInstance: {}", serviceInstance);
+		log.info("**.建構 Business Service[{}]-Interface[{}]", serviceInfo.imp, serviceItf);
 		
 		// 註冊參數
 		if (serviceInfo.params != null && !serviceInfo.params.isEmpty()) {
@@ -223,14 +224,14 @@ public class BusinessServiceFactory {
 		// 註冊前再次判斷是否該服務已經透過其他執行緒完成建構。
 		// 若有，則保留原註冊，廢棄目前建構的服務實體；否則，保留此次建構的服務實體。
 		synchronized (serviceInstanceMap) {
-			if (serviceInstanceMap.containsKey(serviceInter))
+			if (serviceInstanceMap.containsKey(serviceItf))
 				return;
 			else
-				serviceInstanceMap.put(serviceInter, serviceInstance);
+				serviceInstanceMap.put(serviceItf, serviceInstance);
 		}
 		
 		// 觸發事件
-		fireRegistedResource(serviceInter, service);
+		fireRegistedResource(serviceItf, service);
 
 	}
 	
