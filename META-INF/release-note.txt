@@ -1,5 +1,9 @@
 Min-Hua, 2022.03.22
 [changes]
+1. BeanUtil新增getProperty方法。
+
+Min-Hua, 2022.03.22
+[changes]
 1. Server啟動時讀取設定檔的機制。
   - 新增BusinessServiceFactory。
   - 在WEB-INF中設定ServiceModule.xml。

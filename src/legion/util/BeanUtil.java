@@ -2,11 +2,26 @@ package legion.util;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BeanUtil {
 	private static Logger log = LoggerFactory.getLogger(BeanUtil.class);
+
+	public static Object getProperty(Object bean, String property) {
+		Object object = bean;
+		if (property != null) {
+			try {
+				object = PropertyUtils.getProperty(bean, property);
+			} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+				log.error(e.getMessage());
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return object;
+	}
 
 	public static Class serviceClass(String className) {
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
