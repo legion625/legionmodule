@@ -36,7 +36,6 @@ public class InitWebAppsListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		log.info("InitWebAppListener.contextInitialized......");
-		log.warn("InitWebAppListener.contextInitialized......");
 //		initLog(sce); TODO
 //		initSystemInfo(sce); TODO
 //		registerClientRmiSSL(sce); TODO
@@ -86,7 +85,7 @@ public class InitWebAppsListener implements ServletContextListener {
 		// Business Service
 		try {
 			fis = new FileInputStream(filePath);
-			BusinessServiceFactory.getInstance().regiesterService(fis);
+			BusinessServiceFactory.getInstance().registerService(fis);
 			
 //			log.info("*.Legion Module Version [{}]", LegionContext.getInstance().getVersion()); // XXX 這裡在讀BusinessServiceModule，有需要SHOW版本嗎?
 //			LegionContext.getInstance().getSystemInfo().putAttribute("legionmodule.version"

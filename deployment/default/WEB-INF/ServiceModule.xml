@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<!-- BusinessService -->
-	<BusinessService id="businessService"></BusinessService>
+	<BusinessService>
+		<Service name="MyBizService" interface="legion.MyBizService" imp="legion.MyBizServiceImp">
+			<Parameter name="pName" value="pValue"/>
+		</Service>
+	</BusinessService>
 	<!-- IntegrationService -->
 	<IntegrationService id="integrationService">
 		<Service class="legion.data.LegionDataService" imp="legion.data.LegionDataServiceImp">
