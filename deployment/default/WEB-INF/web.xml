@@ -45,6 +45,11 @@
 		<param-name>service-module-file</param-name>
 		<param-value>WEB-INF/ServiceModule.xml</param-value>
 	</context-param>
+	<context-param>
+		<param-name>datasource-file</param-name>
+		<param-value>WEB-INF/datasource.xml</param-value>
+	</context-param>
+	
 	
 	<welcome-file-list>
 		<!-- <welcome-file>index.html</welcome-file>

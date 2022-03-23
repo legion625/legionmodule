@@ -1,3 +1,5 @@
+在InitWebAppsListener中實作initDataSource
+
 Min-Hua, 2022.03.22
 [change]
 1. 新增DataServiceFactory，並在InitWebAppsListener中實作initIntegrationServiceModule。

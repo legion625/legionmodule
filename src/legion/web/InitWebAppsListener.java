@@ -40,7 +40,7 @@ public class InitWebAppsListener implements ServletContextListener {
 //		initLog(sce); TODO
 //		initSystemInfo(sce); TODO
 //		registerClientRmiSSL(sce); TODO
-//		initDataSource(sce); TODO
+		initDataSource(sce);
 		initIntegrationServiceModule(sce);
 		initBusinessServiceModule(sce);
 //		initAspectManager(sce); TODO
@@ -71,6 +71,30 @@ public class InitWebAppsListener implements ServletContextListener {
 		log.info("Destroy personal notifications......");
 //		destroyPersonalNotifications(); TODO
 
+	}
+	
+	// -------------------------------------------------------------------------------
+	protected void initDataSource(ServletContextEvent sce) {
+		log.info("initDataSource......");
+		ServletContext sc = sce.getServletContext();
+		FileInputStream fis = null;
+		String filePath = sc.getRealPath("/") + sc.getInitParameter("datasource-file");
+		log.info("DataSource filePath: {}", filePath);
+		try {
+			fis = new FileInputStream(filePath);
+			DSManager.getInstance().registerDSXml(fis); // FIXME
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("init datasource fail: {}", e.getMessage());
+		} finally {
+			try {
+				if (fis != null)
+					fis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+		}
 	}
 
 	// -------------------------------------------------------------------------------
