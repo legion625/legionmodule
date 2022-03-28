@@ -1,3 +1,6 @@
+Jason, 2022.03.28
+1. QueryOperation
+
 v0.7.1 released by Jason, 2018.12.30
 [change]
 1. [LUIS]Add attribute 'resolution' to LuisEntity.
