@@ -1,4 +1,8 @@
 在InitWebAppsListener中實作initDataSource
+新增LegionContext
+
+[lib]
+1. 新增commons_configuration_1.10.jar。
 
 Min-Hua, 2022.03.22
 [change]

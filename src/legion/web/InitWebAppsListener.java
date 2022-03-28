@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
 import legion.BusinessServiceFactory;
 import legion.DataServiceFactory;
 import legion.IntegrationService;
+import legion.datasource.manager.DSManager;
 
 public class InitWebAppsListener implements ServletContextListener {
 

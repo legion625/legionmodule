@@ -1,6 +1,7 @@
 package legion.datasource.manager;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -104,5 +105,83 @@ public class DSManager {
 		return dsDao.releaseDatasource(_urlDs);
 	}
 	
+	public boolean releaseAllDatasources() {
+		return dsDao.releaseAllDatasources();
+	}
+	
+	public List<DataSourceInfo> getDatasourceInfos(){
+		return dsDao.getDatasourceInfos();
+	}
+	
+	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
+	public Object getConn(String _url) {
+		return getConn(_url, Integer.toString(Thread.currentThread().hashCode()));
+	}
+
+	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
+	public Object getConn(UrlDS _urlDs) {
+		return getConn(_urlDs, Integer.toString(Thread.currentThread().hashCode()));
+	}
+	
+	/**
+	 * 取得所需的Datasource Connection並以指定的ID為登記使用標的
+	 * @param _url
+	 * @param _id
+	 * @return Object
+	 * @deprecated 不支援多執行緒進行單一交易
+	 */
+	@Deprecated
+	public Object getConn(String _url, String _id) {
+		UrlDS urlDs;
+		if (urlDsMap.containsKey(_url))
+			urlDs = urlDsMap.get(_url);
+		else {
+			synchronized (urlDsMap) {
+				if(urlDsMap.containsKey(_url))
+					urlDs = urlDsMap.get(_url);
+				else {
+					urlDs = new UrlDS(_url);
+					urlDsMap.put(_url, urlDs);
+				}
+			}
+		}
+		return getConn(urlDs, _id);
+	}
+	
+	/**
+	 * 取得所需的Datasource Connection並以指定的ID為登記使用標的
+	 * 
+	 * @param _urlDs
+	 * @param _id
+	 * @return Object
+	 * @deprecated 不支援多執行緒進行單一交易
+	 */
+	private Object getConn(UrlDS _urlDs, String _id) {
+		Object conn = null;
+		// 是否處理交易狀態下取得Connection
+		conn = getTransactionCacheConn(_urlDs, _id);
+		if (conn == null) {
+			// 由DsDao取得連線
+			conn = dsDao.getConn(_urlDs);
+			if (conn == null)
+				return null;
+			else if (getTransactionState(_id)) {
+				// 交易狀態下，進行connection註冊
+				conn = registerTransactionCacheConn(_urlDs, _id, conn);
+				return conn;
+			}
+		}
+		return conn;
+	}
+	
+	private synchronized Object getTransactionCacheConn(UrlDS _urlDs, String _id) {
+		Object conn = null;
+		if (!getTransactionState(_id))
+			return null;
+		
+		Transaction t = transactionMap.get(_id);
+		conn = t.getConnection(_urlDs);
+		return conn;
+	}
 
 }
