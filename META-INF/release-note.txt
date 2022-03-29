@@ -1,5 +1,7 @@
-在InitWebAppsListener中實作initDataSource
-新增LegionContext
+[change]
+1. 在InitWebAppsListener中實作initDataSource
+2. 新增LegionContext類別。
+3. 新增ISystemInfo介面。
 
 [lib]
 1. 新增commons_configuration_1.10.jar。
