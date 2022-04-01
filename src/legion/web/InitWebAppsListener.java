@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,10 +68,10 @@ public class InitWebAppsListener implements ServletContextListener {
 		log.info("Destroy all business services......");
 		BusinessServiceFactory.getInstance().destroyAllServices();
 		log.info("Destroy all integration services......");
-//		DataServiceFactory.getInstance().destoryAllServices(); TODO
+		DataServiceFactory.getInstance().destroyAllServices();
 
 		log.info("Destroy datasources......");
-//		destroyDataSources(); TODO
+		destroyDataSources();
 		log.info("Destroy personal notifications......");
 //		destroyPersonalNotifications(); TODO
 
@@ -83,7 +86,7 @@ public class InitWebAppsListener implements ServletContextListener {
 		log.info("DataSource filePath: {}", filePath);
 		try {
 			fis = new FileInputStream(filePath);
-			DSManager.getInstance().registerDSXml(fis); // FIXME
+			DSManager.getInstance().registerDatasourceXml(fis);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("init datasource fail: {}", e.getMessage());
@@ -95,6 +98,33 @@ public class InitWebAppsListener implements ServletContextListener {
 				e.printStackTrace();
 				log.error(e.getMessage());
 			}
+		}
+	}
+	
+	protected void destroyDataSources() {
+		try {
+			DSManager.getInstance().releaseAllDatasources();
+			DSManager.getInstance().stopMonitor();
+		} catch (Exception e) {
+			log.error("destroy Datasource fail .....{}", e.getMessage());
+		}
+		try {
+			Enumeration<Driver> drivers = DriverManager.getDrivers();
+			while (drivers.hasMoreElements()) {
+				Driver driver = drivers.nextElement();
+				DriverManager.deregisterDriver(driver);
+			}
+		} catch (Exception e) {
+			log.error("deregisterDriver Fail .....{}", e.getMessage());
+		}
+		// MySQL
+		try {
+			Class<?> c = getClass().getClassLoader().loadClass("com.mysql.jdbc.AbandonedConnectionCleanupThread");
+			java.lang.reflect.Method shutdown = c.getDeclaredMethod("shutdown", new Class[] {});
+			shutdown.invoke(null, new Object[] {});
+			// AbandonedConnectionCleanupThread.shutdown();
+		} catch (Exception e) {
+			log.error("MySQL AbandonedConnectionCleanupThread shutdown");
 		}
 	}
 
