@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.tools.ant.taskdefs.SQLExec.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import legion.BusinessServiceFactory;
 import legion.LegionContext;
+import legion.datasource.DatasourceInfo;
 import legion.datasource.UrlDs;
 import legion.util.DateFormatUtil;
 import legion.util.DateUtil;
@@ -82,7 +82,7 @@ public class DSManager {
 	 * @param _datasourceXmlStream
 	 */
 	public void registerDatasourceXml(InputStream _datasourceXmlStream) {
-		dsDao.registerXml(_datasourceXmlStream);
+		dsDao.registerDatasourceXml(_datasourceXmlStream);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class DSManager {
 	 * @param _datasourceXmlStream
 	 */
 	public void registerDatasourceXml(InputStream _datasourceXmlStream, boolean _rebuild) {
-		dsDao.registerXml(_datasourceXmlStream, _rebuild);
+		dsDao.registerDatasourceXml(_datasourceXmlStream, _rebuild);
 	}
 	
 	/**
@@ -114,12 +114,12 @@ public class DSManager {
 	public boolean releaseDatasource(UrlDs _urlDs) {
 		return dsDao.releaseDatasource(_urlDs);
 	}
-	
-	public boolean releaseAllDatasources() {
-		return dsDao.releaseAllDatasources();
+
+	public void releaseAllDatasources() {
+		dsDao.releaseAllDatasources();
 	}
-	
-	public List<DataSourceInfo> getDatasourceInfos(){
+
+	public List<DatasourceInfo> getDatasourceInfos(){
 		return dsDao.getDatasourceInfos();
 	}
 	
@@ -177,7 +177,7 @@ public class DSManager {
 				return null;
 			else if (getTransactionState(_id)) {
 				// 交易狀態下，進行connection註冊
-				conn = registerTransactionCacheConn(_urlDs, _id, conn);
+				conn = registerTransactionCacheConn(_id, _urlDs, conn);
 				return conn;
 			}
 		}
@@ -453,7 +453,7 @@ public class DSManager {
 							alerts.clear();
 						for(Transaction t: transactionMap.values()) {
 							long st = System.currentTimeMillis();
-							if((t.getCreateTime()>0 && (st-t.getCreateTime())>=maxTsCreateTime))
+							if((t.getCreateTime()>0 && (st-t.getCreateTime())>=maxTsCreateTime)
 								||(t.getStartTime()>0 && (st-t.getStartTime())>=maxTsStartTime))
 								alerts.add(t);
 						}
@@ -470,7 +470,7 @@ public class DSManager {
 			log.debug("Thread[TransactionMonitor] End...");
 		}
 		
-		void alertTransaction(Tranaction _t) {
+		void alertTransaction(Transaction _t) {
 			// 提供log輸出
 			// 另外也提供mail通知，並且以另一緒來進行該動作
 			

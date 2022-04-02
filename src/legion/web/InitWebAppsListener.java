@@ -44,7 +44,7 @@ public class InitWebAppsListener implements ServletContextListener {
 //		initLog(sce); TODO
 //		initSystemInfo(sce); TODO
 //		registerClientRmiSSL(sce); TODO
-		initDataSource(sce);
+		initDataSource(sce); // FIXME
 		initIntegrationServiceModule(sce);
 		initBusinessServiceModule(sce);
 //		initAspectManager(sce); TODO
@@ -86,7 +86,7 @@ public class InitWebAppsListener implements ServletContextListener {
 		log.info("DataSource filePath: {}", filePath);
 		try {
 			fis = new FileInputStream(filePath);
-			DSManager.getInstance().registerDatasourceXml(fis);
+			DSManager.getInstance().registerDsXml(fis);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("init datasource fail: {}", e.getMessage());
@@ -102,12 +102,12 @@ public class InitWebAppsListener implements ServletContextListener {
 	}
 	
 	protected void destroyDataSources() {
-		try {
+//		try {
 			DSManager.getInstance().releaseAllDatasources();
 			DSManager.getInstance().stopMonitor();
-		} catch (Exception e) {
-			log.error("destroy Datasource fail .....{}", e.getMessage());
-		}
+//		} catch (Exception e) {
+//			log.error("destroy Datasource fail .....{}", e.getMessage());
+//		}
 		try {
 			Enumeration<Driver> drivers = DriverManager.getDrivers();
 			while (drivers.hasMoreElements()) {

@@ -6,9 +6,9 @@
 		</Service>
 	</BusinessService>
 	<!-- IntegrationService -->
-	<IntegrationService id="integrationService">
-		<Service class="legion.data.LegionDataService" imp="legion.data.LegionDataServiceImp">
-			<param name="legion" src="xxx" />
+	<IntegrationService>
+		<Service name="LegionDataService" interface="legion.data.LegionDataService" imp="legion.data.LegionDataServiceImp">
+			<param name="legion" value="xxx" />
 		</Service>
 	</IntegrationService>
 </root>
