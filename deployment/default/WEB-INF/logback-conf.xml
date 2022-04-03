@@ -15,7 +15,7 @@
 	</root>
 	
 	<!-- logger->system level -->
-	<logger name="legion.web.InitWebAppsListener" additivity="false" level="INFO">
+	<logger name="legion.web.InitLegionWebAppsListener" additivity="false" level="INFO">
 		<appender-ref ref="StdOut" />
 	</logger>
 	<logger name="legion.DataServiceFactory" additivity="false" level="INFO">

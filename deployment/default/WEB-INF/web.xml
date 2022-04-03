@@ -8,7 +8,7 @@
 	</listener>
 	<!-- init web apps listener -->
 	<listener>
-		<listener-class>legion.web.InitWebAppsListener</listener-class>	
+		<listener-class>legion.web.InitLegionWebAppsListenerDefault</listener-class>	
 	</listener>
 	
 	

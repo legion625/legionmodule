@@ -35,17 +35,15 @@ import legion.IntegrationService;
 import legion.datasource.manager.DSManager;
 import legion.util.DataFO;
 
-public class InitWebAppsListener implements ServletContextListener {
-
-	private Logger log = LoggerFactory.getLogger(InitWebAppsListener.class);
+public abstract class InitLegionWebAppsListener implements ServletContextListener {
+	protected Logger log = LoggerFactory.getLogger(InitLegionWebAppsListener.class);
 
 	// -------------------------------------------------------------------------------
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		log.info("InitWebAppListener.contextInitialized......");
-		log.debug("test debug");
 		initLog(sce); // ok
-//		initSystemInfo(sce); TODO
+//		initSystemInfo(sce); // FIXME 還不能完全正常運作
 //		registerClientRmiSSL(sce); TODO
 //		initDataSource(sce); // FIXME 還不能完全正常運作
 		initIntegrationServiceModule(sce); // ok
@@ -117,6 +115,12 @@ public class InitWebAppsListener implements ServletContextListener {
 			}
 		}
 	}
+	
+	// -------------------------------------------------------------------------------
+	// ------------------------------------system-------------------------------------
+	/** 創建實作SYstemInfo物件，並且註冊至LegionContext。 */
+	protected abstract void initSystemInfo(ServletContextEvent sce);
+	
 	
 	// -------------------------------------------------------------------------------
 	// ----------------------------------datasource-----------------------------------
