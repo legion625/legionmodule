@@ -28,10 +28,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import ch.qos.logback.classic.LoggerContext;
 import legion.BusinessServiceFactory;
 import legion.DataServiceFactory;
 import legion.IntegrationService;
 import legion.datasource.manager.DSManager;
+import legion.util.DataFO;
 
 public class InitWebAppsListener implements ServletContextListener {
 
@@ -41,12 +43,13 @@ public class InitWebAppsListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		log.info("InitWebAppListener.contextInitialized......");
-//		initLog(sce); TODO
+		log.debug("test debug");
+		initLog(sce); // ok
 //		initSystemInfo(sce); TODO
 //		registerClientRmiSSL(sce); TODO
-		initDataSource(sce); // FIXME
-		initIntegrationServiceModule(sce);
-		initBusinessServiceModule(sce);
+//		initDataSource(sce); // FIXME 還不能完全正常運作
+		initIntegrationServiceModule(sce); // ok
+		initBusinessServiceModule(sce); // ok
 //		initAspectManager(sce); TODO
 //		initMenu(sce); TODO
 //		initMimeType(sce); TODO
@@ -78,6 +81,45 @@ public class InitWebAppsListener implements ServletContextListener {
 	}
 	
 	// -------------------------------------------------------------------------------
+	// --------------------------------------log--------------------------------------
+	protected void initLog(ServletContextEvent sce) {
+		// 初始Log4環境...
+//		initLog4j(sce); XXX 應該不需要用到log4j...
+		// 初始Logback環境
+		initLogback(sce);
+	}
+	
+	protected void initLogback(ServletContextEvent sce) {
+		ServletContext sc = sce.getServletContext();
+		String logfile = sc.getInitParameter("logback-init-file");
+		if(DataFO.isEmptyString(logfile)) {
+			log.info("inigLogback fail: logfile [{}]", logfile);
+			return;
+		}
+		logfile = sc.getRealPath("/")+logfile;
+		log.info("logback-init-file:{}", logfile);
+		LogbackConfigure.initLogback(logfile);
+	}
+	
+	private static class LogbackConfigure{
+		static void initLogback(String _logfile) {
+			// assume SLF4j is bound to logback in the current environment
+			ch.qos.logback.classic.LoggerContext logContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+			try {
+				ch.qos.logback.classic.joran.JoranConfigurator c = new ch.qos.logback.classic.joran.JoranConfigurator();
+				c.setContext(logContext);
+				// to clear any previous configuration
+				logContext.reset();
+				c.doConfigure(_logfile);
+			}catch (Exception e) {
+				LoggerFactory.getLogger(LogbackConfigure.class).error("initLogback fail: {}" , e.getMessage());
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// -------------------------------------------------------------------------------
+	// ----------------------------------datasource-----------------------------------
 	protected void initDataSource(ServletContextEvent sce) {
 		log.info("initDataSource......");
 		ServletContext sc = sce.getServletContext();
@@ -86,7 +128,7 @@ public class InitWebAppsListener implements ServletContextListener {
 		log.info("DataSource filePath: {}", filePath);
 		try {
 			fis = new FileInputStream(filePath);
-			DSManager.getInstance().registerDsXml(fis);
+			DSManager.getInstance().registerDatasourceXml(fis);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("init datasource fail: {}", e.getMessage());
@@ -129,6 +171,7 @@ public class InitWebAppsListener implements ServletContextListener {
 	}
 
 	// -------------------------------------------------------------------------------
+	// ---------------------------IntegrationServiceModule----------------------------
 	protected void initIntegrationServiceModule(ServletContextEvent sce) {
 		log.info("initIntegrationServiceModule......");
 		ServletContext sc = sce.getServletContext();
@@ -153,6 +196,7 @@ public class InitWebAppsListener implements ServletContextListener {
 	}
 
 	// -------------------------------------------------------------------------------
+	// -----------------------------BusinessServiceModule-----------------------------
 	protected void initBusinessServiceModule(ServletContextEvent sce) {
 		log.info("initBusinessServiceModule......");
 		ServletContext sc = sce.getServletContext();
