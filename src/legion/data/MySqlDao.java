@@ -32,8 +32,7 @@ public abstract class MySqlDao extends Dao {
 	protected MySqlDataSource ds;
 
 	protected MySqlDao(MySqlDataSource _ds) {
-		System.out.println("Start::MySqlDao");
-		System.out.println("ds: " + _ds);
+		log.debug("Start::MySqlDao... _ds: {}", _ds);
 		ds = _ds;
 	}
 

@@ -4,6 +4,7 @@
 3. 新增ISystemInfo介面。
 4. 在InitWebAppsListener中實作initLog，並在web-inf中新增logback-con.xml設定檔。
 
+
 [lib]
 1. 新增commons_configuration_1.10.jar。
 
