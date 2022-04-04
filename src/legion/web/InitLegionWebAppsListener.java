@@ -43,7 +43,7 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 	public void contextInitialized(ServletContextEvent sce) {
 		log.info("InitWebAppListener.contextInitialized......");
 		initLog(sce); // ok
-//		initSystemInfo(sce); // FIXME 還不能完全正常運作
+		initSystemInfo(sce); // FIXME 還不能完全正常運作
 //		registerClientRmiSSL(sce); TODO
 //		initDataSource(sce); // FIXME 還不能完全正常運作
 		initIntegrationServiceModule(sce); // ok

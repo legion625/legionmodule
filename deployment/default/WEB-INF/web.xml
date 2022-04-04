@@ -47,6 +47,10 @@
 		<param-value>WEB-INF/logback-conf.xml</param-value>
 	</context-param>
 	<context-param>
+		<param-name>system-config-file</param-name>
+		<param-value>WEB-INF/system-conf.properties</param-value>
+	</context-param>
+	<context-param>
 		<param-name>datasource-file</param-name>
 		<param-value>WEB-INF/datasource.xml</param-value>
 	</context-param>

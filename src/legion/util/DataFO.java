@@ -141,8 +141,7 @@ public class DataFO {
 	public static double parseCeilNumber(double _d, int _digit) {
 		if (_digit < 0)
 			return _d;
-//		return MathUtils.round(_d, _digit, BigDecimal.ROUND_CEILING);
-		return MathUtils.round(_d, _digit, RoundingMode.CEILING.ordinal());
+		return MathUtils.round(_d, _digit, RoundingMode.CEILING);
 	}
 	
 	/**
@@ -156,7 +155,7 @@ public class DataFO {
 	public static double parseFloorNumber(double _d, int _digit) {
 		if (_digit < 0)
 			return _d;
-		return MathUtils.round(_d, _digit, RoundingMode.FLOOR.ordinal());
+		return MathUtils.round(_d, _digit, RoundingMode.FLOOR);
 	}
 	
 	/**
@@ -170,7 +169,7 @@ public class DataFO {
 	public static double parseRoundNumber(double _d, int _digit) {
 		if (_digit < 0)
 			return _d;
-		return MathUtils.round(_d, _digit, RoundingMode.HALF_EVEN.ordinal());
+		return MathUtils.round(_d, _digit, RoundingMode.HALF_EVEN);
 	}
 	
 	

@@ -44,8 +44,9 @@ public class InitLegionWebAppsListenerDefault extends InitLegionWebAppsListener 
 
 			// System config
 			String file = context.getRealPath("/") + context.getInitParameter("system-config-file"); // TOOD
-																										// 在Web.xml中設定參數
+			log.debug("debug system-config file: {}", file);																				// 在Web.xml中設定參數
 			if (file != null) {
+				
 				PropertiesConfiguration cfg = new PropertiesConfiguration();
 				cfg.setEncoding("UTF-8");
 				cfg.load(file);
@@ -91,6 +92,12 @@ public class InitLegionWebAppsListenerDefault extends InitLegionWebAppsListener 
 					systemInfo.setClassAnalyseClasspath(resultPaths.toArray(new String[0]));
 				}
 			}
+			
+			for(String key: systemInfo.getAttributes().keySet()) {
+				log.debug("{}\t{}", key,systemInfo.getAttributes().get(key) );
+			}
+			
+			
 		} catch (Exception e) {
 			log.error("init systemInfo Fail... {}", e.getMessage());
 		}

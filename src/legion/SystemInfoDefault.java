@@ -1,18 +1,24 @@
 package legion;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import legion.util.DataFO;
 
 public class SystemInfoDefault implements ISystemWebInfo{
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
 	// 單位:小時
 	private int localeCookieAge = 192; // 預設8天
 	private String[] classAnalyseClasspath;
-	private AspectManager aspectManager;
+//	private AspectManager aspectManager;  // FIXME not implemented yet
 	private ServletContext servletContext;
 	private Map<String, String> attrs = new HashMap<>();
 	private String systemId = "";
@@ -24,7 +30,13 @@ public class SystemInfoDefault implements ISystemWebInfo{
 	
 	private SystemInfoDefault(){
 		LegionContext.getInstance().registerSystemInfo(this);
-		hostIp = InetAddress.getLocalHost().getHostAddress();
+		try {
+			hostIp = InetAddress.getLocalHost().getHostAddress();
+			log.debug("hostIp: {}", hostIp);
+		} catch (UnknownHostException e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	public final static SystemInfoDefault getInstance() {
@@ -46,11 +58,12 @@ public class SystemInfoDefault implements ISystemWebInfo{
 	public String[] getClassAnalyseClasspath() {
 		return classAnalyseClasspath;
 	}
-
-	@Override
-	public AspectManager getAspectManager() {
-		return aspectManager;
-	}
+	
+	 // FIXME not implemented yet
+//	@Override
+//	public AspectManager getAspectManager() {
+//		return aspectManager;
+//	}
 
 	@Override
 	public String getName() {
@@ -93,11 +106,12 @@ public class SystemInfoDefault implements ISystemWebInfo{
 			if (DataFO.isInt(_attr))
 				localeCookieAge = Integer.parseInt(_attr);
 	}
-
-	@Override
-	public void setAspectManager(AspectManager aspectManager) {
-		this.aspectManager = aspectManager;
-	}
+	
+	 // FIXME not implemented yet
+//	@Override
+//	public void setAspectManager(AspectManager aspectManager) {
+//		this.aspectManager = aspectManager;
+//	}
 
 	@Override
 	public void setClassAnalyseClasspath(String[] classAnalyseClasspath) {

@@ -20,13 +20,40 @@ public class LegionContext {
 		try {
 			PropertiesConfiguration cfg = new PropertiesConfiguration();
 			cfg.setEncoding("UTF-8");
+			log.debug("LegionContext.class.getResource(\"legionmodule.properties\"): {}", LegionContext.class.getResource("legionmodule.properties"));
+			
+			
+//			 String resolveName(String name) {
+			String name = "legionmodule.properties";
+			if (!name.startsWith("/")) {
+				String baseName = LegionContext.class.getPackageName();
+				if (!baseName.isEmpty()) {
+					int len = baseName.length() + 1 + name.length();
+					StringBuilder sb = new StringBuilder(len);
+					name = sb.append(baseName.replace('.', '/')).append('/').append(name).toString();
+				}
+			} else {
+				name = name.substring(1);
+			}
+//		        return name;
+//			}
+			
+			log.debug("resolveName: {}", name);
+			
+			
 			cfg.load(LegionContext.class.getResource("legionmodule.properties"));
-			version = cfg.getString("Version");			
-		}catch (ConfigurationException e) {
+			version = cfg.getString("Version");		
+			log.debug("legionmodule version: {}", version);
+//		}catch (ConfigurationException e) {
+		}catch(Throwable e){
 			e.printStackTrace();
 			log.error("設定Legionmodule資料屬性異常。 {}", e.getMessage());
 		}
 	}
+	
+	
+	
+	
 	
 	public final static LegionContext getInstance() {
 		return INSTANCE;

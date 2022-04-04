@@ -13,12 +13,12 @@ public interface ISystemInfo {
 	Map<String, String> getAttributes();
 
 	String[] getClassAnalyseClasspath();
-	AspectManager getAspectManager();
+//	AspectManager getAspectManager(); // FIXME not implemented yet
 	String getName();
 	String getId();
 	String getHostIp();
 	String getVersion();
 	void putAttribute(String _key, String _attr);
-	void setAspectManager(AspectManager _manager);
+//	void setAspectManager(AspectManager _manager);  // FIXME not implemented yet
 	void setClassAnalyseClasspath(String[] _path);
 }
