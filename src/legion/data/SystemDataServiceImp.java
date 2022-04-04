@@ -2,7 +2,7 @@ package legion.data;
 
 import java.util.Map;
 
-public class LegionDataServiceImp implements LegionDataService{
+public class SystemDataServiceImp implements SystemDataService{
 
 	@Override
 	public void register(Map<String, String> _params) {
@@ -15,6 +15,8 @@ public class LegionDataServiceImp implements LegionDataService{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	// -------------------------------------------------------------------------------
 
 
 }

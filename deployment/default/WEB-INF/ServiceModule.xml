@@ -7,7 +7,10 @@
 	</BusinessService>
 	<!-- IntegrationService -->
 	<IntegrationService>
-		<Service name="LegionDataService" interface="legion.data.LegionDataService" imp="legion.data.LegionDataServiceImp">
+		<Service name="ObjectSeqDataService" interface="legion.data.ObjectSeqDataService" imp="legion.data.ObjectSeqDataServiceImp">
+			<param name="legion" value="xxx" />
+		</Service>
+		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.SystemDataServiceImp">
 			<param name="legion" value="xxx" />
 		</Service>
 	</IntegrationService>
