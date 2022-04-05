@@ -35,5 +35,8 @@
 	<logger name="legion.LegionContext" additivity="false" level="DEBUG">
 		<appender-ref ref="StdOut" />
 	</logger>
+	<logger name="legion.web.MenuRepository" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
 	
 </configuration>

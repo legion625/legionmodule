@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -31,7 +32,9 @@ import org.xml.sax.SAXException;
 import ch.qos.logback.classic.LoggerContext;
 import legion.BusinessServiceFactory;
 import legion.DataServiceFactory;
+import legion.ISystemInfo;
 import legion.IntegrationService;
+import legion.LegionContext;
 import legion.datasource.manager.DSManager;
 import legion.util.DataFO;
 
@@ -49,7 +52,7 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 		initIntegrationServiceModule(sce); // ok
 		initBusinessServiceModule(sce); // ok
 //		initAspectManager(sce); TODO
-//		initMenu(sce); TODO
+		initMenu(sce); // FIXME 還不能完全正常運作
 //		initMimeType(sce); TODO
 
 //		initIppmCrossResourceLink(sce); TODO
@@ -212,10 +215,15 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 			fis = new FileInputStream(filePath);
 			BusinessServiceFactory.getInstance().registerService(fis);
 
-//			log.info("*.Legion Module Version [{}]", LegionContext.getInstance().getVersion()); // XXX 這裡在讀BusinessServiceModule，有需要SHOW版本嗎?
-//			LegionContext.getInstance().getSystemInfo().putAttribute("legionmodule.version"
-//					,LegionContext.getInstance().getVersion()
-//					);
+			log.info("*.Legion Module Version [{}]", LegionContext.getInstance().getVersion()); // XXX
+																								// 這裡在讀BusinessServiceModule，有需要SHOW版本嗎?
+			LegionContext.getInstance().getSystemInfo().putAttribute("legionmodule.version",
+					LegionContext.getInstance().getVersion());
+			ISystemInfo systemInfo = LegionContext.getInstance().getSystemInfo();
+			for (String key : systemInfo.getAttributes().keySet()) {
+				log.debug("key:{}\tvalue:{}", key, systemInfo.getAttribute(key));
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
@@ -230,6 +238,36 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 		}
 	}
 
+	// -------------------------------------------------------------------------------
+	// -------------------------------------menu--------------------------------------
+	protected void initMenu(ServletContextEvent sce) {
+		log.info("init Menu...");
+		ServletContext sc = sce.getServletContext();
+		InputStream menuStream = null;
+		try {
+			// 主menu
+			String filePath = sc.getInitParameter("menu-file"); // TODO 在web.xml中設定menu-file
+			menuStream = sc.getResourceAsStream(filePath);
+			MenuRepository.getInstance().initMainMenu(menuStream);
+		} catch (Exception e) {
+			log.error("init menu fail...");
+		} finally {
+			try {
+				if (menuStream != null)
+					menuStream.close();
+			} catch (IOException e) {
+				log.error("{}", e.getMessage());
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	// -------------------------------------------------------------------------------
 //	@Deprecated
 //	private void initServiceModule() {

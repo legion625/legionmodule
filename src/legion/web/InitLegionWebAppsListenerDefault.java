@@ -43,10 +43,9 @@ public class InitLegionWebAppsListenerDefault extends InitLegionWebAppsListener 
 			systemInfo.setServletContext(context);
 
 			// System config
-			String file = context.getRealPath("/") + context.getInitParameter("system-config-file"); // TOOD
-			log.debug("debug system-config file: {}", file);																				// 在Web.xml中設定參數
+			String file = context.getRealPath("/") + context.getInitParameter("system-config-file");
+			log.debug("debug system-config file: {}", file); // 在Web.xml中設定參數
 			if (file != null) {
-				
 				PropertiesConfiguration cfg = new PropertiesConfiguration();
 				cfg.setEncoding("UTF-8");
 				cfg.load(file);

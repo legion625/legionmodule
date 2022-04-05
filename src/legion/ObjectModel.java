@@ -9,7 +9,7 @@ import legion.data.ObjectSeqDataService;
 import legion.util.DataFO;
 
 public abstract class ObjectModel {
-	protected static final Logger log = LoggerFactory.getLogger(getClass());
+	protected static final Logger log = LoggerFactory.getLogger(ObjectModel.class);
 
 	// OID
 	protected static final String YEAR = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
