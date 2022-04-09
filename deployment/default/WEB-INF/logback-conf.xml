@@ -13,6 +13,10 @@
 		<!-- The following level element is ot necessary since the level of the root level is set to DEBUG by default. -->
 		<appender-ref ref="StdOut" />
 	</root>
+	<!-- logger->common log -->
+	<logger name="legion.util.LogUtil" additivity="false" level="WARN">
+		<appender-ref ref="StdOut" />
+	</logger>
 	
 	<!-- logger->system level -->
 	<logger name="legion.web.InitLegionWebAppsListener" additivity="false" level="INFO">
@@ -36,6 +40,9 @@
 		<appender-ref ref="StdOut" />
 	</logger>
 	<logger name="legion.web.MenuRepository" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.util" additivity="false" level="DEBUG">
 		<appender-ref ref="StdOut" />
 	</logger>
 	

@@ -11,12 +11,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import legion.datasource.DatasourceInfo;
 import legion.datasource.DefaultDatasourceInfoDto;
 import legion.datasource.UrlDs;
 import legion.datasource.source.Dso;
 import legion.util.DataFO;
+import legion.util.LogUtil;
 
 public class DSManagerDao {
 	private static Logger log = LoggerFactory.getLogger(DSManagerDao.class);
@@ -49,7 +51,7 @@ public class DSManagerDao {
 		}
 		try {
 			Dso dso = dsCache.get(_urlDs.getName());
-			if (dso = null) {
+			if (dso == null) {
 				if (sourceCfg == null) {
 					// 進行預設資料來源定義初始
 					sourceCfg = SourceConfiguration.getInstance();
@@ -63,7 +65,10 @@ public class DSManagerDao {
 				//
 				String cls = resourceCfg.getParameter(ResourceInfo.Resource_IMP_CLASS);
 				dso = (Dso) Class.forName(cls).newInstance();
-				dso.initial(resourceCfg);
+				if (!dso.initial(resourceCfg)) {
+					log.error("dso.initial return false.");
+					return null;
+				}
 				dsCache.put(_urlDs.getName(), dso);
 			}
 			return dso.getConn(_urlDs);

@@ -48,7 +48,7 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 		initLog(sce); // ok
 		initSystemInfo(sce); // ok
 //		registerClientRmiSSL(sce); TODO
-//		initDataSource(sce); // FIXME 還不能完全正常運作
+		initDataSource(sce); // FIXME 還不能完全正常運作
 		initIntegrationServiceModule(sce); // ok
 		initBusinessServiceModule(sce); // ok
 //		initAspectManager(sce); TODO

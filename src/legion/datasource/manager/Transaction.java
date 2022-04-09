@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
 import legion.datasource.UrlDs;
+import legion.util.LogUtil;
 
 public class Transaction {
 	private static Logger log = LoggerFactory.getLogger(Transaction.class);
@@ -128,14 +129,13 @@ public class Transaction {
 					conn.release();
 					conn = null;
 				} catch (Exception e) {
-//					LogUtil.log(e, Level.DEBUG);
-					log.error(e.getMessage());
+					LogUtil.log(e, Level.ERROR);
 					e.printStackTrace();
 					continue;
 				}
 			}
 			connMap.clear();
-			fireEvent(TransactionEventType.AfterCommit());
+			fireEvent(TransactionEventType.AfterCommit);
 			return true;
 		}
 		return false;

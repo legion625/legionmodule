@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import legion.BusinessServiceFactory;
 import legion.LegionContext;
 import legion.datasource.DatasourceInfo;
+import legion.datasource.DefaultTransactionInfoDto;
+import legion.datasource.TransactionInfo;
 import legion.datasource.UrlDs;
 import legion.util.DateFormatUtil;
 import legion.util.DateUtil;

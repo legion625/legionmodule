@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root>
-	
-</root>
+<context>
+	<Transaction debug="false" period="3000">
+		<!-- 偵測Transaction建立存活時間(毫秒) -->
+		<MaxCreateTime>3000</MaxCreateTime>
+		<!-- 偵測Transaction初始後存活時間(毫秒) -->
+		<MaxStartTime>2000</MaxStartTime>
+		<!-- 偵測異常通知信收信者，可指定多人以";"區隔 -->
+		<AlertMail>legion625@gmail.com</AlertMail>
+	</Transaction>
+	<Resource name="legionmodule">
+		<parameter>
+			<name>dsoClassName</name>
+			<value>legion.datasource.source.DbTomcatPoolDso</value>
+		</parameter>
+	</Resource>
+</context>
