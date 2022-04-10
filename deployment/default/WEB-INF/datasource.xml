@@ -13,5 +13,57 @@
 			<name>dsoClassName</name>
 			<value>legion.datasource.source.DbTomcatPoolDso</value>
 		</parameter>
+		<parameter>
+			<name>driverClassName</name>
+			<value>com.mysql.cj.jdbc.Driver</value>
+		</parameter>
+		<parameter>
+			<name>url</name>
+			<value>jdbc:mysql://(host=localhost,port=3306,serverTimezone=Asia@2FTaipei,sslMode=DISABLED/legionmodule)</value>
+		</parameter>
+		<parameter>
+			<name>username</name>
+			<value>root</value>
+		</parameter>
+		<parameter>
+			<name>password</name>
+			<value>root!87570620</value>
+		</parameter>
+		<parameter>
+			<name>testOnBorrow</name>
+			<value>true</value>
+		</parameter>
+		<parameter>
+			<name>validationQuery</name>
+			<value>select 1</value>
+		</parameter>
+		<parameter>
+			<name>maxActive</name>
+			<value>15</value>
+		</parameter>
+		<parameter>
+			<name>maxIdle</name>
+			<value>8</value>
+		</parameter>
+		<parameter>
+			<name>minIdle</name>
+			<value>2</value>
+		</parameter>
+		<parameter>
+			<name>initialSize</name>
+			<value>1</value>
+		</parameter>
+		<parameter>
+			<name>maxWait</name>
+			<value>5000</value>
+		</parameter>
+		<parameter>
+			<name>alertMailPeriod</name>
+			<value>300</value>
+		</parameter>
+		<parameter>
+			<name>alertMail</name>
+			<value>legion625@gmail.com</value>
+		</parameter>
 	</Resource>
 </context>

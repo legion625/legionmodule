@@ -127,6 +127,7 @@ public class DSManagerDao {
 	 * @param _reBuild
 	 */
 	protected void registerDatasourceXml(InputStream _dsXmlStream, boolean _reBuild) {
+		log.debug("DSManagerDao::registerDatasourceXml start");
 		if (sourceCfg == null)
 			sourceCfg = SourceConfiguration.getInstance();
 		sourceCfg.registerDsXml(_dsXmlStream, _reBuild);
@@ -138,8 +139,7 @@ public class DSManagerDao {
 					try {
 						dsCache.get(key).close();
 					} catch (Exception e) {
-						log.error("[{}] Dso.close error. ", key);
-						e.printStackTrace();
+						LogUtil.log(log, e, Level.ERROR);
 					}
 				}
 			} finally {
@@ -147,6 +147,7 @@ public class DSManagerDao {
 				lock.unlock();
 			}
 		}
+		log.debug("DSManagerDao::registerDatasourceXml end");
 	}
 	
 	/** 釋放指定的資料來源 */

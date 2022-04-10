@@ -84,7 +84,9 @@ public class DSManager {
 	 * @param _datasourceXmlStream
 	 */
 	public void registerDatasourceXml(InputStream _datasourceXmlStream) {
+		log.debug("DSManager::registerDatasourceXml start");
 		dsDao.registerDatasourceXml(_datasourceXmlStream);
+		log.debug("DSManager::registerDatasourceXml end");
 	}
 
 	/**

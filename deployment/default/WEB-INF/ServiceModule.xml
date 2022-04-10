@@ -8,11 +8,11 @@
 	<!-- IntegrationService -->
 	<IntegrationService>
 		<Service name="ObjectSeqDataService" interface="legion.data.ObjectSeqDataService" imp="legion.data.service.ObjectSeqDataServiceImp">
-			<param name="source" value="sourceTemp" />
+			<param name="source" value="legionmodule" />
 			<param name="serverId" value="0" />
 		</Service>
 		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.SystemDataServiceImp">
-			<param name="legion" value="xxx" />
+			<param name="source" value="legionmodule" />
 		</Service>
 	</IntegrationService>
 </root>

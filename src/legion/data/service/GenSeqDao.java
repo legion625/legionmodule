@@ -26,6 +26,10 @@ public class GenSeqDao {
 
 	// -------------------------------------------------------------------------------
 	private final static String TB_SYSTEM_SEQ = "system_seq";
+	private final static String COL_SYSTEM_SEQ_ITEM_ID = "item_id";
+	private final static String COL_SYSTEM_SEQ_CURRENT_NUM = "current_num";
+	private final static String COL_SYSTEM_SEQ_LAST_NUM = "last_num";
+	private final static String COL_SYSTEM_SEQ_MAX_NUM = "max_num";
 
 	synchronized String getSeq(String _itemId) {
 		String simpleSeq = getSimpleSeq(_itemId);
@@ -34,7 +38,7 @@ public class GenSeqDao {
 			return null;
 		}
 		return simpleSeq + "!" + serverId;
-		
+
 //		long lgSeq = 1;
 //		Connection conn = null;
 //		PreparedStatement pstmt1 = null, pstmt2 = null;
@@ -81,7 +85,7 @@ public class GenSeqDao {
 //		}
 //		return lgSeq + "!" + serverId;
 	}
-	
+
 	synchronized String getSimpleSeq(String _itemId) {
 		long lgSeq = 1;
 		Connection conn = null;
@@ -89,22 +93,25 @@ public class GenSeqDao {
 		ResultSet rs = null;
 		try {
 			conn = (Connection) dsManager.getConn(source);
-			pstmt1 = conn.prepareStatement("select * from system_seq where item_id = ?");
+			pstmt1 = conn
+					.prepareStatement("select * from " + TB_SYSTEM_SEQ + " where " + COL_SYSTEM_SEQ_ITEM_ID + " = ?");
 			pstmt1.setString(1, _itemId);
 			rs = pstmt1.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getLong("current_num") < rs.getLong("max_num"))
-					lgSeq = rs.getLong("current_num") + 1;
+				if (rs.getLong(COL_SYSTEM_SEQ_CURRENT_NUM) < rs.getLong(COL_SYSTEM_SEQ_MAX_NUM))
+					lgSeq = rs.getLong(COL_SYSTEM_SEQ_CURRENT_NUM) + 1;
 
-				pstmt2 = conn.prepareStatement("update system_seq set current_num=?, last_num=? where item_id = ?");
+				pstmt2 = conn.prepareStatement("update " + TB_SYSTEM_SEQ + " set " + COL_SYSTEM_SEQ_CURRENT_NUM + "=?, "
+						+ COL_SYSTEM_SEQ_LAST_NUM + "=? where " + COL_SYSTEM_SEQ_ITEM_ID + " = ?");
 				pstmt2.setLong(1, lgSeq);
 				pstmt2.setLong(2, (lgSeq + 1));
 				pstmt2.setString(3, _itemId);
 				pstmt2.execute();
 			} else {
-				pstmt2 = conn.prepareStatement("insert into " + TB_SYSTEM_SEQ
-						+ " (item_id, current_num, last_num, max_num) values (?,1,2,99999999)");
+				pstmt2 = conn.prepareStatement("insert into " + TB_SYSTEM_SEQ + " (" + COL_SYSTEM_SEQ_ITEM_ID + ", "
+						+ COL_SYSTEM_SEQ_CURRENT_NUM + ", " + COL_SYSTEM_SEQ_LAST_NUM + ", " + COL_SYSTEM_SEQ_MAX_NUM
+						+ ") values (?,1,2,99999999)");
 				pstmt2.setString(1, _itemId);
 				pstmt2.execute();
 			}

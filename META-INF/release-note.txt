@@ -1,4 +1,8 @@
 Legion, 2022.04.05
+[deployment]
+1. 新增資料表system_seq。
+
+Legion, 2022.04.05
 1. 在InitWebAppsListener中實作initMenu。
 
 Legion, 2022.04.05

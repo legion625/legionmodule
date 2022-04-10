@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -14,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
+import legion.util.BeanUtil;
 import legion.util.DataFO;
 import legion.util.LogUtil;
 
@@ -106,6 +109,18 @@ public class SourceConfiguration {
 				}
 				sourceMap.put(info.getName(), info);
 			}
+			
+			log.debug("sourceMap.size(): {}", sourceMap.size());
+			for(String key: sourceMap.keySet()) {
+				log.debug("{}", key);
+				ResourceInfo resourceInfo = sourceMap.get(key);
+				Map<String, Object> map = PropertyUtils.describe(resourceInfo);
+				for (String k : map.keySet()) {
+					log.debug("{}\t{}", k, map.get(k));
+				}
+				
+			}
+			
 		} catch (Exception e) {
 			log.error("datasource XML parsing fail: {}", e.getMessage());
 			LogUtil.log(log, e, Level.ERROR);
