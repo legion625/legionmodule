@@ -34,37 +34,37 @@ public class Sha2 {
 		return toReturn;
 	}
 
-	public static void main(String[] argv) {
-
-//		String inputValue = "this is an example";
-		String inputValue = "password";
-
-		// With the java libraries
-		String sha256 = getSHA256(inputValue);
-
-		System.out.println("The SHA-256 of \"" + inputValue + "\" is:");
-		System.out.println(sha256);
-		System.out.println();
-
-		// With Apache commons
-		sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(inputValue);
-
-		System.out.println("The SHA-256 of \"" + inputValue + "\" is:");
-		System.out.println(sha256);
-		System.out.println();
-
-		// With the java libraries
-		String sha512 = getSHA512(inputValue);
-
-		System.out.println("The SHA-512 of \"" + inputValue + "\" is:");
-		System.out.println(sha512);
-		System.out.println();
-
-		// With Apache commons
-		sha512 = org.apache.commons.codec.digest.DigestUtils.sha512Hex(inputValue);
-
-		System.out.println("The SHA-512 of \"" + inputValue + "\" is:");
-		System.out.println(sha512);
-
-	}
+//	public static void main(String[] argv) {
+//
+////		String inputValue = "this is an example";
+//		String inputValue = "password";
+//
+//		// With the java libraries
+//		String sha256 = getSHA256(inputValue);
+//
+//		System.out.println("The SHA-256 of \"" + inputValue + "\" is:");
+//		System.out.println(sha256);
+//		System.out.println();
+//
+//		// With Apache commons
+//		sha256 = org.apache.commons.codec.digest.DigestUtils.sha256Hex(inputValue);
+//
+//		System.out.println("The SHA-256 of \"" + inputValue + "\" is:");
+//		System.out.println(sha256);
+//		System.out.println();
+//
+//		// With the java libraries
+//		String sha512 = getSHA512(inputValue);
+//
+//		System.out.println("The SHA-512 of \"" + inputValue + "\" is:");
+//		System.out.println(sha512);
+//		System.out.println();
+//
+//		// With Apache commons
+//		sha512 = org.apache.commons.codec.digest.DigestUtils.sha512Hex(inputValue);
+//
+//		System.out.println("The SHA-512 of \"" + inputValue + "\" is:");
+//		System.out.println(sha512);
+//
+//	}
 }

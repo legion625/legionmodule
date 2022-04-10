@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.function.Supplier;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public abstract class Dao {
+	protected Logger log = LoggerFactory.getLogger(getClass());
 
 	protected abstract Connection getConn();
 
@@ -26,7 +31,8 @@ public abstract class Dao {
 				pstmt = null;
 			}
 		} catch (SQLException e) {
-			System.out.println("close SQLException :" + e.toString());
+			log.error("close SQLException error: {}", e.toString());
+			e.printStackTrace();
 		}
 	}
 }

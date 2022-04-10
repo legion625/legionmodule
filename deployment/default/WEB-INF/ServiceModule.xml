@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<BusinessService>
+		<Service name="MyBizService" interface="legion.MyBizService" imp="legion.MyBizServiceImp">
+			<Parameter name="pName" value="pValue"/>
+		</Service>
+	</BusinessService>
+	<!-- IntegrationService -->
+	<IntegrationService>
+		<Service name="ObjectSeqDataService" interface="legion.data.ObjectSeqDataService" imp="legion.data.service.ObjectSeqDataServiceImp">
+			<param name="source" value="legionmodule" />
+			<param name="serverId" value="0" />
+		</Service>
+		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.SystemDataServiceImp">
+			<param name="source" value="legionmodule" />
+		</Service>
+	</IntegrationService>
+</root>

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Deprecated
 public class ObjSeqDao extends MySqlDao {
 	public ObjSeqDao(MySqlDataSource _ds) {
 		super(_ds);
