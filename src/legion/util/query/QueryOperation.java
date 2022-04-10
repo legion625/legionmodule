@@ -10,6 +10,7 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import legion.LegionContext;
 import legion.util.DataFO;
 
 /**
@@ -86,7 +87,7 @@ public class QueryOperation<C extends QueryParam, R> implements Serializable {
 		int defaultSize = -1;
 		//
 		String defaultSizeStr = LegionContext.getInstance().getSystemInfo()
-				.getAttributes("system.queryOperation.limit");
+				.getAttribute("system.queryOperation.limit");
 		if (DataFO.isInt(defaultSizeStr))
 			defaultSize = Integer.parseInt(defaultSizeStr);
 		return defaultSize;
