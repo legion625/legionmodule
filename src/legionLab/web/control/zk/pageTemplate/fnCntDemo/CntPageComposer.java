@@ -1,4 +1,4 @@
-package legion.web.control.zk.pageTemplate.fnCntDemo;
+package legionLab.web.control.zk.pageTemplate.fnCntDemo;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -7,7 +7,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import legion.web.control.zk.legionmodule.pageTemplate.FnCntProxy;
 
 public class CntPageComposer extends SelectorComposer<Component> {
-	public final static String URI = "pageTemplate/fnCntDemo/cntPage.zul";
+	public final static String URI = "/legionLab/pageTemplate/fnCntDemo/cntPage.zul";
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {

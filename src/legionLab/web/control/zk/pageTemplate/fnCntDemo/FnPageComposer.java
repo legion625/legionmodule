@@ -1,4 +1,4 @@
-package legion.web.control.zk.pageTemplate.fnCntDemo;
+package legionLab.web.control.zk.pageTemplate.fnCntDemo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.zkoss.zul.Include;
 import legion.web.control.zk.legionmodule.pageTemplate.FnCntProxy;
 
 public class FnPageComposer extends SelectorComposer<Component> {
-	public final static String URI = "pageTemplate/fnCntDemo/fnPage.zul";
+	public final static String URI = "/legionLab/pageTemplate/fnCntDemo/fnPage.zul";
 
 	@Wire
 	private Include iclSubpage;

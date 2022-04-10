@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="new page title" border="normal"
-		apply="legion.web.control.zk.pageTemplate.fnCntDemo.FnPageComposer">
+		apply="legionLab.web.control.zk.pageTemplate.fnCntDemo.FnPageComposer">
 		This is Fn Page.
 		<vlayout>
 		<button id="btn1" label="refresh fn" />

@@ -12,8 +12,8 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import example.DataSource;
 import legion.data.MySqlDataSource;
+import legionLab.DataSource;
 
 public class DocRepoFacadeTest {
 	@Test

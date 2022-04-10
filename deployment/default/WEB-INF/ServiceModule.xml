@@ -11,7 +11,7 @@
 			<param name="source" value="legionmodule" />
 			<param name="serverId" value="0" />
 		</Service>
-		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.SystemDataServiceImp">
+		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.service.system.SystemDataServiceImp">
 			<param name="source" value="legionmodule" />
 		</Service>
 	</IntegrationService>
