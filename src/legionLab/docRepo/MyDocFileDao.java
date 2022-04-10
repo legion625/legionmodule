@@ -1,7 +1,7 @@
-package example.docRepo;
+package legionLab.docRepo;
 
-import example.DataSource;
 import legion.data.docRepo.DocFileDao;
+import legionLab.DataSource;
 
 public class MyDocFileDao extends DocFileDao {
 	protected MyDocFileDao() {

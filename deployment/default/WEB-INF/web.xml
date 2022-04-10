@@ -8,10 +8,8 @@
 	</listener>
 	<!-- init web apps listener -->
 	<listener>
-		<listener-class>legion.web.InitLegionWebAppsListenerDefault</listener-class>	
+		<listener-class>legionLab.web.InitLegionWebAppsListenerDefault</listener-class>	
 	</listener>
-	
-	
 	
 	<servlet>
 		<description>The ZK loader for ZUML pages</description>
@@ -63,8 +61,6 @@
 		<param-value>WEB-INF/menu-conf.xml</param-value>
 	</context-param>
 	
-	
-	
 	<welcome-file-list>
 		<!-- <welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -73,7 +69,7 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 		<welcome-file>index.zul</welcome-file> -->
-		<welcome-file>main.zul</welcome-file>
+		<welcome-file>legionLab/main.zul</welcome-file>
 		
 	</welcome-file-list>
 </web-app>

@@ -1,4 +1,4 @@
-package legion.web;
+package legionLab.web;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import legion.ISystemWebInfo;
 import legion.LegionContext;
 import legion.SystemInfoDefault;
+import legion.web.InitLegionWebAppsListener;
 
 public class InitLegionWebAppsListenerDefault extends InitLegionWebAppsListener implements ServletContextListener {
 

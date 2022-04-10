@@ -1,5 +1,6 @@
-package legion.web.control.zk.gaStaffShiftDemo;
+package legionLab.web.control.zk.gaStaffShiftDemo;
 
+import org.slf4j.event.Level;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -9,10 +10,11 @@ import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 
+import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.FnCntProxy;
 
 public class FnPageComposer extends SelectorComposer<Component>{
-	public final static String URI = "gaStaffShiftDemo/fnPage.zul";
+	public final static String URI = "/legionLab/gaStaffShiftDemo/fnPage.zul";
 	
 	@Override
 	public void doAfterCompose(Component comp) {
@@ -24,9 +26,8 @@ public class FnPageComposer extends SelectorComposer<Component>{
 			/**/
 //			String value2 = (String) Executions.getCurrent().getAttribute("key2");
 //			System.out.println("value2: " + value2);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Throwable e) {
+			LogUtil.log(e, Level.ERROR);
 		}
 	}
 	

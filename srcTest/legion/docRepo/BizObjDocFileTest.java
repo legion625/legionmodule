@@ -4,10 +4,10 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import example.DataSource;
-import example.docRepo.MyDocFileDao;
 import legion.TestUtil;
 import legion.data.MySqlDataSource;
+import legionLab.DataSource;
+import legionLab.docRepo.MyDocFileDao;
 
 public class BizObjDocFileTest {
 	private static MySqlDataSource ds = DataSource.getMySqlDs();

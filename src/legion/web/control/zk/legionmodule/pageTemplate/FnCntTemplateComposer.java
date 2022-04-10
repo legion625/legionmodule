@@ -15,10 +15,30 @@ import org.zkoss.zul.LayoutRegion;
 import org.zkoss.zul.West;
 
 import legion.util.DataFO;
+import legion.util.ZkUtil;
 
 public class FnCntTemplateComposer extends SelectorComposer<Component> {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	// -------------------------------------------------------------------------------
+	public final static String FN_LEFT_TEMPLATE_URI = "/legionmodule/pageTemplate/fnLeftTemplate.zul";
 
+//	public static FnCntTemplateComposer of(Include _icd, String _fnUri) {
+//		return of(_icd, _fnUri, null);
+//	}
+//	
+//	public static FnCntTemplateComposer of(Include _icd, String _fnUri, String _cntUri) {
+//		_icd.setSrc(FN_LEFT_TEMPLATE_URI);
+//		_icd.invalidate();
+//		FnCntTemplateComposer c = ZkUtil.of(_icd, "fnCntTemplateRoot");
+//		if (!DataFO.isEmptyString(_fnUri))
+//			c.refreshFnUri(_fnUri);
+//		if (!DataFO.isEmptyString(_cntUri))
+//			c.refreshCntUri(_cntUri);
+//		return c;
+//	}
+
+	// -------------------------------------------------------------------------------
 	@Wire
 	private LayoutRegion layoutRegionFn;
 	@Wire
