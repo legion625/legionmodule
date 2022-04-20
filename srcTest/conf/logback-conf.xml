@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+	<!-- appender -->
+	<appender name="StdOut" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- Encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>[%5p] %-20([%d{MM-dd HH:mm:ss}] [%thread]) %-20(%class{0}[%4(%L)]) => %m%n</pattern>
+		</encoder>
+	</appender>
+	<!-- logger -->
+	<!-- logger->root -->
+	<root level="ERROR">
+		<!-- The following level element is ot necessary since the level of the root level is set to DEBUG by default. -->
+		<appender-ref ref="StdOut" />
+	</root>
+	<!-- logger->common log -->
+	<logger name="legion.util.LogUtil" additivity="false" level="WARN">
+		<appender-ref ref="StdOut" />
+	</logger>
+	
+	<!-- logger->system level -->
+	<logger name="legion.web.InitLegionWebAppsListener" additivity="false" level="INFO">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.DataServiceFactory" additivity="false" level="INFO">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.BusinessServiceFactory" additivity="false" level="INFO">
+		<appender-ref ref="StdOut" />
+	</logger>
+	
+	<!-- Test -->
+	<logger name="legion.TestLogMark" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	
+	<!-- developing debug -->
+	<logger name="legion.SystemInfoDefault" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.web.InitLegionWebAppsListener" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.LegionContext" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.web.MenuRepository" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.util" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.data" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.datasource" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	<logger name="legion.DataServiceFactory" additivity="false" level="DEBUG">
+		<appender-ref ref="StdOut" />
+	</logger>
+	
+</configuration>

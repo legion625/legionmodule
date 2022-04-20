@@ -16,10 +16,16 @@
 			</grid>
 			<menubar>
 				<menuitem id="miFnLeftTemplateDemo" label="Fn-Left Template Demo" ></menuitem>
-				<menuitem id="miGaStaffShiftDemo" label="GA Staff Shift Demo" ></menuitem>
-				
-				
-				
+				<menuitem id="miGaStaffShiftDemo" label="GA Staff Shift Demo"></menuitem>
+				<menu label="System">
+					<menupopup>
+						<menuitem id="miSysAttr" label="System attributes"></menuitem>
+					</menupopup>
+				</menu>
+
+
+
+
 				<!-- <menu label="採購文件">
 					<menupopup>
 						<menuitem id="miRfi" label="資訊邀請書(RFI)" />

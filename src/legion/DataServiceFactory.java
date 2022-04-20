@@ -200,11 +200,15 @@ public class DataServiceFactory {
 	
 	// -------------------------------------------------------------------------------
 	public <T> T getService(Class<T> _class) {
+		log.debug("test 1");
 		if (!serviceInstanceMap.containsKey(_class)) {
+			log.debug("test 2");
 			// 檢查是否有服務資訊，無則先初始該服務。
 			if (serviceInfoMap.containsKey(_class.getName())) {
+				log.debug("test 3");
 				try {
 					initService(serviceInfoMap.get(_class.getName()), false);
+					log.debug("test 4");
 				} catch (Exception e) {
 					e.printStackTrace();
 					log.error(e.getMessage());

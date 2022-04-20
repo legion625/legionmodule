@@ -38,6 +38,20 @@ public abstract class ObjectModel {
 		this.setUid(oid);
 		return true;
 	}
+	
+	protected <T extends ObjectModel> T configNewInstance() {
+		if (!generateUid()) {
+			log.error("generateUid return false.");
+			return null;
+		}
+		return (T) this;
+	}
+	
+	protected void configGetInstance(String _uid, long _objectCreateTime, long _objectUpdateTime) {
+		setUid(_uid);
+		setObjectCreateTime(_objectCreateTime);
+		setObjectUpdateTime(_objectUpdateTime);
+	}
 
 	// -------------------------------------------------------------------------------
 	// ---------------------------------getter&setter---------------------------------
@@ -78,6 +92,14 @@ public abstract class ObjectModel {
 
 	protected abstract boolean delete();
 
-	public abstract boolean equals(Object _obj);
+	public boolean equals(Object _obj) {
+		if (_obj == null)
+			return false;
+		if (!(_obj instanceof ObjectModel))
+			return false;
+		if (this.getClass() != _obj.getClass())
+			return false;
+		return this.getUid().equals(((ObjectModel) _obj).getUid());
+	}
 
 }
