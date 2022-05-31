@@ -2,6 +2,7 @@ package legion.datasource.source;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
@@ -203,6 +204,7 @@ public class DbTomcatPoolDso extends Dso {
 		// 初始
 		DataSourceFactory factory = new DataSourceFactory();
 		try {
+			properties.propertyNames().asIterator().forEachRemaining(e->log.debug("{}\t{}", e, properties.get(e)) );
 			ds = (DataSource) factory.createDataSource(properties);
 		} catch (Exception e) {
 			LogUtil.log(log, e, Level.ERROR);

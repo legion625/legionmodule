@@ -22,6 +22,7 @@ public class LegionTest extends AbstractLegionInitTest {
 		
 		List<SysAttr> sysAttrList = systemDataSerivce.loadSysAttrList();
 		log.debug("sysAttrList: {}", sysAttrList);
+		log.debug("sysAttrList.size(): {}", sysAttrList.size());
 		for(SysAttr sa: sysAttrList) {
 			log.debug("{}\t{}\t{}", sa.getTypeIdx(), sa.getKey(), sa.getValue());
 		}

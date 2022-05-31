@@ -31,6 +31,7 @@ public  class AbstractMySqlDao extends AbstractDao {
 	}
 
 	protected Connection getConn() {
+		log.debug("source: {}", source);
 		return DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
 	}
 
@@ -91,6 +92,7 @@ public  class AbstractMySqlDao extends AbstractDao {
 
 	// -------------------------------------------------------------------------------
 	protected final <T extends ObjectModel> boolean saveObject(String _table, DbColumn<T>[] _cols, T _obj) {
+		log.debug("_obj.getUid(): {}", _obj.getUid());
 		Connection conn = getConn();
 		PreparedStatement pstmt = null;
 		try {
@@ -100,13 +102,17 @@ public  class AbstractMySqlDao extends AbstractDao {
 			for (DbColumn<T> _col : _cols)
 				qstr += _col.name + "=?,";
 			qstr += COL_OBJECT_UPDATE_TIME + "=?";
-			qstr += " where " + COL_UID + "='" + _obj.getUid() + "'";
+//			qstr += " where " + COL_UID + "='" + _obj.getUid() + "'";
+			qstr += " where "+COL_UID+"=?";
+			log.debug("qstr: {}", qstr);
 			pstmt = conn.prepareStatement(qstr);
 			int colIndex = 1;
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			
+			pstmt.setString(colIndex++, _obj.getUid());
 
 			if (pstmt.executeUpdate() == 1)
 				return true;
@@ -136,14 +142,16 @@ public  class AbstractMySqlDao extends AbstractDao {
 				qstr += ",?";
 			qstr += ",?,?)";
 
+			log.debug("qstr: {}", qstr);
+			
 			pstmt = conn.prepareStatement(qstr);
 			int colIndex = 1;
 			pstmt.setString(colIndex++, _obj.getUid());
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
 			return pstmt.executeUpdate() == 1;
 		} catch (SQLException e) {
 			LogUtil.log(log, e, Level.ERROR);

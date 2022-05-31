@@ -20,6 +20,7 @@ public class SysAttrDao extends AbstractMySqlDao {
 
 	boolean testCallback() {
 		Connection conn = getConn();
+		log.debug("conn: {}", conn);
 		if (conn == null)
 			return false;
 		try {
@@ -35,8 +36,8 @@ public class SysAttrDao extends AbstractMySqlDao {
 	// ------------------------------------SysAttr------------------------------------
 	private final static String TB_SYS_ATTR = "sys_attr";
 	private final static String COL_SYS_ATTR_TYPE_IDX = "type_idx";
-	private final static String COL_SYS_ATTR_KEY = "key";
-	private final static String COL_SYS_ATTR_VALUE = "value";
+	private final static String COL_SYS_ATTR_KEY = "attr_key";
+	private final static String COL_SYS_ATTR_VALUE = "attr_value";
 
 	boolean saveSysAttr(SysAttr _sysAttr) {
 		DbColumn<SysAttr>[] cols = new DbColumn[] {

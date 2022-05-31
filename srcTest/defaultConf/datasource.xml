@@ -16,12 +16,12 @@
 		<parameter>
 			<name>driverClassName</name>
 			<!--<value>com.mysql.cj.jdbc.Driver</value>--> <!-- jdbc8 -->
-			<value>com.mysql.jdbc.Driver</value>
+			<value>com.mysql.jdbc.Driver</value> <!-- jdbc5 -->
 		</parameter>
 		<parameter>
 			<name>url</name>
-			<!--<value>jdbc:mysql://(host=localhost,port=3306,serverTimezone=Asia@2FTaipei,sslMode=DISABLED/legionmodule)</value>--> <!-- jdbc8 -->
-			<value>jdbc:mysql://localhost:3306/legionmodule</value>
+			<!--<value>jdbc:mysql://(host=localhost,port=3306,serverTimezone=Asia@2FTaipei,sslMode=DISABLED/legionmodule)</value>--> <!-- MySql8 -->
+			<value>jdbc:mysql://localhost:3306/legionmodule</value> <!-- MySql5 -->
 		</parameter>
 		<parameter>
 			<name>username</name>
