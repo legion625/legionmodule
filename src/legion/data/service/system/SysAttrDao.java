@@ -35,10 +35,11 @@ public class SysAttrDao extends AbstractMySqlDao {
 	// ------------------------------------SysAttr------------------------------------
 	private final static String TB_SYS_ATTR = "sys_attr";
 	private final static String COL_SYS_ATTR_TYPE_IDX = "type_idx";
-	private final static String COL_SYS_ATTR_KEY = "key";
-	private final static String COL_SYS_ATTR_VALUE = "value";
+	private final static String COL_SYS_ATTR_KEY = "kkey";
+	private final static String COL_SYS_ATTR_VALUE = "vvalue";
 
 	boolean saveSysAttr(SysAttr _sysAttr) {
+		log.debug("test saveSysAttr");
 		DbColumn<SysAttr>[] cols = new DbColumn[] {
 				DbColumn.of(COL_SYS_ATTR_TYPE_IDX, ColType.INT, SysAttr::getTypeIdx),
 				DbColumn.of(COL_SYS_ATTR_KEY, ColType.STRING, SysAttr::getKey),

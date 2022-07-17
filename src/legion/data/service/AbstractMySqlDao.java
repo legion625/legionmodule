@@ -106,8 +106,11 @@ public  class AbstractMySqlDao extends AbstractDao {
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+//			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
 
+			log.debug("qstr: {}", qstr);
+			
 			if (pstmt.executeUpdate() == 1)
 				return true;
 			else
@@ -137,13 +140,18 @@ public  class AbstractMySqlDao extends AbstractDao {
 			qstr += ",?,?)";
 
 			pstmt = conn.prepareStatement(qstr);
+			log.debug("qstr: {}", qstr);
 			int colIndex = 1;
 			pstmt.setString(colIndex++, _obj.getUid());
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+//			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+//			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			
+			
 			return pstmt.executeUpdate() == 1;
 		} catch (SQLException e) {
 			LogUtil.log(log, e, Level.ERROR);

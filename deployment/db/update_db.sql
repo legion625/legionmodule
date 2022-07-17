@@ -12,8 +12,8 @@ CREATE TABLE `system_seq` (
 CREATE TABLE `sys_attr` (
   `uid` VARCHAR(45) NOT NULL,
   `type_idx` TINYINT NULL,
-  `key` VARCHAR(45) NULL,
-  `value` VARCHAR(45) NULL,
+  `kkey` VARCHAR(45) NULL,
+  `vvalue` VARCHAR(45) NULL,
   `object_create_time` BIGINT NOT NULL,
   `object_update_time` BIGINT NOT NULL,
   PRIMARY KEY (`uid`));
