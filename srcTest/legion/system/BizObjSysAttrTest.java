@@ -1,7 +1,5 @@
 package legion.system;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -11,47 +9,41 @@ import legion.AbstractLegionInitTest;
 import legion.DataServiceFactory;
 import legion.TestUtil;
 import legion.data.SystemDataService;
-import legion.data.service.system.SystemDataServiceImp;
 import legion.system.type.SysAttrType;
 
-public class BizObjSysAttrTest extends AbstractLegionInitTest{
-
+public class BizObjSysAttrTest extends AbstractLegionInitTest {
 	private static SystemDataService dataService = DataServiceFactory.getInstance().getService(SystemDataService.class);
-	
+
 	private String targetUid;
-	private Target target1,target2;
 	
+	private Target target1, target2;
+
 	@Before
-	public void before() {
-		target1 = new Target(SysAttrType.UNDEFINED, "targetUid1", "targetUid1");
-		target2 = new Target(SysAttrType.SYS, "targetUid2", "targetUid2");
+	public void initMethod() {
+		target1 = new Target(SysAttrType.UNDEFINED, "key1", "value1");
+		target2 = new Target(SysAttrType.SYS, "key2", "value2");
 	}
-	
+
 	@Test
-	public void testCRUD() throws Throwable{
+	public void testCRUD() throws Throwable {
 		testCreateSysAttr();
 		testUpdateSysAttr();
 		testDeleteSysAttr();
 	}
-	
+
 	@Test
-//	@Ignore
+	@Ignore
 	public void testCreateSysAttr() throws Throwable {
 		/* create */
 		SysAttr obj = SysAttr.newInstance(target1.type);
-		log.debug("obj.getUid(): {}", obj.getUid());
-		
 		PropertyUtils.copyProperties(obj, target1);
-		log.debug("obj.getUid(): {}", obj.getUid());
-		log.debug("obj key: {}\tobj value: {}", obj.getKey(), obj.getValue());
 		assert obj.save();
 		targetUid = obj.getUid();
-		
 		/* load */
 		obj = dataService.loadSysAttr(targetUid);
 		TestUtil.assertObjEqual(target1, obj);
 	}
-	
+
 	@Test
 	@Ignore
 	public void testUpdateSysAttr() throws Throwable {
@@ -62,13 +54,13 @@ public class BizObjSysAttrTest extends AbstractLegionInitTest{
 		obj = dataService.loadSysAttr(targetUid);
 		TestUtil.assertObjEqual(target2, obj);
 	}
-	
+
 	@Test
 	@Ignore
 	public void testDeleteSysAttr() {
-		assert dataService.deleteSysAttr(targetUid);
+		assert dataService.loadSysAttr(targetUid).delete();
 	}
-	
+
 	// -------------------------------------------------------------------------------
 	public class Target {
 		private SysAttrType type;
