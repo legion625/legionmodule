@@ -37,6 +37,7 @@ import legion.IntegrationService;
 import legion.LegionContext;
 import legion.datasource.manager.DSManager;
 import legion.util.DataFO;
+import legionLab.web.control.zk.Main2Composer;
 
 public abstract class InitLegionWebAppsListener implements ServletContextListener {
 	protected Logger log = LoggerFactory.getLogger(InitLegionWebAppsListener.class);
