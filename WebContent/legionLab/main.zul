@@ -20,6 +20,12 @@
 				<menu label="System">
 					<menupopup>
 						<menuitem id="miSysAttr" label="System attributes"></menuitem>
+						<menuitem id="miTest">					</menuitem>
+						<menu id="submenu">
+						<menupopup>
+						<menuitem id="misubmenu"></menuitem>
+						</menupopup>
+						</menu>
 					</menupopup>
 				</menu>
 

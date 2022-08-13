@@ -4,18 +4,14 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.LayoutRegion;
-import org.zkoss.zul.West;
 
 import legion.util.DataFO;
-import legion.util.ZkUtil;
 
 public class FnCntTemplateComposer extends SelectorComposer<Component> {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
