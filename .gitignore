@@ -7,3 +7,4 @@ WebContent/WEB-INF/*
 /bin/
 classes/*
 /WEB-INF/
+srcTest/conf/*
