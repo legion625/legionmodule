@@ -14,6 +14,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.source"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.query"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.system"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.docRepo"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.service"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.service.system"/>
@@ -28,6 +29,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.luis"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.kernel"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system.type"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.zk"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.manager"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.kmeans"/>

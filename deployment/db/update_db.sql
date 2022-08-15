@@ -6,9 +6,9 @@ CREATE TABLE `system_seq` (
   `last_num` BIGINT NULL,
   `max_num` BIGINT NULL,
   PRIMARY KEY (`item_id`));
--- dev_legion_local
 
--- staging
+
+-- 0.10.1 -> 0.10.2
 CREATE TABLE `sys_attr` (
   `uid` VARCHAR(45) NOT NULL,
   `type_idx` TINYINT NULL,
@@ -17,3 +17,4 @@ CREATE TABLE `sys_attr` (
   `object_create_time` BIGINT NOT NULL,
   `object_update_time` BIGINT NOT NULL,
   PRIMARY KEY (`uid`));
+-- dev_legion_local
