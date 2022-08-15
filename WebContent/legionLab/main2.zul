@@ -9,37 +9,12 @@
 							<label value="Legion Module" />
 						</cell>
 						<cell align="right">
-							<toolbarbutton label="home"></toolbarbutton>
+							<toolbarbutton id="btnHome" label="home"></toolbarbutton>
 						</cell>
 					</row>
 				</rows>
 			</grid>
-			<menubar id="menubar">
-				<!-- 
-				<menuitem id="miFnLeftTemplateDemo" label="Fn-Left Template Demo" ></menuitem>
-				<menuitem id="miGaStaffShiftDemo" label="GA Staff Shift Demo"></menuitem>
-				<menu label="System">
-					<menupopup>
-						<menuitem id="miSysAttr" label="System attributes"></menuitem>
-					</menupopup>
-				</menu>
- -->
-
-
-
-				<!-- <menu label="採購文件">
-					<menupopup>
-						<menuitem id="miRfi" label="資訊邀請書(RFI)" />
-						<menuitem label="報價邀請書(RFQ)" />
-						<menuitem label="提案邀請書(RFP)" />
-						<menuitem label="邀標書(IFB)" />
-						<menuitem label="投標須知(Tender Notice)" />
-						<menuitem label="協商邀請書(Invitation for Negotiation)" />
-						<menuitem label="賣方初應書(Seller Initial Response)" />
-					</menupopup>
-				</menu>
-				<menu label="系統資訊"></menu>-->
-			</menubar>
+			<menubar id="menubar" />
 			<include id="iclMain" vflex="1" width="100%"></include>
 		</panelchildren>
 	</panel>

@@ -8,6 +8,7 @@ import org.slf4j.event.Level;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Menu;
@@ -22,6 +23,8 @@ import legion.web.MenuEntry;
 import legion.web.MenuInfo;
 import legion.web.MenuItemInfo;
 import legion.web.MenuRepository;
+import legion.web.control.zk.legionmodule.system.SysAttrPageComposer;
+import legion.web.zk.ZkUtil;
 
 public class Main2Composer extends SelectorComposer<Component> {
 	private Logger log = LoggerFactory.getLogger(Main2Composer.class);
@@ -36,7 +39,6 @@ public class Main2Composer extends SelectorComposer<Component> {
 	@Override
 	public void doAfterCompose(Component comp) {
 		log.debug("Main2Composer.doAfterCompose");
-		System.out.println("Main2Composer.doAfterCompose");
 		try {
 			super.doAfterCompose(comp);
 			initMenubar();
@@ -45,37 +47,28 @@ public class Main2Composer extends SelectorComposer<Component> {
 		}
 	}
 	
+	// -------------------------------------------------------------------------------
+	@Listen(Events.ON_CLICK + "=#btnHome")
+	public void btnHome_clicked() {
+		iclMain.setSrc(null);
+	}
+	
+	// -------------------------------------------------------------------------------
 	public void initMenubar() {
 		log.debug("Main2Composer.test");
-		System.out.println("Main2Composer.test");
-		
 		menubar.getChildren().clear();
 		
 		MenuInfo menuInfo = MenuRepository.getInstance().getMenu(MenuRepository.MAIN_MENU);
 		List<MenuEntry> menuItemList =  menuInfo.getItems();
 		for(MenuEntry me: menuItemList) {
 			parseMenuEntry(menubar, me);
-//			MenuItemInfo mi = (MenuItemInfo) me;
-//			int itemSize = mi.getItems() == null ? 0 : mi.getItems().size();
-//			log.error("{}\t{}\t{}\t{}", mi.getName(), mi.getText(), mi.getRefId(), itemSize);
-//
-//			if (itemSize == 0) {
-//				Menuitem menuitem = createMenuitem(mi.getText(), mi.getNavigateUrl());
-//				menubar.appendChild(menuitem);
-//			} else {
-//				Menu menu = new Menu(mi.getText());
-////				mi.getItems()
-//				
-//				menubar.appendChild(menu);
-//				
-//			}
 		}
 	}
 	
 	private void parseMenuEntry(XulElement _parentComponent, MenuEntry _menuEntry) {
 		MenuItemInfo mi = (MenuItemInfo) _menuEntry;
 		int itemSize = mi.getItems() == null ? 0 : mi.getItems().size();
-		log.error("{}\t{}\t{}\t{}", mi.getName(), mi.getText(), mi.getRefId(), itemSize);
+		log.debug("{}\t{}\t{}\t{}", mi.getName(), mi.getText(), mi.getRefId(), itemSize);
 
 		// 子階為0視為最末階，建menuitem。
 		if (itemSize == 0) {
@@ -92,6 +85,7 @@ public class Main2Composer extends SelectorComposer<Component> {
 	private Menu createMenu(MenuItemInfo _mi) {
 		Menu menu = new Menu(_mi.getText());
 		Menupopup menupopup = new Menupopup();
+		
 
 		List<MenuEntry> childrenList = _mi.getItems();
 		// 所有子階中，有可能是最末階、也有可能再下階還有，呼叫parseMenuEntry遞迴處理。
@@ -99,15 +93,20 @@ public class Main2Composer extends SelectorComposer<Component> {
 			for (MenuEntry c : childrenList) {
 				parseMenuEntry(menupopup, c);
 			}
-
 		menu.appendChild(menupopup);
+		for(Component cpn: menupopup.getChildren()) {
+			log.debug("{}", cpn.toString());
+		}
 		return menu;
 	}
 	
 	
 	private Menuitem createMenuitem(String _label, String _navigateUrl) {
 		Menuitem menuitem = new Menuitem(_label);
-		menuitem.addEventListener(Events.ON_CLICK, evt -> iclMain.setSrc(_navigateUrl));
+		if (DataFO.isEmptyString(_navigateUrl))
+			menuitem.addEventListener(Events.ON_CLICK, evt -> ZkUtil.showNotificationError("未指定目錄選單內容。"));
+		else
+			menuitem.addEventListener(Events.ON_CLICK, evt -> iclMain.setSrc(_navigateUrl));
 		return menuitem;
 	}
 }

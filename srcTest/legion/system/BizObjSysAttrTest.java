@@ -58,7 +58,7 @@ public class BizObjSysAttrTest extends AbstractLegionInitTest {
 	@Test
 	@Ignore
 	public void testDeleteSysAttr() {
-		targetUid = "2022!13!0!1";
+//		targetUid = "2022!13!0!1";
 		assert dataService.loadSysAttr(targetUid).delete();
 	}
 

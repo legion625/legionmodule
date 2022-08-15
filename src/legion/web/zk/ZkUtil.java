@@ -12,4 +12,8 @@ public class ZkUtil {
 	public static void showNotificationError() {
 		Notification.show("Unexpected error. Please inform the system manager.");
 	}
+	
+	public static void showNotificationError(String _errorMsg) {
+		Notification.show(_errorMsg, Notification.TYPE_ERROR, null, "middle_center", 0);
+	}
 }
