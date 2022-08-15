@@ -68,8 +68,9 @@
 		<welcome-file>default.html</welcome-file>
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
-		<welcome-file>index.zul</welcome-file> -->
-		<welcome-file>legionLab/main2.zul</welcome-file>
+		<welcome-file>index.zul</welcome-file> 
+		<welcome-file>legionLab/main2.zul</welcome-file>-->
+		<welcome-file>legionmodule/main.zul</welcome-file>
 		
 	</welcome-file-list>
 </web-app>

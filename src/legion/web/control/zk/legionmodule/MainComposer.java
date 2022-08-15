@@ -1,4 +1,4 @@
-package legionLab.web.control.zk;
+package legion.web.control.zk.legionmodule;
 
 import java.util.List;
 
@@ -26,8 +26,8 @@ import legion.web.MenuRepository;
 import legion.web.control.zk.legionmodule.system.SysAttrPageComposer;
 import legion.web.zk.ZkUtil;
 
-public class Main2Composer extends SelectorComposer<Component> {
-	private Logger log = LoggerFactory.getLogger(Main2Composer.class);
+public class MainComposer extends SelectorComposer<Component> {
+	private Logger log = LoggerFactory.getLogger(MainComposer.class);
 	
 	@Wire
 	private Menubar menubar;
