@@ -1,7 +1,6 @@
-package legion.data;
+package legion.data.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,72 +11,45 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import legion.data.search.SearchCondition;
-import legion.data.search.SearchOperation;
-import legion.data.search.SearchParam;
-import legion.kernel.LegionObject;
+import org.slf4j.event.Level;
+
+import legion.ObjectModel;
+import legion.data.AbstractDao;
 import legion.util.DataFO;
 import legion.util.DatabaseFO;
-@Deprecated
-public abstract class MySqlDao extends Dao {
+import legion.util.LogUtil;
+
+public  class AbstractMySqlDao extends AbstractDao {
 	protected final static String COL_UID = "uid";
 	protected final static String COL_OBJECT_CREATE_TIME = "object_create_time";
 	protected final static String COL_OBJECT_UPDATE_TIME = "object_update_time";
 
-	// private final static String IP = "localhost";
-	// private final static String SCHEMA_NAME = "lab";
-	// private final static String USER = "root";
-	// private final static String PASSWORD = "1234";
+	private String source;
 
-	protected MySqlDataSource ds;
-
-	protected MySqlDao(MySqlDataSource _ds) {
-		log.debug("Start::MySqlDao... _ds: {}", _ds);
-		ds = _ds;
+	protected AbstractMySqlDao(String source) {
+		this.source = source;
 	}
 
 	protected Connection getConn() {
-		// 1.加載JDBC驅動
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("加載JDBC驅動成功");
-			// Log.d("", "加載JDBC驅動成功");
-		} catch (ClassNotFoundException e) {
-			System.out.println("加載JDBC驅動失敗");
-			// Log.e("", "加載JDBC驅動失敗");
-			return null;
-		}
-
-		// 2.設置好IP/端口/數據庫名/用戶名/密碼等必要的連接信息
-		// MySqlDataSource ds = MySqlDataSource.getDataSource();
-		String url = "jdbc:mysql://" + ds.getIp() + "/" + ds.getSchema()
-				+ "?useUnicode=true&characterEncoding=Utf-8&useSSL=false"; // 構建連接mysql的字符串
-
-		// 3.連接JDBC
-		int i = 1;
-		while (i <= 5) { // retry at most 5 times
-			try {
-				Connection conn = DriverManager.getConnection(url, ds.getUser(), ds.getPassword());
-				System.out.println("遠程連接成功!");
-				// Log.i("", "遠程連接成功!");
-				return conn;
-			} catch (SQLException e) {
-				// Log.e("", "遠程連接失敗!");
-				System.out.println("遠程連接失敗!");
-				try {
-					Thread.sleep(5000); // 每隔5秒嘗試連接
-					i++;
-					// Log.e("", "try to reconnect");
-				} catch (InterruptedException e1) {
-					// Log.e("", e1.toString());
-				}
-			}
-		}
-		return null;
+		log.debug("source: {}", source);
+		return DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
 	}
 
 	// -------------------------------------------------------------------------------
-	public class DbColumn<T extends LegionObject> {
+	protected String parseUid(ResultSet _rs) throws SQLException {
+		return _rs.getString(COL_UID);
+	}
+
+	protected long parseObjectCreateTime(ResultSet _rs) throws SQLException {
+		return _rs.getLong(COL_OBJECT_CREATE_TIME);
+	}
+
+	protected long parseObjectUpdateTime(ResultSet _rs) throws SQLException {
+		return _rs.getLong(COL_OBJECT_UPDATE_TIME);
+	}
+	
+	// -------------------------------------------------------------------------------
+	public static class DbColumn<T extends ObjectModel> {
 		private String name;
 		private ColType colType;
 		private Function<T, Object> fnGetValue;
@@ -88,6 +60,11 @@ public abstract class MySqlDao extends Dao {
 			this.fnGetValue = fnGetValue;
 		}
 
+		public static <T extends ObjectModel> DbColumn<T> of(String name, ColType colType, Function<T, Object> fnGetValue) {
+			return new DbColumn<>(name, colType, fnGetValue);
+		}
+		
+		// ---------------------------------------------------------------------------
 		private void configPstmt(PreparedStatement pstmt, int _colIndex, T _obj) throws SQLException {
 			switch (colType) {
 			case STRING:
@@ -107,15 +84,15 @@ public abstract class MySqlDao extends Dao {
 				break;
 			}
 		}
-
 	}
 
 	public enum ColType {
-		STRING, INT, LONG, FLOAT,BOOLEAN;
+		STRING, INT, LONG, FLOAT, BOOLEAN;
 	}
 
 	// -------------------------------------------------------------------------------
-	protected final <T extends LegionObject> boolean saveObject(String _table, DbColumn<T>[] _cols, T _obj) {
+	protected final <T extends ObjectModel> boolean saveObject(String _table, DbColumn<T>[] _cols, T _obj) {
+		log.debug("_obj.getUid(): {}", _obj.getUid());
 		Connection conn = getConn();
 		PreparedStatement pstmt = null;
 		try {
@@ -125,28 +102,31 @@ public abstract class MySqlDao extends Dao {
 			for (DbColumn<T> _col : _cols)
 				qstr += _col.name + "=?,";
 			qstr += COL_OBJECT_UPDATE_TIME + "=?";
-			qstr += " where " + COL_UID + "='" + _obj.getUid() + "'";
+//			qstr += " where " + COL_UID + "='" + _obj.getUid() + "'";
+			qstr += " where "+COL_UID+"=?";
+			log.debug("qstr: {}", qstr);
 			pstmt = conn.prepareStatement(qstr);
 			int colIndex = 1;
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			
+			pstmt.setString(colIndex++, _obj.getUid());
 
 			if (pstmt.executeUpdate() == 1)
 				return true;
 			else
 				return createObject(_table, _cols, _obj);
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
 			return false;
 		} finally {
 			close(conn, pstmt, null);
 		}
 	}
 
-	private final <T extends LegionObject> boolean createObject(String _table, DbColumn<T>[] _cols, T _obj) {
+	private final <T extends ObjectModel> boolean createObject(String _table, DbColumn<T>[] _cols, T _obj) {
 		Connection conn = getConn();
 		PreparedStatement pstmt = null;
 		try {
@@ -162,18 +142,19 @@ public abstract class MySqlDao extends Dao {
 				qstr += ",?";
 			qstr += ",?,?)";
 
+			log.debug("qstr: {}", qstr);
+			
 			pstmt = conn.prepareStatement(qstr);
 			int colIndex = 1;
 			pstmt.setString(colIndex++, _obj.getUid());
 			for (DbColumn<T> _col : _cols) {
 				_col.configPstmt(pstmt, colIndex++, _obj);
 			}
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
-			pstmt.setString(colIndex++, DatabaseFO.toDbString(LocalDateTime.now()));
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
+			pstmt.setLong(colIndex++, System.currentTimeMillis());
 			return pstmt.executeUpdate() == 1;
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
 		} finally {
 			close(conn, pstmt, null);
 		}
@@ -192,75 +173,27 @@ public abstract class MySqlDao extends Dao {
 			System.out.println("pstmt.executeUpdate(): " + pstmt.executeUpdate());
 			return true;
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
 		} finally {
 			close(conn, pstmt, null);
 		}
 		return false;
 	}
-	
+
 	// -------------------------------------------------------------------------------
-	protected final <T extends LegionObject> T loadObject(String _table, String _uid,
+	protected final <T extends ObjectModel> T loadObject(String _table, String _uid,
 			Function<ResultSet, T> _fnParseObj) {
-//		if (DataFO.isEmptyString(_uid))
-//			return null;
-//
-//		Connection conn = getConn();
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		T obj = null;
-//		try {
-//			// statement
-//			String qstr = "select * from " + _table + " where " + COL_UID + " = '" + _uid + "'";
-//			pstmt = conn.prepareStatement(qstr);
-//			rs = pstmt.executeQuery();
-//			if (rs.next()) {
-//				obj = _fnParseObj.apply(rs);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("DB linking failed!");
-//			e.printStackTrace();
-//			return null;
-//		} finally {
-//			close(conn, pstmt, rs);
-//		}
-//		return obj;
 		return loadObject(_table, COL_UID, _uid, _fnParseObj);
 	}
-	
-	
-	protected final <T extends LegionObject> T loadObject(String _table, String _col, String _value,
+
+	protected final <T extends ObjectModel> T loadObject(String _table, String _col, String _value,
 			Function<ResultSet, T> _fnParseObj) {
-//		if (DataFO.isEmptyString(_col) || DataFO.isEmptyString(_value))
-//			return null;
-//
-//		Connection conn = getConn();
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		T obj = null;
-//		try {
-//			// statement
-//			String qstr = "select * from " + _table + " where " + _col + " = '" + _value + "'";
-//			pstmt = conn.prepareStatement(qstr);
-//			rs = pstmt.executeQuery();
-//			if (rs.next()) {
-//				obj = _fnParseObj.apply(rs);
-//			}
-//		} catch (SQLException e) {
-//			System.out.println("DB linking failed!");
-//			e.printStackTrace();
-//			return null;
-//		} finally {
-//			close(conn, pstmt, rs);
-//		}
-//		return obj;
 		Map<String, String> keyValueMap = new HashMap<>();
 		keyValueMap.put(_col, _value);
 		return loadObject(_table, keyValueMap, _fnParseObj);
 	}
 
-	protected final <T extends LegionObject> T loadObject(String _table, Map<String, String> _keyValueMap,
+	protected final <T extends ObjectModel> T loadObject(String _table, Map<String, String> _keyValueMap,
 			Function<ResultSet, T> _fnParseObj) {
 		// if (DataFO.isEmptyString(_col) || DataFO.isEmptyString(_value))
 		// return null;
@@ -286,21 +219,20 @@ public abstract class MySqlDao extends Dao {
 				obj = _fnParseObj.apply(rs);
 			}
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
 			return null;
 		} finally {
 			close(conn, pstmt, rs);
 		}
 		return obj;
 	}
-	
+
 	// -------------------------------------------------------------------------------
-	protected final <T extends LegionObject> List<T> loadObjectList(String _table, Function<ResultSet, T> _fnParseObj) {
+	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, Function<ResultSet, T> _fnParseObj) {
 		return loadObjectList(_table, null, null, _fnParseObj);
 	}
-	
-	protected final <T extends LegionObject> List<T> loadObjectList(String _table, String _col, String _key,
+
+	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, String _col, String _key,
 			Function<ResultSet, T> _fnParseObj) {
 		List<T> list = new ArrayList<>();
 
@@ -319,46 +251,30 @@ public abstract class MySqlDao extends Dao {
 				list.add(_fnParseObj.apply(rs));
 			}
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
 			return null;
 		} finally {
 			close(conn, pstmt, rs);
 		}
 		return list;
 	}
-	
-	// -------------------------------------------------------------------------------
-	protected final <T extends SearchParam, U> SearchOperation<T, U> searchObject(String _table,
-			SearchOperation<T, U> _param, Function<T, String> _fnParseColMapping, Function<ResultSet, U> _fnParseObj) {
-		List<U> list = new ArrayList<>();
 
-		Connection conn = getConn();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+	protected final void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
-			// statement
-			String qstr = "select * from " + _table + " where " + COL_UID + " is not null";
-			if (_param != null) {
-				for (SearchCondition<T> c : _param.getConditions()) {
-					qstr += " and " + _fnParseColMapping.apply(c.getParam()) + " " + c.getCompareOp().getOper() + " '"
-							+ c.getValue() + "'";
-				}
+			if (conn != null) {
+				conn.close();
+				conn = null;
 			}
-			pstmt = conn.prepareStatement(qstr);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				list.add(_fnParseObj.apply(rs));
+			if (rs != null) {
+				rs.close();
+				rs = null;
 			}
-			_param.setResultList(list);
+			if (pstmt != null) {
+				pstmt.close();
+				pstmt = null;
+			}
 		} catch (SQLException e) {
-			System.out.println("DB linking failed!");
-			e.printStackTrace();
-			return null;
-		} finally {
-			close(conn, pstmt, rs);
+			LogUtil.log(log, e, Level.ERROR);
 		}
-		return _param;
 	}
-
 }

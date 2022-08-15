@@ -1,0 +1,24 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="System attributes" border="normal"
+		apply="legion.web.control.zk.legionmodule.system.SysAttrPageComposer">
+		<hlayout>
+			<toolbarbutton />
+		</hlayout>
+		<grid id="gridSysAttr" emptyMessage="no data">
+			<auxhead>
+				<auxheader></auxheader>
+				<auxheader></auxheader>
+				<auxheader></auxheader>
+			</auxhead>
+			<columns sizable="true">
+				<column width="100px">
+					<toolbarbutton id="btnAddSysAttr" label="Add" iconSclass="fa fa-plus fa-fw" />
+				</column>
+				<column label="type" width="100px"/>
+				<column label="key" width="180px"/>
+				<column label="value" width="180px"/>
+			</columns>
+		</grid>
+	</window>
+</zk>

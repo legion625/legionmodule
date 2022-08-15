@@ -1,8 +1,33 @@
 package legion;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.junit.Test;
 
-public class LegionTest {
+import legion.data.SystemDataService;
+import legion.system.SysAttr;
+
+public class LegionTest extends AbstractLegionInitTest {
+	
+	@Test
+	public void test0() {
+		log.debug("test0");
+		log.debug("SystemInfoDefault.getInstance().getVersion(): {}", SystemInfoDefault.getInstance().getVersion());
+		
+		SystemDataService systemDataSerivce = DataServiceFactory.getInstance().getService(SystemDataService.class);
+		log.debug("systemDataSerivce: {}", systemDataSerivce);
+		assertTrue(systemDataSerivce.testCallback());
+		
+		List<SysAttr> sysAttrList = systemDataSerivce.loadSysAttrList();
+		log.debug("sysAttrList: {}", sysAttrList);
+		log.debug("sysAttrList.size(): {}", sysAttrList.size());
+		for(SysAttr sa: sysAttrList) {
+			log.debug("{}\t{}\t{}", sa.getTypeIdx(), sa.getKey(), sa.getValue());
+		}
+	}
+	
 	@Test
 	public void test() {
 //		String str = "aaa[123]";
@@ -19,9 +44,10 @@ public class LegionTest {
 		String str1 = "NN";
 		String str2 = "WP";
 		String str3 = "WRB";
-		System.out.println(str1+"\t"+str1.matches(REGEX_INVALID_POS));
-		System.out.println(str2+"\t"+str2.matches(REGEX_INVALID_POS));
-		System.out.println(str3+"\t"+str3.matches(REGEX_INVALID_POS));
+		log.debug(str1+"\t"+str1.matches(REGEX_INVALID_POS));
+		log.debug(str2+"\t"+str2.matches(REGEX_INVALID_POS));
+		log.debug(str3+"\t"+str3.matches(REGEX_INVALID_POS));
 	}
+	
 	
 }

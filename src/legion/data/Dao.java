@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+@Deprecated
 public abstract class Dao {
 	protected Logger log = LoggerFactory.getLogger(getClass());
 

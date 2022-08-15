@@ -31,12 +31,31 @@ public abstract class ObjectModel {
 			log.error("HIGH_OID error.");
 			return false;
 		}
+		log.debug("high");
 		synchronized (ObjectModel.class) {
 			oid = YEAR + OID_SEPARATOR + HIGH_OID + OID_SEPARATOR + low_oid;
 			low_oid++;
 		}
 		this.setUid(oid);
+		log.debug("HIGH_OID: {}\tlow_oid: {}",HIGH_OID, low_oid);
+		log.debug("oid: {}", oid);
 		return true;
+	}
+	
+	protected <T extends ObjectModel> T configNewInstance() {
+		if (!generateUid()) {
+			log.error("generateUid return false.");
+			return null;
+		}
+		log.debug("getUid(): {}", getUid());
+		
+		return (T) this;
+	}
+	
+	protected void configGetInstance(String _uid, long _objectCreateTime, long _objectUpdateTime) {
+		setUid(_uid);
+		setObjectCreateTime(_objectCreateTime);
+		setObjectUpdateTime(_objectUpdateTime);
 	}
 
 	// -------------------------------------------------------------------------------
@@ -78,6 +97,14 @@ public abstract class ObjectModel {
 
 	protected abstract boolean delete();
 
-	public abstract boolean equals(Object _obj);
+	public boolean equals(Object _obj) {
+		if (_obj == null)
+			return false;
+		if (!(_obj instanceof ObjectModel))
+			return false;
+		if (this.getClass() != _obj.getClass())
+			return false;
+		return this.getUid().equals(((ObjectModel) _obj).getUid());
+	}
 
 }

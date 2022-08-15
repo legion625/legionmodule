@@ -40,6 +40,7 @@ public class DSManager {
 	}
 	
 	public static DSManager getInstance() {
+		log.debug("instance: {}", instance);
 		return instance;
 	}
 	

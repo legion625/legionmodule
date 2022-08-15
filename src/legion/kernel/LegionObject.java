@@ -3,7 +3,6 @@ package legion.kernel;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 import legion.data.MySqlDataSource;
 import legion.data.ObjSeqDao;

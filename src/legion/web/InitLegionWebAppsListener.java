@@ -37,6 +37,7 @@ import legion.IntegrationService;
 import legion.LegionContext;
 import legion.datasource.manager.DSManager;
 import legion.util.DataFO;
+import legionLab.web.control.zk.Main2Composer;
 
 public abstract class InitLegionWebAppsListener implements ServletContextListener {
 	protected Logger log = LoggerFactory.getLogger(InitLegionWebAppsListener.class);
@@ -52,7 +53,7 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 		initIntegrationServiceModule(sce); // ok
 		initBusinessServiceModule(sce); // ok
 //		initAspectManager(sce); TODO
-		initMenu(sce); // FIXME 還不能完全正常運作
+		initMenu(sce); // ok
 //		initMimeType(sce); TODO
 
 //		initIppmCrossResourceLink(sce); TODO

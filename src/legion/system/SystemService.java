@@ -1,21 +1,20 @@
-package legion.data;
+package legion.system;
 
 import java.util.List;
 
-import legion.IntegrationService;
-import legion.system.SysAttr;
+import legion.BusinessService;
 
-public interface SystemDataService extends IntegrationService {
-	
-	boolean testCallback();
+public interface SystemService extends BusinessService{
 	
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
-	boolean saveSysAttr(SysAttr _sysAttr);
-
+	SysAttr createSysAttr();
+	
 	boolean deleteSysAttr(String _uid);
-
+	
+	boolean saveSysAttr(SysAttr _sysAttr);
+	
 	SysAttr loadSysAttr(String _uid);
-
-	List<SysAttr> loadSysAttrList();
+	
+	List<SysAttr> loadSysAttrList(); 
 }

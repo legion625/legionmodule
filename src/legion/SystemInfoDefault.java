@@ -96,7 +96,7 @@ public class SystemInfoDefault implements ISystemWebInfo{
 
 	@Override
 	public String getVersion() {
-		return getAttribute("Version");
+		return getAttribute("version");
 	}
 
 	@Override
