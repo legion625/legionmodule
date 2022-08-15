@@ -105,7 +105,7 @@ public class SysAttr extends SysObjectModel {
 	}
 
 	// -------------------------------------------------------------------------------
-	public static SysAttr create() {
+	static SysAttr create() {
 		SysAttr sa = newInstance(SysAttrType.SYS);
 		if (sa.save())
 			return sa;

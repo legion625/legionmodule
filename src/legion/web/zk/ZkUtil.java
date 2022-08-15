@@ -9,11 +9,28 @@ public class ZkUtil {
 		return (T) _icd.getFellow(_cpnId).getAttribute("$composer");
 	}
 	
-	public static void showNotificationError() {
-		Notification.show("Unexpected error. Please inform the system manager.");
+	// -------------------------------------------------------------------------------
+	private  static void showNotification(String _msg, String _type) {
+		Notification.show(_msg, _type, null, "middle_center", 0);
 	}
 	
-	public static void showNotificationError(String _errorMsg) {
-		Notification.show(_errorMsg, Notification.TYPE_ERROR, null, "middle_center", 0);
+	public static void showNotificationInfo(String _msg) {
+		showNotification(_msg, Notification.TYPE_INFO);
 	}
+	
+	
+	public static void showNotificationWarning(String _msg) {
+		showNotification(_msg, Notification.TYPE_WARNING);
+	}
+
+	public static void showNotificationError() {
+		showNotificationError("Unexpected error. Please report to the system manager.");
+	}
+
+	public static void showNotificationError(String _msg) {
+		showNotification(_msg, Notification.TYPE_ERROR);
+	}
+	
+	
+	
 }

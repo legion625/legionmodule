@@ -29,8 +29,23 @@ public class SystemServiceImp implements SystemService{
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	@Override
+	public SysAttr createSysAttr() {
+		return SysAttr.create();
+	}
+	
+	@Override
+	public boolean deleteSysAttr(String _uid) {
+		return loadSysAttr(_uid).delete();
+	}
+
+	@Override
 	public boolean saveSysAttr(SysAttr _sysAttr) {
 		return _sysAttr.save();
+	}
+	
+	@Override
+	public SysAttr loadSysAttr(String _uid) {
+		return dataService.loadSysAttr(_uid);
 	}
 
 	@Override

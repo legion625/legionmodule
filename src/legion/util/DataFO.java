@@ -12,6 +12,7 @@ import java.math.RoundingMode;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,11 @@ public class DataFO {
 	public final static String SEPERATED_LINE_FOOTER = "##";
 	
 	// -------------------------------------------------------------------------------
+	public static <T> T orElse(T _value, T _else) {
+		Optional<T> opt = Optional.ofNullable(_value);
+		return opt.orElse(_else);
+	}
+	
 	public static String fillString(String _str, int _length, char _char) {
 		if (_length <= 0)
 			return "";

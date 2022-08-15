@@ -12,12 +12,12 @@
 				<auxheader></auxheader>
 			</auxhead>
 			<columns sizable="true">
-				<column>
-					<toolbarbutton id="btnAddSysAttr" label="Add" iconSclass="fas fa-pen-square fa-fw" />
+				<column width="100px">
+					<toolbarbutton id="btnAddSysAttr" label="Add" iconSclass="fa fa-plus fa-fw" />
 				</column>
-				<column label="type" />
-				<column label="key" />
-				<column label="value" />
+				<column label="type" width="100px"/>
+				<column label="key" width="180px"/>
+				<column label="value" width="180px"/>
 			</columns>
 		</grid>
 	</window>

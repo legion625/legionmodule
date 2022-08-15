@@ -1,5 +1,7 @@
+Min-Hua, 2022.08.15
 [change]
 1. 新增SysAttr系統屬性。
+2. 目錄引進menu-conf架構。
 
 [deployment]
 1. 新增資料表sys_attr。
@@ -32,6 +34,7 @@ v0.10.0 released by Min-Hua, 2022.04.10
   -5. menu-conf.xml
 2. 新增deployment資料夾，把WEB-INF的內容放一份在該資料夾中，並在.gitignore中過濾掉WEB-INF。
 3. 新增資料表system_seq。
+
 
 ------------------------------------------------------------------------------
 v0.7.1 released by Jason, 2018.12.30

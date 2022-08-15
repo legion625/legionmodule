@@ -72,7 +72,8 @@ public class Main2Composer extends SelectorComposer<Component> {
 
 		// 子階為0視為最末階，建menuitem。
 		if (itemSize == 0) {
-			Menuitem menuitem = createMenuitem(mi.getText(), mi.getNavigateUrl());
+//			Menuitem menuitem = createMenuitem(mi.getText(),mi.getIconSclass(), mi.getNavigateUrl());
+			Menuitem menuitem = createMenuitem(mi);
 			_parentComponent.appendChild(menuitem);
 		}
 		// 子階不為0，再建構出一層menu。
@@ -84,6 +85,7 @@ public class Main2Composer extends SelectorComposer<Component> {
 	
 	private Menu createMenu(MenuItemInfo _mi) {
 		Menu menu = new Menu(_mi.getText());
+		menu.setIconSclass(_mi.getIconSclass());
 		Menupopup menupopup = new Menupopup();
 		
 
@@ -101,12 +103,18 @@ public class Main2Composer extends SelectorComposer<Component> {
 	}
 	
 	
-	private Menuitem createMenuitem(String _label, String _navigateUrl) {
-		Menuitem menuitem = new Menuitem(_label);
-		if (DataFO.isEmptyString(_navigateUrl))
+//	private Menuitem createMenuitem(String _label, String _iconSclass, String _navigateUrl) {
+	private Menuitem createMenuitem(MenuItemInfo _mi) {
+//		Menuitem menuitem = new Menuitem(_label);
+		Menuitem menuitem = new Menuitem(_mi.getText());
+//		menuitem.setIconSclass(_iconSclass);
+		menuitem.setIconSclass(_mi.getIconSclass());
+//		if (DataFO.isEmptyString(_navigateUrl))
+		String navigateUrl = _mi.getNavigateUrl(); 
+		if (DataFO.isEmptyString(navigateUrl))
 			menuitem.addEventListener(Events.ON_CLICK, evt -> ZkUtil.showNotificationError("未指定目錄選單內容。"));
 		else
-			menuitem.addEventListener(Events.ON_CLICK, evt -> iclMain.setSrc(_navigateUrl));
+			menuitem.addEventListener(Events.ON_CLICK, evt -> iclMain.setSrc(navigateUrl));
 		return menuitem;
 	}
 }

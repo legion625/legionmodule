@@ -53,7 +53,7 @@ public abstract class InitLegionWebAppsListener implements ServletContextListene
 		initIntegrationServiceModule(sce); // ok
 		initBusinessServiceModule(sce); // ok
 //		initAspectManager(sce); TODO
-		initMenu(sce); // FIXME 還不能完全正常運作
+		initMenu(sce); // ok
 //		initMimeType(sce); TODO
 
 //		initIppmCrossResourceLink(sce); TODO
