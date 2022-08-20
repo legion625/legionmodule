@@ -28,6 +28,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.manager"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.kmeans"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.security"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.tfidf"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect.menuHandler"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource"/>
