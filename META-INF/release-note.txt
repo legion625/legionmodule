@@ -1,9 +1,10 @@
-Min-Hua, 2022.09.01
+Min-Hua, 2022.09.05
 [change]
 1. 新增RmiSsl相關類別架構。
   - RmiSslDso
   - RmiSslClientSocketFactory
   - RmiSslServerSocketFactory
+2. 新增抽象的ObjectModelRemote類別，實作Serializable並及ObjectModel的基礎屬性。
 
 ------------------------------------------------------------------------------
 v0.10.3 released by Min-Hua, 2022.08.20
