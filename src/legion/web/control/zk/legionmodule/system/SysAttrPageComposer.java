@@ -37,7 +37,6 @@ public class SysAttrPageComposer extends SelectorComposer<Component> {
 	
 	// -------------------------------------------------------------------------------
 	private SystemService sysService = BusinessServiceFactory.getInstance().getService(SystemService.class);
-//	private List<SysAttr> sysAttrList;
 	
 	// -------------------------------------------------------------------------------
 	@Override
