@@ -5,6 +5,7 @@
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.serviceFacade.rmi"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.source"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.query"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect"/>
