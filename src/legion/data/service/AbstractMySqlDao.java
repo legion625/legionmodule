@@ -79,6 +79,9 @@ public  class AbstractMySqlDao extends AbstractDao {
 			case FLOAT:
 				pstmt.setFloat(_colIndex, (float) fnGetValue.apply(_obj));
 				break;
+			case DOUBLE:
+				pstmt.setDouble(_colIndex, (double) fnGetValue.apply(_obj));
+				break;
 			case BOOLEAN:
 				pstmt.setBoolean(_colIndex, (boolean) fnGetValue.apply(_obj));
 				break;
@@ -87,7 +90,7 @@ public  class AbstractMySqlDao extends AbstractDao {
 	}
 
 	public enum ColType {
-		STRING, INT, LONG, FLOAT, BOOLEAN;
+		STRING, INT, LONG, FLOAT, DOUBLE, BOOLEAN;
 	}
 
 	// -------------------------------------------------------------------------------

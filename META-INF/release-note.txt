@@ -1,5 +1,10 @@
 Min-Hua, 2022.09.22
 [change]
+1. AbstractMySqlDao的DbColumn新增支援DOUBLE型別。
+2. 改寫IdxEnum介面，以legion.type下的為主。
+
+Min-Hua, 2022.09.22
+[change]
 1. 新增Fsm類別，用來控制狀態變化。
 2. 新增TimeTraveler工具類別，在程式碼中進行rollback程序。
 

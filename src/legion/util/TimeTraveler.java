@@ -38,7 +38,20 @@ public class TimeTraveler {
 		siteList.addAll(_tt.siteList);
 	}
 	
-	public void travel() {}
+	public void travel() {
+		if (siteList == null)
+			return;
+		int all = siteList.size();
+		while (siteList.size() > 0) {
+			int lastIdx = siteList.size() - 1;
+			Site site = siteList.remove(lastIdx);
+			boolean r = site.process();
+			if (r)
+				log.info("[{}] - {}", all - siteList.size(), site.getDesp());
+			else
+				log.error("[{}] - {}", all - siteList.size(), site.getDesp());
+		}
+	}
 	
 	// -------------------------------------------------------------------------------
 	private interface Site {
