@@ -1,3 +1,20 @@
+Min-Hua, 2022.09.22
+[change]
+1. AbstractMySqlDao的DbColumn新增支援DOUBLE型別。
+2. 改寫IdxEnum介面，以legion.type下的為主。
+
+Min-Hua, 2022.09.22
+[change]
+1. 新增Fsm類別，用來控制狀態變化。
+2. 新增TimeTraveler工具類別，在程式碼中進行rollback程序。
+
+Min-Hua, 2022.09.09
+[change]
+1. [系統]新增「關於」頁面，先僅顯示系統版本。
+  - 由SystemInfo出取出在system-conf.properties中的版本號。
+2. 新增ObjectModelInfo和ObjectModelInfoDto。
+  - ObjectModel主要用於底層架構環境，包含了各式方法的實作。這邊新增的Info和InfoDto，僅封裝由ObjectModel的uid、objectCreateTime、和objectUpdateTime等屬性，以使應用端的使用更輕量化。
+
 ------------------------------------------------------------------------------
 v0.10.4 released by Min-Hua, 2022.09.05
 [change]

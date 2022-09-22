@@ -20,7 +20,7 @@
 		</parameter>
 		<parameter>
 			<name>url</name>
-			<!--<value>jdbc:mysql://(host=localhost,port=3306,serverTimezone=Asia@2FTaipei,sslMode=DISABLED/legionmodule)</value>--> <!-- MySql8 -->
+			<!--<value>jdbc:mysql://localhost:3306/legionmodule?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC</value> --> <!-- jdbc8 -->
 			<value>jdbc:mysql://localhost:3306/legionmodule</value> <!-- MySql5 -->
 		</parameter>
 		<parameter>

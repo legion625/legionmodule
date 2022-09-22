@@ -6,7 +6,7 @@ import java.util.Date;
 
 import legion.data.MySqlDataSource;
 import legion.data.ObjSeqDao;
-
+@Deprecated
 public abstract class LegionObject {
 	
 	private String uid;
