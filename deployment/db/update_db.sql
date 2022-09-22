@@ -17,7 +17,7 @@ CREATE TABLE `sys_attr` (
   `object_create_time` BIGINT NOT NULL,
   `object_update_time` BIGINT NOT NULL,
   PRIMARY KEY (`uid`));
--- dev_legion_local
+-- dev_mh_pc
 
 
 -- unstaging
