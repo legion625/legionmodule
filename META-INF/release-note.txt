@@ -1,3 +1,10 @@
+Min-Hua, 2022.11.05
+[change]
+1. AbstractMySqlDao
+  -1. 擴充QueryOperation。
+  -2. 擴充Skewer。
+  -3. DbColumn新增字串長度限制檢查。
+
 ------------------------------------------------------------------------------
 v0.11.1 released by Min-Hua, 2022.11.05
 [change]
