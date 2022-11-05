@@ -1,10 +1,8 @@
-Min-Hua, 2022.10.29
-[change]
-1. AbstractMySqlDao擴充loadObjectList的服務介面。
-
-Min-Hua, 2022.09.24
+------------------------------------------------------------------------------
+v0.11.1 released by Min-Hua, 2022.11.05
 [change]
 1. 新增BizObjBuilder架構。
+1. AbstractMySqlDao擴充loadObjectList的服務介面。
 
 ------------------------------------------------------------------------------
 v0.11.0 released by Min-Hua, 2022.09.22
