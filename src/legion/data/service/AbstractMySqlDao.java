@@ -191,12 +191,12 @@ public  class AbstractMySqlDao extends AbstractDao {
 
 	protected final <T extends ObjectModel> T loadObject(String _table, String _col, String _value,
 			Function<ResultSet, T> _fnParseObj) {
-		Map<String, String> keyValueMap = new HashMap<>();
-		keyValueMap.put(_col, _value);
-		return loadObject(_table, keyValueMap, _fnParseObj);
+		Map<String, String> colValueMap = new HashMap<>();
+		colValueMap.put(_col, _value);
+		return loadObject(_table, colValueMap, _fnParseObj);
 	}
 
-	protected final <T extends ObjectModel> T loadObject(String _table, Map<String, String> _keyValueMap,
+	protected final <T extends ObjectModel> T loadObject(String _table, Map<String, String> _colValueMap,
 			Function<ResultSet, T> _fnParseObj) {
 		// if (DataFO.isEmptyString(_col) || DataFO.isEmptyString(_value))
 		// return null;
@@ -210,9 +210,9 @@ public  class AbstractMySqlDao extends AbstractDao {
 			StringBuilder sb = new StringBuilder();
 			sb.append("select * from ").append(_table);
 			sb.append(" where ").append(COL_UID).append(" is not null");
-			if (_keyValueMap != null) {
-				for (String _key : _keyValueMap.keySet()) {
-					sb.append(" and ").append(_key).append("='").append(_keyValueMap.get(_key)).append("'");
+			if (_colValueMap != null) {
+				for (String _key : _colValueMap.keySet()) {
+					sb.append(" and ").append(_key).append("='").append(_colValueMap.get(_key)).append("'");
 				}
 			}
 
@@ -235,7 +235,15 @@ public  class AbstractMySqlDao extends AbstractDao {
 		return loadObjectList(_table, null, null, _fnParseObj);
 	}
 
-	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, String _col, String _key,
+	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, String _col, String _value,
+			Function<ResultSet, T> _fnParseObj) {
+		Map<String, String> colValueMap = new HashMap<>();
+		colValueMap.put(_col, _value);
+		return loadObjectList(_table, colValueMap, _fnParseObj);
+	}
+	
+//	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, String _col, String _key,
+	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, Map<String, String> _colValueMap,
 			Function<ResultSet, T> _fnParseObj) {
 		List<T> list = new ArrayList<>();
 
@@ -245,8 +253,11 @@ public  class AbstractMySqlDao extends AbstractDao {
 		try {
 			// statement
 			StringBuilder sb = new StringBuilder().append("select * from ").append(_table);
-			if (!DataFO.isEmptyString(_col) && !DataFO.isEmptyString(_key))
-				sb.append(" where ").append(_col).append("='").append(_key).append("'");
+			sb.append(" where ").append("1=1");
+			if (_colValueMap != null)
+				for (String _col : _colValueMap.keySet())
+					sb.append(" and ").append(_col).append("='").append(_colValueMap.get(_col)).append("'");
+			
 			String qstr = sb.toString();
 			pstmt = conn.prepareStatement(qstr);
 			rs = pstmt.executeQuery();
@@ -261,7 +272,11 @@ public  class AbstractMySqlDao extends AbstractDao {
 		}
 		return list;
 	}
+	
+	
 
+	
+	// -------------------------------------------------------------------------------
 	protected final void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		try {
 			if (conn != null) {

@@ -2,7 +2,9 @@ package legion;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -49,5 +51,12 @@ public class LegionTest extends AbstractLegionInitTest {
 		log.debug(str3+"\t"+str3.matches(REGEX_INVALID_POS));
 	}
 	
+	@Test
+	public void testMap() {
+		Map<String, String> map = new HashMap<>();
+		String str1 = map.putIfAbsent("a", "x");
+		String str2 = map.get("a");
+		log.debug("{}\t{}", str1, str2);
+	}
 	
 }
