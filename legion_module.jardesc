@@ -15,6 +15,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.source"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.query"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.biz"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.system"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.docRepo"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.service"/>
