@@ -1,7 +1,7 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<panel id="pnStepbarMain" vflex="1"
-		apply="legionLab.web.control.zk.pageTemplate.stepbarDemo.StepbarMainPageComposer">
+	<panel id="pnStepbarDemo0" vflex="1"
+		apply="legionLab.web.control.zk.pageTemplate.stepbarDemo.StepbarDemo0PageComposer">
 		<panelchildren>
 			<include id="icdStepbar"></include>
 		</panelchildren>

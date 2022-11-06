@@ -1,0 +1,14 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<panel id="pnStepbarDemoCustom" vflex="1"
+		apply="legionLab.web.control.zk.pageTemplate.stepbarDemo.StepbarDemoCustomPageComposer">
+		<panelchildren>
+			<include id="icdStepbar" vflex="1"></include>
+			<hlayout>
+				<toolbarbutton id="btn1" label="Button 1" style="font-weight:bold" />
+				<toolbarbutton id="btn2" label="Button 2" style="font-weight:bold" />
+				<toolbarbutton id="btn3" label="Button 3" style="font-weight:bold" />
+			</hlayout>
+		</panelchildren>
+	</panel>
+</zk>
