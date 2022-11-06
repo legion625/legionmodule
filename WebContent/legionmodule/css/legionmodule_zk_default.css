@@ -1,7 +1,7 @@
 @charset "UTF8";
 
-.gridBordnerNone, 
-.gridBordnerNone .z-row .z-cell{ 
+.gridBorderNone, 
+.gridBorderNone .z-row .z-cell{ 
 	border:none; border-top:none 
 }
 
