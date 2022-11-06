@@ -39,11 +39,11 @@
 	
 }
 
-.stepbar>.step.first-child:before {
+.stepbar>.step:first-child:before {
 	left: 50%;
 }
 
-.stepbar>.step.last-child:before {
+.stepbar>.step:last-child:before {
 	right: 50%;
 }
 
@@ -55,11 +55,11 @@
 	background-image: linear-gradient(to right, LightSkyBlue, SandyBrown 50%, LightGrey);
 }
 
-.stepbar>.step.first-child.current:before {
+.stepbar>.step:first-child.current:before {
 	background-image: linear-gradient(to right, SandyBrown, LightGrey);
 }
 
-.stepbar>.step.last-child.current:before {
+.stepbar>.step:last-child.current:before {
 	background-image: linear-gradient(to right, LightSkyBlue, SandyBrown);
 }
 

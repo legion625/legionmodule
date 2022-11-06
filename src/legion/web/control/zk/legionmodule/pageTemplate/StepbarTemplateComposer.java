@@ -121,7 +121,8 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 		card.setSelectedIndex(getCurrentIndex());
 		
 		/**/
-		btnBack.setDisabled(!(getCurrentIndex() != 0 && getCurrentIndex() != stepModel.getSize() - 1));
+//		btnBack.setDisabled(!(getCurrentIndex() != 0 && getCurrentIndex() != stepModel.getSize() - 1));
+		btnBack.setDisabled(!(getCurrentIndex() != 0));
 		btnNext.setDisabled(!(getCurrentIndex() != stepModel.getSize() - 1));
 	}
 	

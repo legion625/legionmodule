@@ -19,6 +19,10 @@ public class Step {
 		this.div = initDiv();
 	}
 	
+	public static Step of(String name, String icon, String uri) {
+		return new Step(name, icon, uri);
+	}
+	
 	// -------------------------------------------------------------------------------
 	public String getName() {
 		return name;
