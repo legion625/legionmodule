@@ -36,7 +36,7 @@ public class StepbarDemoComposer extends SelectorComposer<Component> {
 		try {
 			super.doAfterCompose(comp);
 			StepbarDemo0PageComposer.of(icdDemo0);
-//			initDemo1();
+			StepbarDemo1PageComposer.of(icdDemo1);
 			StepbarDemoCustomPageComposer.of(icdDemoCustom);
 		} catch (Throwable e) {
 			LogUtil.log(e, Level.ERROR);
