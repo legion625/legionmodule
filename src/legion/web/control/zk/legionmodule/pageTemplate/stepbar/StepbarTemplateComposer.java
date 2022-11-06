@@ -1,4 +1,4 @@
-package legion.web.control.zk.legionmodule.pageTemplate;
+package legion.web.control.zk.legionmodule.pageTemplate.stepbar;
 
 import org.slf4j.event.Level;
 import org.zkoss.zk.ui.Component;
@@ -17,11 +17,11 @@ import org.zkoss.zul.South;
 import org.zkoss.zul.Toolbarbutton;
 
 import legion.util.LogUtil;
-import legion.web.control.zk.legionmodule.pageTemplate.Step.StepStatus;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step.StepStatus;
 import legion.web.zk.ZkUtil;
 
 public class StepbarTemplateComposer extends SelectorComposer<Component> implements Stepbar {
-	public final static String SRC = "/legionmodule/pageTemplate/stepbarTemplate.zul";
+	public final static String SRC = "/legionmodule/pageTemplate/stepbar/stepbarTemplate.zul";
 //	public final static String MAIN_PAGE_ID = "main";
 	
 	// -------------------------------------------------------------------------------
@@ -31,16 +31,16 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 	@Wire
 	private Cardlayout card;
 	
-	@Wire
-	private South southCtrlBar;
-	@Wire
-	private Toolbarbutton btnBack;
-	@Wire
-	private Toolbarbutton btnNext;
+//	@Wire
+//	private South southCtrlBar;
+//	@Wire
+//	private Toolbarbutton btnBack;
+//	@Wire
+//	private Toolbarbutton btnNext;
 	
 	// -------------------------------------------------------------------------------
 	private ListModelList<Step> stepModel;
-	private boolean useDefaultCtrlBar = true;
+//	private boolean useDefaultCtrlBar = true;
 	
 	// -------------------------------------------------------------------------------
 	static StepbarTemplateComposer getInstance(Include _icd) {
@@ -58,7 +58,8 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 	}
 	
 	// -------------------------------------------------------------------------------
-	void initialize(Step[] _steps, StepbarProxy _stepbarProxy, boolean _useDefaultCtrlBar) {
+//	void initialize(Step[] _steps, StepbarProxy _stepbarProxy, boolean _useDefaultCtrlBar) {
+	void initialize(Step[] _steps, StepbarProxy _stepbarProxy) {
 		/* init stepModel */
 		stepModel = new ListModelList<>();
 		stepModel.setMultiple(false);
@@ -98,9 +99,9 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 		if(stepModel.size()>0)
 			navigateTo(stepModel.get(0));
 	
-		/* attributes */
-		useDefaultCtrlBar = _useDefaultCtrlBar;
-		southCtrlBar.setVisible(useDefaultCtrlBar);
+//		/* attributes */
+//		useDefaultCtrlBar = _useDefaultCtrlBar;
+//		southCtrlBar.setVisible(useDefaultCtrlBar);
 	}
 	
 	// -------------------------------------------------------------------------------
@@ -122,8 +123,8 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 		
 		/**/
 //		btnBack.setDisabled(!(getCurrentIndex() != 0 && getCurrentIndex() != stepModel.getSize() - 1));
-		btnBack.setDisabled(!(getCurrentIndex() != 0));
-		btnNext.setDisabled(!(getCurrentIndex() != stepModel.getSize() - 1));
+//		btnBack.setDisabled(!(getCurrentIndex() != 0));
+//		btnNext.setDisabled(!(getCurrentIndex() != stepModel.getSize() - 1));
 	}
 	
 	private Step getCurrent() {
@@ -158,14 +159,14 @@ public class StepbarTemplateComposer extends SelectorComposer<Component> impleme
 	}
 	
 	// -------------------------------------------------------------------------------
-	@Listen(Events.ON_CLICK+"=#btnBack")
-	public void btnBack_clicked() {
-		back();
-	}
-	
-	@Listen(Events.ON_CLICK+"=#btnNext")
-	public void btnNext_clicked() {
-		next();
-	}
+//	@Listen(Events.ON_CLICK+"=#btnBack")
+//	public void btnBack_clicked() {
+//		back();
+//	}
+//	
+//	@Listen(Events.ON_CLICK+"=#btnNext")
+//	public void btnNext_clicked() {
+//		next();
+//	}
 
 }

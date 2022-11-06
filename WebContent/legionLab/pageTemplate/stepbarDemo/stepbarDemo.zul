@@ -5,12 +5,16 @@
 		<tabbox vflex="1">
 			<tabs>
 				<tab label="Demo 0"></tab>
+				<tab label="Demo 0a (add btn event)"></tab>
 				<tab label="Demo 1"></tab>
 				<tab label="Demo custom"></tab>
 			</tabs>
 			<tabpanels>
 				<tabpanel vflex="1">
 					<include id="icdDemo0" />
+				</tabpanel>
+				<tabpanel vflex="1">
+					<include id="icdDemo0a" />
 				</tabpanel>
 				<tabpanel vflex="1">
 					<include id="icdDemo1" />

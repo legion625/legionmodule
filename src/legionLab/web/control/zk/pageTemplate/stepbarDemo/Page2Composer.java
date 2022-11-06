@@ -5,7 +5,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 
 import legion.util.LogUtil;
-import legion.web.control.zk.legionmodule.pageTemplate.StepbarProxy;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
 
 public class Page2Composer extends SelectorComposer<Component>{
 	public final static String URI = "/legionLab/pageTemplate/stepbarDemo/page2.zul";

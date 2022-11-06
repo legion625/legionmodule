@@ -13,8 +13,8 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Panel;
 
 import legion.util.LogUtil;
-import legion.web.control.zk.legionmodule.pageTemplate.Step;
-import legion.web.control.zk.legionmodule.pageTemplate.StepbarProxy;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
 import legion.web.zk.ZkUtil;
 
 public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
@@ -57,7 +57,8 @@ public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
 				Step.of("Page 3", "fa fa-smile", Page3Composer.URI), //
 		};
 
-		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemoCustom, false);
+//		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemoCustom, false);
+		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemoCustom);
 
 		StepbarDemoCustomPageComposer stepbarDemoCustomPageComposer = getComposer(StepbarDemoCustomPageComposer.class);
 		Page1Composer p1c = getComposer(Page1Composer.class);

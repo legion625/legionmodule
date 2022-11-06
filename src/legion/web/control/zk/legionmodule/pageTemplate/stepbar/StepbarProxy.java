@@ -1,4 +1,4 @@
-package legion.web.control.zk.legionmodule.pageTemplate;
+package legion.web.control.zk.legionmodule.pageTemplate.stepbar;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,16 +15,25 @@ public class StepbarProxy implements Stepbar {
 	private static Logger log = LoggerFactory.getLogger(StepbarProxy.class);
 
 	private StepbarTemplateComposer stepbarTemplateComposer;
+	/**
+	 * Not knowing what to do. How about remove this?
+	 */
+	@Deprecated
 	private Component stepMainComponent;
 	private ConcurrentHashMap<Class<?>, SelectorComposer<Component>> composers = new ConcurrentHashMap<>();
 
 	// -------------------------------------------------------------------------------
 	// ----------------------------------constructor----------------------------------
+	private StepbarProxy() {
+		this.stepMainComponent = null;
+	}
+	
 	private StepbarProxy(Component _stepMainComponent) {
 		this.stepMainComponent = _stepMainComponent;
 	}
 
 	// -------------------------------------------------------------------------------
+	@Deprecated
 	public Component getStepMainComponent() {
 		return stepMainComponent;
 	}
@@ -63,13 +72,30 @@ public class StepbarProxy implements Stepbar {
 	}
 
 	// -------------------------------------------------------------------------------
-	/** 在各StepMain頁面doAfterCompose時，應呼叫此方法。 */
+	/**
+	 * StepMain初始化 pageComposer不需要呼叫到mainComposer，應呼叫此方法。(recommended)
+	 */
+	public static StepbarProxy initStepbar(Include _icdStepbar, Step[] _steps) {
+		return initStepbar(_icdStepbar, _steps, null);
+	}
+
+	/**
+	 * StepMain初始化 pageComposer有需求呼叫到mainComposer，應呼叫此方法。(recommended)
+	 */
 	public static StepbarProxy initStepbar(Include _icdStepbar, Step[] _steps,
-			SelectorComposer<Component> _stepMainComposer, Component _stepMainComponent, boolean _useDefaultCtrlBar) {
+			SelectorComposer<Component> _stepMainComposer) {
+		return initStepbar(_icdStepbar, _steps, _stepMainComposer, null);
+	}
+
+	/** StepMain初始化 */
+	public static StepbarProxy initStepbar(Include _icdStepbar, Step[] _steps,
+			SelectorComposer<Component> _stepMainComposer, Component _stepMainComponent) {
 		StepbarProxy proxy = new StepbarProxy(_stepMainComponent);
-		proxy.setComposer(_stepMainComposer);
+		if (_stepMainComposer != null)
+			proxy.setComposer(_stepMainComposer);
 		proxy.stepbarTemplateComposer = StepbarTemplateComposer.getInstance(_icdStepbar);
-		proxy.stepbarTemplateComposer.initialize(_steps, proxy, _useDefaultCtrlBar);
+		proxy.stepbarTemplateComposer.initialize(_steps, proxy);
+
 		return proxy;
 	}
 

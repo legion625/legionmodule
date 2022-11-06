@@ -10,9 +10,9 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Panel;
 
 import legion.util.LogUtil;
-import legion.web.control.zk.legionmodule.pageTemplate.Step;
-import legion.web.control.zk.legionmodule.pageTemplate.StepbarProxy;
-import legion.web.control.zk.legionmodule.pageTemplate.StepbarTemplateComposer;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarTemplateComposer;
 import legion.web.zk.ZkUtil;
 
 public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
@@ -52,7 +52,8 @@ public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
 				Step.of("Page 3", "fa fa-smile", Page3Composer.URI), //
 		};
 
-		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemo1, true);
+//		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemo1, true);
+		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemo1);
 
 		StepbarDemo1PageComposer stepbarDemo1PageComposer = getComposer(StepbarDemo1PageComposer.class);
 		Page1Composer p1c = getComposer(Page1Composer.class);
@@ -64,6 +65,8 @@ public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
 		log.debug("p2c: {}", p2c);
 		log.debug("p3c: {}", p3c);
 
+		
+		// TODO stepbar control
 	}
 	
 	public <T> T getComposer(Class<T> _composerClass) {

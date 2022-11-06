@@ -1,4 +1,4 @@
-package legion.web.control.zk.legionmodule.pageTemplate;
+package legion.web.control.zk.legionmodule.pageTemplate.stepbar;
 
 import org.zkoss.zhtml.Span;
 import org.zkoss.zul.Div;
