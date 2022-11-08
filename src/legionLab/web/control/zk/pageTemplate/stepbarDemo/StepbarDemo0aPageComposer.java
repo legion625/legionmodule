@@ -24,7 +24,7 @@ public class StepbarDemo0aPageComposer extends SelectorComposer<Component> {
 	private Logger log = LoggerFactory.getLogger(StepbarDemo0aPageComposer.class);
 
 	static StepbarDemo0aPageComposer of(Include _icd) {
-		return ZkUtil.of(_icd, URI, "pnStepbarDemo0");
+		return ZkUtil.of(_icd, URI, "pnStepbarDemo0a");
 	}
 
 	// -------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ public class StepbarDemo0aPageComposer extends SelectorComposer<Component> {
 				Step.of("Page 2", "fa fa-eye", Page2Composer.URI), //
 				Step.of("Page 3", "fa fa-smile", Page3Composer.URI), //
 		};
-		stepbarComposer.initStepbar("Demo 0", "", steps, this);
+		stepbarComposer.initStepbar("Demo 0", "add btn event", steps, this);
 		
 		StepbarDemo0aPageComposer stepbarDemo0PageComposer = stepbarComposer.getComposer(StepbarDemo0aPageComposer.class);
 		Page1Composer p1c = stepbarComposer.getComposer(Page1Composer.class);

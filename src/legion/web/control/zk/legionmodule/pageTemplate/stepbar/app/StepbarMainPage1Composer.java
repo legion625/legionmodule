@@ -15,29 +15,30 @@ import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Stepbar;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.ctrl.StepbarCtrl0Composer;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.ctrl.StepbarCtrl1Composer;
 import legion.web.zk.ZkUtil;
 
-public class StepbarMainPage0Composer extends SelectorComposer<Component> implements Stepbar {
-	public final static String URI = "/legionmodule/pageTemplate/stepbar/app/stepbarMainPage0.zul";
+public class StepbarMainPage1Composer extends SelectorComposer<Component> implements Stepbar {
+	public final static String URI = "/legionmodule/pageTemplate/stepbar/app/stepbarMainPage1.zul";
 
-	private Logger log = LoggerFactory.getLogger(StepbarMainPage0Composer.class);
+	private Logger log = LoggerFactory.getLogger(StepbarMainPage1Composer.class);
 
-	public final static StepbarMainPage0Composer of(Include _icd) {
-		return ZkUtil.of(_icd, URI, "pnStepbarMainPage0");
+	public final static StepbarMainPage1Composer of(Include _icd) {
+		return ZkUtil.of(_icd, URI, "pnStepbarMainPage1");
 	}
 	
 	// -------------------------------------------------------------------------------
 	@Wire
-	private Panel pnStepbarMainPage0;
+	private Panel pnStepbarMainPage1;
 
 	@Wire
 	private Label lbPageTitle, lbPageSubtitle;
 	
 	@Wire
-	private Include icdStepbarMainPage0;
+	private Include icdStepbarMainPage1;
 	@Wire
-	private Include icdStepbarMainPage0Ctrl;
-	private StepbarCtrl0Composer stepbarCtrlComposer;
+	private Include icdStepbarMainPage1Ctrl;
+	private StepbarCtrl1Composer stepbarCtrlComposer;
 
 	// -------------------------------------------------------------------------------
 	private StepbarProxy stepbarProxy;
@@ -62,10 +63,10 @@ public class StepbarMainPage0Composer extends SelectorComposer<Component> implem
 		lbPageTitle.setValue(_pageTitle);
 		lbPageSubtitle.setValue(_pageSubtitle);
 		
-		stepbarProxy = StepbarProxy.initStepbar(icdStepbarMainPage0, _steps, _stepMainComposer);
+		stepbarProxy = StepbarProxy.initStepbar(icdStepbarMainPage1, _steps, _stepMainComposer);
 
 		/**/
-		stepbarCtrlComposer = StepbarCtrl0Composer.of(icdStepbarMainPage0Ctrl);
+		stepbarCtrlComposer = StepbarCtrl1Composer.of(icdStepbarMainPage1Ctrl);
 		stepbarCtrlComposer.init(stepbarProxy);
 	}
 	
@@ -75,6 +76,10 @@ public class StepbarMainPage0Composer extends SelectorComposer<Component> implem
 	
 	public void setRunNext(Runnable _runNext) {
 		stepbarCtrlComposer.setRunNext(_runNext);
+	}
+	
+	public void setRunSubmit(Runnable _runSubmit) {
+		stepbarCtrlComposer.setRunSubmit(_runSubmit);
 	}
 	
 	// -------------------------------------------------------------------------------

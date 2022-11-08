@@ -13,6 +13,8 @@ import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarTemplateComposer;
+import legion.web.control.zk.legionmodule.pageTemplate.stepbar.app.StepbarMainPage1Composer;
+import legion.web.zk.ZkMsgBox;
 import legion.web.zk.ZkUtil;
 
 public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
@@ -30,9 +32,7 @@ public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
 
 	@Wire
 	private Include icdStepbar;
-
-	// -------------------------------------------------------------------------------
-	private StepbarProxy stepbarProxy;
+	private StepbarMainPage1Composer stepbarComposer;
 
 	// -------------------------------------------------------------------------------
 	@Override
@@ -46,31 +46,44 @@ public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
 	}
 
 	private void initStepbar() {
-		Step[] steps = new Step[] { //  
+		stepbarComposer = StepbarMainPage1Composer.of(icdStepbar);
+
+		Step[] steps = new Step[] { //
 				Step.of("Page 1", "fa fa-file-archive", Page1Composer.URI), //
 				Step.of("Page 2", "fa fa-eye", Page2Composer.URI), //
 				Step.of("Page 3", "fa fa-smile", Page3Composer.URI), //
 		};
+		stepbarComposer.initStepbar("Demo 1", "add btn event", steps, this);
 
-//		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemo1, true);
-		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemo1);
-
-		StepbarDemo1PageComposer stepbarDemo1PageComposer = getComposer(StepbarDemo1PageComposer.class);
-		Page1Composer p1c = getComposer(Page1Composer.class);
-		Page2Composer p2c = getComposer(Page2Composer.class);
-		Page3Composer p3c = getComposer(Page3Composer.class);
+		StepbarDemo1PageComposer stepbarDemo1PageComposer = stepbarComposer.getComposer(StepbarDemo1PageComposer.class);
+		Page1Composer p1c = stepbarComposer.getComposer(Page1Composer.class);
+		Page2Composer p2c = stepbarComposer.getComposer(Page2Composer.class);
+		Page3Composer p3c = stepbarComposer.getComposer(Page3Composer.class);
 		log.debug("this: {}", this);
 		log.debug("stepbarDemo1PageComposer: {}", stepbarDemo1PageComposer);
 		log.debug("p1c: {}", p1c);
 		log.debug("p2c: {}", p2c);
 		log.debug("p3c: {}", p3c);
 
-		
-		// TODO stepbar control
-	}
-	
-	public <T> T getComposer(Class<T> _composerClass) {
-		return stepbarProxy == null ? null : stepbarProxy.getComposer(_composerClass);
+		/**/
+		stepbarComposer.setRunBack(() -> {
+
+			ZkUtil.showNotificationInfo("Run back custom");
+
+			stepbarComposer.back();
+		});
+
+		stepbarComposer.setRunNext(() -> {
+			ZkUtil.showNotificationInfo("Run next custom");
+			stepbarComposer.next();
+		});
+
+		stepbarComposer.setRunSubmit(() -> {
+			ZkMsgBox.confirm("Run next custom?", () -> {
+				ZkUtil.showNotificationInfo("Run next custom");
+				stepbarComposer.next();
+			});
+		});
 	}
 
 }

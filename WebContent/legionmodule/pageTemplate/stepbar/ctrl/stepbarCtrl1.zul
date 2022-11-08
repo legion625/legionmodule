@@ -1,0 +1,22 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<grid id="stepbarCtrl1" sclass="gridBorderNone gridBgTransparent"
+		apply="legion.web.control.zk.legionmodule.pageTemplate.stepbar.ctrl.StepbarCtrl1Composer">
+		<rows>
+			<row>
+				<cell align="left">
+					<toolbarbutton id="btnBack" label="上一步" iconSclass="fa fa-chevron-left fa-lg"
+						style="font-weight:bold" />
+				</cell>
+				<cell align="center">
+					<button id="btnSubmit" label="送出" style="font-weight:bold" />
+				</cell>
+				<cell align="right">
+					<toolbarbutton id="btnNext" label="下一步" dir="reverse" iconSclass="fa fa-chevron-right fa-lg"
+						style="font-weight:bold">
+					</toolbarbutton>
+				</cell>
+			</row>
+		</rows>
+	</grid>
+</zk>
