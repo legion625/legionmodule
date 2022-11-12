@@ -16,6 +16,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.query"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.biz"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.pageTemplate.stepbar.app"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.system"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.service"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.docRepo"/>
@@ -30,6 +31,8 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.google"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.luis"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.pageTemplate.stepbar"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.pageTemplate.stepbar.ctrl"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.kernel"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system.type"/>
