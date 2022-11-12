@@ -12,6 +12,7 @@
 	<desktop-config>
 		<theme-uri>/legionmodule/css/legionmodule_zk_default.css</theme-uri>
 		<theme-uri>/legionmodule/css/fontawesome-all.css</theme-uri>
+		<theme-uri>/legionmodule/css/stepbar.css</theme-uri>
 	</desktop-config>
 	
 	<library-property>

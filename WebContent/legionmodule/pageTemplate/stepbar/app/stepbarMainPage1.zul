@@ -1,0 +1,14 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<panel id="pnStepbarMainPage1" vflex="1"
+		apply="legion.web.control.zk.legionmodule.pageTemplate.stepbar.app.StepbarMainPage1Composer">
+		<panelchildren>
+		<hlayout valign="middle">
+			<label id="lbPageTitle" value="（No Title）" style="font-size:20px; weight:bold"/>
+			<label id="lbPageSubtitle"  style="font-size:16px; weight:bold"/>
+		</hlayout>
+		<include id="icdStepbarMainPage1" vflex="1" />
+		<include id="icdStepbarMainPage1Ctrl" />
+		</panelchildren>
+	</panel>
+</zk>

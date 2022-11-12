@@ -18,16 +18,18 @@
 	
 	MenuItem下可以新增子標籤Remark，Remark內容會視為開功能選項的描述，建議描述內容以XML CDATA標註。  
 ]]>
-	<MenuItem text="Demo" iconSclass="fa fa-desktop fa-fw">
-		<MenuItem text="Fn-Left Template Demo" iconSclass="fa fa-angle-right fa-fw"
-			navigateUrl="/legionmodule/pageTemplate/fnLeftTemplate.zul?fnUri=/legionLab/pageTemplate/fnCntDemo/fnPage.zul"></MenuItem>
+	<MenuItem text="Demo" iconSclass="fa fa-desktop fa-fw" >
+		<MenuItem text="Fn-Left Template Demo" iconSclass="fa fa-angle-right fa-fw" 
+		navigateUrl="/legionmodule/pageTemplate/fnLeftTemplate.zul?fnUri=/legionLab/pageTemplate/fnCntDemo/fnPage.zul"></MenuItem>
 		<MenuItem text="GA Staff Shift Demo" iconSclass="fa fa-angle-right fa-fw"
-			navigateUrl="/legionmodule/pageTemplate/fnLeftTemplate.zul?fnUri=/legionLab/gaStaffShiftDemo/fnPage.zul"></MenuItem>
-		<MenuItem text="Demo3"></MenuItem>
+		navigateUrl="/legionmodule/pageTemplate/fnLeftTemplate.zul?fnUri=/legionLab/gaStaffShiftDemo/fnPage.zul"></MenuItem>
+		<MenuItem text="Stepbar template demo" iconSclass="fa fa-angle-right fa-fw"
+		navigateUrl="/legionLab/pageTemplate/stepbarDemo/stepbarDemo.zul"></MenuItem>
 	</MenuItem>
 	<MenuItem text="進階管理"></MenuItem>
-	<MenuItem text="系統資訊及管理">
-		<MenuItem text="系統屬性" iconSclass="fa fa-caret-right fa-fw" navigateUrl="/legionmodule/system/sysAttrPage.zul"></MenuItem>
-		<MenuItem text="關於" iconSclass="fa fa-caret-right fa-fw" navigateUrl="/legionmodule/system/about.zul"></MenuItem>
+	<MenuItem text="系統管理">
+		<MenuItem text="系統資訊" iconSclass="fa fa-caret-right fa-fw"
+		navigateUrl="/legionmodule/system/sysAttrPage.zul"
+		></MenuItem>
 	</MenuItem>
 </Menu>
