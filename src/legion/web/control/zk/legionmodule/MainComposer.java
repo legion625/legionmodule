@@ -11,12 +11,16 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Include;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Menu;
 import org.zkoss.zul.Menubar;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Menupopup;
 import org.zkoss.zul.impl.XulElement;
 
+import legion.ISystemInfo;
+import legion.LegionContext;
+import legion.SystemInfoDefault;
 import legion.util.DataFO;
 import legion.util.LogUtil;
 import legion.web.MenuEntry;
@@ -30,6 +34,9 @@ public class MainComposer extends SelectorComposer<Component> {
 	private Logger log = LoggerFactory.getLogger(MainComposer.class);
 	
 	@Wire
+	private Label lbSysName;
+	
+	@Wire
 	private Menubar menubar;
 
 	@Wire
@@ -41,6 +48,7 @@ public class MainComposer extends SelectorComposer<Component> {
 		log.debug("Main2Composer.doAfterCompose");
 		try {
 			super.doAfterCompose(comp);
+			initSys() ;
 			initMenubar();
 		} catch (Throwable e) {
 			LogUtil.log(e, Level.ERROR);
@@ -52,9 +60,16 @@ public class MainComposer extends SelectorComposer<Component> {
 	public void btnHome_clicked() {
 		iclMain.setSrc(null);
 	}
-	
+
 	// -------------------------------------------------------------------------------
-	public void initMenubar() {
+	private void initSys() {
+		ISystemInfo systemInfo = LegionContext.getInstance().getSystemInfo();
+		String sysName = systemInfo.getName();
+		if (!DataFO.isEmptyString(sysName))
+			lbSysName.setValue(sysName);
+	}
+	
+	private void initMenubar() {
 		log.debug("Main2Composer.test");
 		menubar.getChildren().clear();
 		

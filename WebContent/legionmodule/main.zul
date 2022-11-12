@@ -6,7 +6,7 @@
 				<rows>
 					<row>
 						<cell align="left">
-							<label value="Legion Module" />
+							<label id="lbSysName" value="Legion Module" />
 						</cell>
 						<cell align="right">
 							<toolbarbutton id="btnHome" label="home"></toolbarbutton>
