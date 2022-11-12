@@ -42,11 +42,11 @@ public class StepbarCtrl0Composer extends SelectorComposer<Component> {
 	// -------------------------------------------------------------------------------
 	private final Runnable runBackDefault = () -> {
 		stepbar.back();
-		updateBtnVisible();
+		toggleBtnVisible();
 	};
 	private final Runnable runNextDefault = () -> {
 		stepbar.next();
-		updateBtnVisible();
+		toggleBtnVisible();
 	};
 
 	private Runnable runBack;
@@ -64,10 +64,10 @@ public class StepbarCtrl0Composer extends SelectorComposer<Component> {
 		this.stepbar = _stepbar;
 		setRunBack(runBackDefault);
 		setRunNext(runNextDefault);
-		updateBtnVisible();
+		toggleBtnVisible();
 	}
 
-	public void updateBtnVisible() {
+	public void toggleBtnVisible() {
 		btnBack.setVisible(stepbar.getCurrentIndex() != 0);
 		btnNext.setVisible(stepbar.getCurrentIndex() != stepbar.getStepSize() - 1);
 	}

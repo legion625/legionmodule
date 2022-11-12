@@ -100,19 +100,19 @@ public class StepbarMainPage1Composer extends SelectorComposer<Component> implem
 	@Override
 	public void back() {
 		stepbarProxy.back();
-		stepbarCtrlComposer.updateBtnVisible();
+		stepbarCtrlComposer.toggleBtnVisible();
 	}
 
 	@Override
 	public void next() {
 		stepbarProxy.next();
-		stepbarCtrlComposer.updateBtnVisible();
+		stepbarCtrlComposer.toggleBtnVisible();
 	}
 
 	@Override
 	public void navigateTo(int _index) {
 		stepbarProxy.navigateTo(_index);
-		stepbarCtrlComposer.updateBtnVisible();
+		stepbarCtrlComposer.toggleBtnVisible();
 	}
 
 }

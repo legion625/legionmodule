@@ -68,10 +68,10 @@ public class StepbarCtrl1Composer extends SelectorComposer<Component> {
 		setRunBack(runBackDefault);
 		setRunNext(runNextDefault);
 		setRunSubmit(runSubmitDefault);
-		updateBtnVisible();
+		toggleBtnVisible();
 	}
 
-	public void updateBtnVisible() {
+	public void toggleBtnVisible() {
 		int i = stepbar.getCurrentIndex();
 		int n = stepbar.getStepSize();
 		btnBack.setVisible(i != 0 && i != n - 1);

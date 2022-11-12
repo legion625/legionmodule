@@ -58,7 +58,7 @@ public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
 		};
 
 //		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemoCustom, false);
-		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this, pnStepbarDemoCustom);
+		stepbarProxy = StepbarProxy.initStepbar(icdStepbar, steps, this);
 
 		StepbarDemoCustomPageComposer stepbarDemoCustomPageComposer = getComposer(StepbarDemoCustomPageComposer.class);
 		Page1Composer p1c = getComposer(Page1Composer.class);
@@ -69,6 +69,9 @@ public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
 		log.debug("p1c: {}", p1c);
 		log.debug("p2c: {}", p2c);
 		log.debug("p3c: {}", p3c);
+		
+		/* step ctrl */
+		
 
 	}
 

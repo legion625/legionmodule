@@ -39,8 +39,7 @@ public class StepbarDemoComposer extends SelectorComposer<Component> {
 		StepbarDemo0PageComposer.of(icdDemo0);
 		StepbarDemo0aPageComposer.of(icdDemo0a);
 		StepbarDemo1PageComposer.of(icdDemo1);
-//		StepbarDemoCustomPageComposer.of(icdDemoCustom);
-
+		StepbarDemoCustomPageComposer.of(icdDemoCustom);
 	}
 
 }

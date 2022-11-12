@@ -88,6 +88,7 @@ public class StepbarProxy implements Stepbar {
 	}
 
 	/** StepMain初始化 */
+	@Deprecated
 	public static StepbarProxy initStepbar(Include _icdStepbar, Step[] _steps,
 			SelectorComposer<Component> _stepMainComposer, Component _stepMainComponent) {
 		StepbarProxy proxy = new StepbarProxy(_stepMainComponent);
