@@ -338,12 +338,14 @@ public class AbstractMySqlDao extends AbstractDao {
 	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, String _col, String _value,
 			Function<ResultSet, T> _fnParseObj) {
 		Map<String, String> colValueMap = new HashMap<>();
-		colValueMap.put(_col, _value);
+		if (!DataFO.isEmptyString(_col) && _value != null)
+			colValueMap.put(_col, _value);
 		return loadObjectList(_table, colValueMap, _fnParseObj);
 	}
 
 	protected final <T extends ObjectModel> List<T> loadObjectList(String _table, Map<String, String> _colValueMap,
 			Function<ResultSet, T> _fnParseObj) {
+		log.debug("loadObjectList::start");
 		List<T> list = new ArrayList<>();
 
 		Connection conn = getConn();
@@ -358,11 +360,13 @@ public class AbstractMySqlDao extends AbstractDao {
 					sb.append(" and ").append(_col).append("='").append(_colValueMap.get(_col)).append("'");
 
 			String qstr = sb.toString();
+			log.debug("qstr: {}", qstr);
 			pstmt = conn.prepareStatement(qstr);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				list.add(_fnParseObj.apply(rs));
 			}
+			log.debug("list.size(): {}", list.size());
 		} catch (SQLException e) {
 			LogUtil.log(log, e, Level.ERROR);
 			return null;
