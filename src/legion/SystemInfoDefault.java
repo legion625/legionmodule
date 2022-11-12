@@ -66,28 +66,30 @@ public class SystemInfoDefault implements ISystemWebInfo{
 //	}
 
 	@Override
+	public String getId() {
+//		if(!DataFO.isEmptyString(systemId))
+//			return systemId;
+		systemId = getAttribute("system.id");
+//		if(DataFO.isEmptyString(systemName))
+//			systemId = getAttribute("APP_NAME");
+//		if(DataFO.isEmptyString(systemName))
+//			systemId = hostIp;
+		return systemId;
+	}
+	
+	@Override
 	public String getName() {
-		if(!DataFO.isEmptyString(systemName))
-			return systemName;
+//		if(!DataFO.isEmptyString(systemName))
+//			return systemName;
 		systemName = getAttribute("system.name");
-		if(DataFO.isEmptyString(systemName))
-			systemName = getAttribute("APP_NAME");
-		if(DataFO.isEmptyString(systemName))
-			systemName = hostIp;
+//		if(DataFO.isEmptyString(systemName))
+//			systemName = getAttribute("APP_NAME");
+//		if(DataFO.isEmptyString(systemName))
+//			systemName = hostIp;
 		return systemName;
 	}
 
-	@Override
-	public String getId() {
-		if(!DataFO.isEmptyString(systemId))
-			return systemId;
-		systemId = getAttribute("system.id");
-		if(DataFO.isEmptyString(systemName))
-			systemId = getAttribute("APP_NAME");
-		if(DataFO.isEmptyString(systemName))
-			systemId = hostIp;
-		return systemId;
-	}
+	
 
 	@Override
 	public String getHostIp() {
@@ -96,7 +98,7 @@ public class SystemInfoDefault implements ISystemWebInfo{
 
 	@Override
 	public String getVersion() {
-		return getAttribute("version");
+		return getAttribute("system.version");
 	}
 
 	@Override
