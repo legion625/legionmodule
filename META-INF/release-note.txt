@@ -1,6 +1,10 @@
 Min-Hua, 2022.11.12
+[change]
+1. 調整FnCntProxy的寫法，不再使用dynamicProperties。
+2. Biz Process Unit: 重新命名IssueFacade為BpuFacade，並以Bpu取代BizObjBuilder。
+
 [bug]
-1. Fix 'loadObjectList' error.
+1. Fix 'loadObjectList' error in AbstractMySqlDao.
 
 ------------------------------------------------------------------------------
 v0.12.1 released by Min-Hua, 2022.11.12
@@ -10,7 +14,7 @@ v0.12.1 released by Min-Hua, 2022.11.12
 [deployment]
 1. System-conf.properties
   -1. Add attributes: system.id, system.name
-  -2. Ahange attributes: version -> system.version 
+  -2. Change attributes: version -> system.version 
 
 ------------------------------------------------------------------------------
 v0.12.0 released by Min-Hua, 2022.11.12

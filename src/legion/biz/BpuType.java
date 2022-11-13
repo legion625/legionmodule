@@ -3,7 +3,7 @@ package legion.biz;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public interface BizObjBuilderType {
+public interface BpuType {
 	Class getBuilderClass();
 
 	Class[] getArgsClasses();
@@ -23,7 +23,7 @@ public interface BizObjBuilderType {
 	boolean matchBiz(Object... _args);
 
 	default boolean match(Object... _args) {
-		Logger log = LoggerFactory.getLogger(BizObjBuilderType.class);
+		Logger log = LoggerFactory.getLogger(BpuType.class);
 		if (!matchInput(_args)) {
 			log.error("matchInput return false.");
 			return false;

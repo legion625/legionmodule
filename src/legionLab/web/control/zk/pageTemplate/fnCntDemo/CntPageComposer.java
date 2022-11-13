@@ -1,22 +1,34 @@
 package legionLab.web.control.zk.pageTemplate.fnCntDemo;
 
+import org.slf4j.event.Level;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zul.Include;
 
+import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.FnCntProxy;
+import legion.web.zk.ZkUtil;
 
 public class CntPageComposer extends SelectorComposer<Component> {
 	public final static String URI = "/legionLab/pageTemplate/fnCntDemo/cntPage.zul";
 
-	@Override
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-		System.out.println(this.getClass().getSimpleName() + ".doAfterCompose");
-		FnCntProxy.register();
+	public static CntPageComposer of(Include _icd) {
+		return ZkUtil.of(_icd, URI, "wdCntPage");
+	}
 
-		/**/
-		String value2 = (String) Executions.getCurrent().getAttribute("key2");
-		System.out.println("value2: " + value2);
+	// -------------------------------------------------------------------------------
+	@Override
+	public void doAfterCompose(Component comp) {
+		try {
+			super.doAfterCompose(comp);
+			FnCntProxy.register(this);
+
+		} catch (Throwable e) {
+			LogUtil.log(e, Level.ERROR);
+		}
+	}
+
+	String getValue() {
+		return "CntPageValue";
 	}
 }

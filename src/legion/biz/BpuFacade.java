@@ -9,27 +9,27 @@ import org.slf4j.LoggerFactory;
 
 import legion.util.LogUtil;
 
-public class IssueFacade {
-	private Logger log = LoggerFactory.getLogger(IssueFacade.class);
+public class BpuFacade {
+	private Logger log = LoggerFactory.getLogger(BpuFacade.class);
 
 	// -------------------------------------------------------------------------------
-	private final static IssueFacade INSTANCE = new IssueFacade();
+	private final static BpuFacade INSTANCE = new BpuFacade();
 
-	private IssueFacade() {
+	private BpuFacade() {
 		bizObjBuilderFactoryMap = new HashMap<>();
 		srcObjStrategyMap = new HashMap<>();
 	}
 
-	public final static IssueFacade getInstance() {
+	public final static BpuFacade getInstance() {
 		return INSTANCE;
 	}
 
 	// -------------------------------------------------------------------------------
-	private Map<Class<? extends BizObjBuilderType>, BizObjBuilderFactory<? extends BizObjBuilderType>> bizObjBuilderFactoryMap;
+	private Map<Class<? extends BpuType>, BpuFactory<? extends BpuType>> bizObjBuilderFactoryMap;
 
-	private BizObjBuilderFactory<? extends BizObjBuilderType> getFactory(
-			Class<? extends BizObjBuilderType> _bizObjBuilderTypeClass) {
-		bizObjBuilderFactoryMap.putIfAbsent(_bizObjBuilderTypeClass, new BizObjBuilderFactory<>());
+	private BpuFactory<? extends BpuType> getFactory(
+			Class<? extends BpuType> _bizObjBuilderTypeClass) {
+		bizObjBuilderFactoryMap.putIfAbsent(_bizObjBuilderTypeClass, new BpuFactory<>());
 		return bizObjBuilderFactoryMap.get(_bizObjBuilderTypeClass);
 	}
 	
@@ -57,10 +57,10 @@ public class IssueFacade {
 		return getSrcObjStrategy(_srcObjType, _srcObjType.getStrategyClass()).matchSrcObj(_srcObj, _srcObjType, _args);
 	}
 	
-	public final <B extends BizObjBuilder, T extends BizObjBuilderType> B getBuilder(T _builderType, Object... _args) {
-		return (B) ((BizObjBuilderFactory<T>) getFactory(_builderType.getClass())).getBuilder(_builderType, _args);
+	public final <B extends Bpu, T extends BpuType> B getBuilder(T _builderType, Object... _args) {
+		return (B) ((BpuFactory<T>) getFactory(_builderType.getClass())).getBuilder(_builderType, _args);
 	}
-	public final boolean matchBuilder(BizObjBuilderType _builderType, Object... _args) {
+	public final boolean matchBuilder(BpuType _builderType, Object... _args) {
 		return _builderType.match(_args);
 	}
 	

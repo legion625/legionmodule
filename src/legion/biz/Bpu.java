@@ -4,12 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
-import legion.ObjectModel;
 import legion.util.LogUtil;
 import legion.util.TimeTraveler;
 
-public abstract class BizObjBuilder<U extends ObjectModel> {
-	protected Logger log = LoggerFactory.getLogger(BizObjBuilder.class);
+public abstract class Bpu<U> {
+	protected Logger log = LoggerFactory.getLogger(Bpu.class);
 
 	protected Object[] args;
 
@@ -18,7 +17,7 @@ public abstract class BizObjBuilder<U extends ObjectModel> {
 		appendBase();
 	}
 
-	protected abstract BizObjBuilder<U> appendBase();
+	protected abstract Bpu<U> appendBase();
 
 	/**
 	 * 「確認」：合理性檢查（業務層級）

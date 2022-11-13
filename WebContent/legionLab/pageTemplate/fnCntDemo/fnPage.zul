@@ -5,11 +5,11 @@
 		This is Fn Page.
 		<vlayout>
 		<button id="btn1" label="refresh fn" />
-		<button id="btn2" label="refresh fn with dyna-prop" />
+		<button id="btn2" label="refresh fn with fn-call" />
 		<button id="btn3" label="refresh cnt" />
-		<button id="btn4" label="refresh cnt with dyna-prop" />
+		<button id="btn4" label="refresh cnt with fn-call" />
 		<button id="btn5" label="refresh page" />
-		<button id="btn6" label="refresh page" />
+		<button id="btn6" label="refresh page (no via fnCntProxy)" />
 		<button id="btn7" label="refresh cnt and close fn" />
 		</vlayout>
 		<include id="iclSubpage"></include>
