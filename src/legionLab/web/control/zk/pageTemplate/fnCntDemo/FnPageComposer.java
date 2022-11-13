@@ -1,17 +1,16 @@
 package legionLab.web.control.zk.pageTemplate.fnCntDemo;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.slf4j.event.Level;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Include;
 
+import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.FnCntProxy;
+import legion.web.zk.ZkNotification;
 
 public class FnPageComposer extends SelectorComposer<Component> {
 	public final static String URI = "/legionLab/pageTemplate/fnCntDemo/fnPage.zul";
@@ -22,15 +21,13 @@ public class FnPageComposer extends SelectorComposer<Component> {
 	private FnCntProxy proxy;
 
 	@Override
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-		System.out.println(this.getClass().getSimpleName() + ".doAfterCompose");
-		proxy = FnCntProxy.register();
-
-		/**/
-		String value1 = (String) Executions.getCurrent().getAttribute("key1");
-		System.out.println("value1: " + value1);
-
+	public void doAfterCompose(Component comp) {
+		try {
+			super.doAfterCompose(comp);
+			proxy = FnCntProxy.register(this);
+		} catch (Throwable e) {
+			LogUtil.log(e, Level.ERROR);
+		}
 	}
 
 	@Listen(Events.ON_CLICK + "=#btn1")
@@ -40,9 +37,13 @@ public class FnPageComposer extends SelectorComposer<Component> {
 
 	@Listen(Events.ON_CLICK + "=#btn2")
 	public void btn2_clicked() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("key1", "value1");
-		proxy.refreshFnUri(FnPageComposer.URI, map);
+		proxy.refreshFnUri(FnPageComposer.URI);
+		FnPageComposer c = proxy.getComposer(FnPageComposer.class);
+		ZkNotification.info("btn2_clicked: " + c.getValue());
+	}
+
+	private String getValue() {
+		return "FnPageValue";
 	}
 
 	@Listen(Events.ON_CLICK + "=#btn3")
@@ -52,9 +53,9 @@ public class FnPageComposer extends SelectorComposer<Component> {
 
 	@Listen(Events.ON_CLICK + "=#btn4")
 	public void btn4_clicked() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("key2", "value2");
-		proxy.refreshCntUri(CntPageComposer.URI, map);
+		proxy.refreshCntUri(CntPageComposer.URI);
+		CntPageComposer c = proxy.getComposer(CntPageComposer.class);
+		ZkNotification.info("btn4_clicked: " + c.getValue());
 	}
 
 	@Listen(Events.ON_CLICK + "=#btn5")
@@ -64,18 +65,14 @@ public class FnPageComposer extends SelectorComposer<Component> {
 
 	@Listen(Events.ON_CLICK + "=#btn6")
 	public void btn6_clicked() {
-		Map<String, Object> map = new HashMap<>();
-		map.put("key2", "value2");
-		proxy.refreshPage(iclSubpage, CntPageComposer.URI, map);
+		CntPageComposer c = CntPageComposer.of(iclSubpage);
+		ZkNotification.info("btn6_clicked: " + c.getValue());
 	}
-	
+
 	@Listen(Events.ON_CLICK + "=#btn7")
 	public void btn7_clicked() {
-		System.out.println("btn7_clicked");
 		proxy.refreshCntUri(CntPageComposer.URI);
-		System.out.println("test1");
 		proxy.setFnOpen(false);
-		System.out.println("test2");
 	}
-	
+
 }

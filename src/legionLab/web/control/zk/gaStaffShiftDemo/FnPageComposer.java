@@ -20,12 +20,8 @@ public class FnPageComposer extends SelectorComposer<Component>{
 	public void doAfterCompose(Component comp) {
 		try {
 			super.doAfterCompose(comp);
-			System.out.println(this.getClass().getSimpleName() + ".doAfterCompose");
-			FnCntProxy.register();
+			FnCntProxy.register(this);
 
-			/**/
-//			String value2 = (String) Executions.getCurrent().getAttribute("key2");
-//			System.out.println("value2: " + value2);
 		} catch (Throwable e) {
 			LogUtil.log(e, Level.ERROR);
 		}

@@ -9,17 +9,17 @@ import org.slf4j.LoggerFactory;
 
 import legion.util.LogUtil;
 
-public class BizObjBuilderFactory<T extends BizObjBuilderType> {
-	private Logger log = LoggerFactory.getLogger(BizObjBuilderFactory.class);
+public class BpuFactory<T extends BpuType> {
+	private Logger log = LoggerFactory.getLogger(BpuFactory.class);
 	
-	BizObjBuilder getBuilder(T _builderType, Object... _args) {
+	Bpu getBuilder(T _builderType, Object... _args) {
 		if(!_builderType.match(_args)) {
 			log.info("match return false.");
 			return null;
 		}
 		
 		try {
-			BizObjBuilder b = (BizObjBuilder) _builderType.getBuilderClass().getDeclaredConstructor().newInstance();
+			Bpu b = (Bpu) _builderType.getBuilderClass().getDeclaredConstructor().newInstance();
 			b.init(_args);
 			return b;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
