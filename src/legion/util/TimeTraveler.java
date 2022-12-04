@@ -47,9 +47,9 @@ public class TimeTraveler {
 			Site site = siteList.remove(lastIdx);
 			boolean r = site.process();
 			if (r)
-				log.info("[{}] - {}", all - siteList.size(), site.getDesp());
+				log.info("[{}] - process success. {}", all - siteList.size(), site.getDesp());
 			else
-				log.error("[{}] - {}", all - siteList.size(), site.getDesp());
+				log.error("[{}] - process failed. {}", all - siteList.size(), site.getDesp());
 		}
 	}
 	
@@ -76,7 +76,8 @@ public class TimeTraveler {
 
 		@Override
 		public String getDesp() {
-			return "process success. " + desp;
+//			return "process success. " + desp;
+			return desp;
 		}
 	}
 
