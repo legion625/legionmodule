@@ -38,8 +38,8 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.tfidf"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.aspect.menuHandler"/>
-        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.openai"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.docRepo"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util"/>
     </selectedElements>
