@@ -771,7 +771,7 @@ public class AbstractMySqlDao extends AbstractDao {
 			ArrayList<Object> datas = new ArrayList<>();
 			String qstr = packSearchSkewerSql(datas, _tableColPacks, _tableRels, _param, _sqlParser,
 					_queryParamMappingParser);
-			log.error("qstr: {}", qstr);
+//			log.error("qstr: {}", qstr);
 			StringBuilder sb = new StringBuilder(qstr);
 
 			// sort
