@@ -25,6 +25,8 @@
 		navigateUrl="/legionmodule/pageTemplate/fnLeftTemplate.zul?fnUri=/legionLab/gaStaffShiftDemo/fnPage.zul"></MenuItem>
 		<MenuItem text="Stepbar template demo" iconSclass="fa fa-angle-right fa-fw"
 		navigateUrl="/legionLab/pageTemplate/stepbarDemo/stepbarDemo.zul"></MenuItem>
+		<MenuItem text="Filter demo" iconSclass="fa fa-angle-right fa-fw"
+		navigateUrl="/legionLab/filter/filterDemo.zul"></MenuItem>
 	</MenuItem>
 	<MenuItem text="進階管理"></MenuItem>
 	<MenuItem text="系統管理">
