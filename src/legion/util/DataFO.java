@@ -330,4 +330,8 @@ public class DataFO {
 				.replace("?", "%3F").replace("#", "%23").replace("&", "%26").replace("=", "%3D");
 
 	}
+	
+	public static String getStr(boolean _b) {
+		return _b?"✓":"×";
+	}
 }
