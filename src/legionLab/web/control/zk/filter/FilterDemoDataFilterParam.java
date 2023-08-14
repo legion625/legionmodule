@@ -3,13 +3,16 @@ package legionLab.web.control.zk.filter;
 import legion.util.filter.FilterFunction;
 import legion.util.filter.FilterOperation.FilterCompareOp;
 import legion.util.filter.FilterParam;
+import legion.util.filter.handler.BooleanFilter;
+import legion.util.filter.handler.DoubleFilter;
+import legion.util.filter.handler.EnumEqualFilter;
 import legion.util.filter.handler.StringFilter;
 
 public enum FilterDemoDataFilterParam implements FilterParam<Object> {
 	AAA("aaa", "AAA", StringFilter.getInstance()), //
-	BBB("bbb", "BBB", StringFilter.getInstance()), //
-	CCC("ccc", "CCC", StringFilter.getInstance()), //
-	DDD("ddd", "DDD", StringFilter.getInstance()), //
+	BBB("bbb", "BBB", BooleanFilter.getInstance()), //
+	DDD("ddd", "DDD", DoubleFilter.getInstance()), //
+	TYPE("type", "TYPE", EnumEqualFilter.getInstance()), //
 	;
 
 	private String id;

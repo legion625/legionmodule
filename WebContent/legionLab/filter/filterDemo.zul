@@ -5,31 +5,59 @@
 			<grid id="gridDemo" vflex="1" hflex="1" mold="paging" pageSize="20">
 				<auxhead>
 					<auxheader>
-						<textbox id="txbFltrAaa" hflex="1" />
+						<textbox id="txbGridFltrAaa" hflex="1" />
 					</auxheader>
 					<auxheader>
-						<textbox id="txbFltrBbb" hflex="1" />
+						<hlayout hflex="1">
+							<checkbox id="chbGridFltrBbb0" label="×" checked="true" />
+							<checkbox id="chbGridFltrBbb1" label="✓" checked="true" />
+						</hlayout>
 					</auxheader>
 					<auxheader>
-						<textbox id="txbFltrCcc" hflex="1" />
+						<hlayout hflex="1">
+							<doublebox id="dbbGridFltrDdd0" hflex="1" />
+							<label value="-" />
+							<doublebox id="dbbGridFltrDdd1" hflex="1" />
+						</hlayout>
 					</auxheader>
 					<auxheader>
-						<textbox id="txbFltrDdd" hflex="1" />
+						<combobox id="cbbGridFltrType" hflex="1" />
 					</auxheader>
 				</auxhead>
-				<columns>
+				<columns sizable="true">
 					<column label="Aaa" />
-					<column label="Bbb" />
-					<column label="Ccc" />
-					<column label="Ddd" />
+					<column label="Bbb" style="text-align:left" align="center" />
+					<column label="Ddd" style="text-align:left" align="right" />
+					<column label="Type" />
 				</columns>
 			</grid>
-			<listbox hflex="1">
-				<listhead>
+			<listbox id="lbxDemo" vflex="1" hflex="1" mold="paging" pageSize="20">
+				<auxhead>
+					<auxheader>
+						<textbox id="txbLbxFltrAaa" hflex="1" />
+					</auxheader>
+					<auxheader>
+						<hlayout hflex="1">
+							<checkbox id="chbLbxFltrBbb0" label="×" checked="true" />
+							<checkbox id="chbLbxFltrBbb1" label="✓" checked="true" />
+						</hlayout>
+					</auxheader>
+					<auxheader>
+						<hlayout hflex="1">
+							<doublebox id="dbbLbxFltrDdd0" hflex="1" />
+							<label value="-" />
+							<doublebox id="dbbLbxFltrDdd1" hflex="1" />
+						</hlayout>
+					</auxheader>
+					<auxheader>
+						<combobox id="cbbLbxFltrType" hflex="1" />
+					</auxheader>
+				</auxhead>
+				<listhead sizable="true">
 					<listheader label="Aaa" />
-					<listheader label="Bbb" />
-					<listheader label="Ccc" />
-					<listheader label="Ddd" />
+					<listheader label="Bbb" style="text-align:left" align="center" />
+					<listheader label="Ddd" style="text-align:left" align="right" />
+					<listheader label="Type" />
 				</listhead>
 			</listbox>
 		</hlayout>

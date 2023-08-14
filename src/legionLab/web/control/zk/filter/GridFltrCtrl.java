@@ -11,12 +11,9 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Textbox;
 
 public class GridFltrCtrl<T> extends FltrCtrl<T> {
-//
 	private Grid grid;
 
-
 	private GridFltrCtrl(Grid grid, RowRenderer<T> renderer) {
-		//
 		this.grid = grid;
 		this.grid.setRowRenderer(renderer);
 	}
@@ -30,6 +27,5 @@ public class GridFltrCtrl<T> extends FltrCtrl<T> {
 		ListModelList<T> model = new ListModelList<>(filteredList);
 		grid.setModel(model);
 	}
-
 
 }
