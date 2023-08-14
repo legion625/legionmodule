@@ -5,6 +5,7 @@
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
     <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.filter"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.serviceFacade.rmi"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.source"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.query"/>
@@ -17,6 +18,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.service.system"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.geneticAlgorithm"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.filter.app"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.data.search"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.nlp"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.pageTemplate"/>
@@ -29,6 +31,7 @@
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.control.zk.legionmodule.pageTemplate.stepbar.ctrl"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.kernel"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system"/>
+        <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.util.filter.handler"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.system.type"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.web.zk"/>
         <javaElement handleIdentifier="=legionmodule-github/src&lt;legion.datasource.manager"/>
