@@ -8,3 +8,4 @@ WebContent/WEB-INF/*
 classes/*
 /WEB-INF/
 srcTest/conf/*
+/.apt_generated/
