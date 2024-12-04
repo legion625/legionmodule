@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Menu>
 	<![CDATA[ 
+	==已啟用==
 	text:			顯示名稱
+	iconSclass:		用font-awesome設定icon
+	navigateUrl:	連結
+	
+	==未啟用==	
 	refId:			索引id，非必要值，是作為後續若是有需要引用該MenuItem時必要的索引值，若是有填寫必須在MenuRepository中唯一。
 	localeLabelKey:	連結Resouce Properties的索引值，若填寫該key會以Resource定義的名稱優先當作選單名稱。
-	
 	invalidHidden:	設定當權限不符時的顯示模式，是否要隱藏，true/false。預設為true，不符合權限就不顯示。
 	condition:		以User搭配jxpath語法檢驗權限狀態。
 	handlerClass:	執行權限狀態判別的Handler名稱
 	handlerMethod:	執行權限狀態判別的方法名稱
 	handlerData:	定義會存放在AspectBus中的參數，可提供給MenuHandler的資料參數。
-	navigateUrl:	連結
 	target:			連結的視窗，_top表示在目前瀏覽器視窗開啟新連結；_blank表示以新瀏覽器視窗開啟；_hightlight表示在MainWindow下以Hightlighted window開啟，預設以MainWindow的作業區開啟
 	absImage:		顯示icon
 	absHoverImage:	滑鼠進入時顯示icon
-	iconSclass:		用font-awesome設定icon
-	
 	MenuItem下可以新增子標籤Remark，Remark內容會視為開功能選項的描述，建議描述內容以XML CDATA標註。  
 ]]>
 	<MenuItem text="Demo" iconSclass="fa fa-desktop fa-fw" >

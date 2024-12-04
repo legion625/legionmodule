@@ -127,7 +127,6 @@ v0.10.0 released by Min-Hua, 2022.04.10
 2. 新增deployment資料夾，把WEB-INF的內容放一份在該資料夾中，並在.gitignore中過濾掉WEB-INF。
 3. 新增資料表system_seq。
 
-
 ------------------------------------------------------------------------------
 v0.7.1 released by Jason, 2018.12.30
 [change]
