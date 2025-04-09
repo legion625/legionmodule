@@ -1,0 +1,12 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<borderlayout id="main" vflex="1"
+		apply="legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarTemplateComposer">
+		<north border="none" style="padding:1% 0 0 0">
+			<div id="divStepbar" sclass="stepbar" />
+		</north>
+		<center border="none" style="padding: 1% 5%">
+			<cardlayout id="card" vflex="1" />
+		</center>
+	</borderlayout>
+</zk>

@@ -18,7 +18,7 @@ import legion.data.search.SearchParam;
 import legion.kernel.LegionObject;
 import legion.util.DataFO;
 import legion.util.DatabaseFO;
-
+@Deprecated
 public abstract class MySqlDao extends Dao {
 	protected final static String COL_UID = "uid";
 	protected final static String COL_OBJECT_CREATE_TIME = "object_create_time";
@@ -32,8 +32,7 @@ public abstract class MySqlDao extends Dao {
 	protected MySqlDataSource ds;
 
 	protected MySqlDao(MySqlDataSource _ds) {
-		System.out.println("Start::MySqlDao");
-		System.out.println("ds: " + _ds);
+		log.debug("Start::MySqlDao... _ds: {}", _ds);
 		ds = _ds;
 	}
 

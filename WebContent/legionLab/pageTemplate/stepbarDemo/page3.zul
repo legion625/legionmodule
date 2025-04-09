@@ -1,0 +1,8 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<panel vflex="1" apply="legionLab.web.control.zk.pageTemplate.stepbarDemo.Page3Composer">
+<panelchildren>
+page 3
+</panelchildren>
+</panel>
+</zk>

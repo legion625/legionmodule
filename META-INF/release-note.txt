@@ -1,0 +1,225 @@
+------------------------------------------------------------------------------
+v0.14.0 released by Min-Hua, 2023.08.14
+[change]
+1. 新增FilterOperation架構。
+
+------------------------------------------------------------------------------
+v0.13.1 released by Min-Hua, 2023.06.18
+[change]
+1. Add IdEnum interface.
+
+------------------------------------------------------------------------------
+v0.13.0 released by Min-Hua, 2023.06.10
+[change]
+1. 新增openai.ChatBot類別。
+  - 相依libraries: jdk(17.0.2), httpcomponents-client-4.5.6, json, gson_2.8.5, slf4j_1.7.36
+
+------------------------------------------------------------------------------
+v0.12.3 released by Min-Hua, 2022.12.04
+[change]
+1. Minor changes.
+
+[bug]
+1. Fix 'AbstractMySqlDao' error.
+
+------------------------------------------------------------------------------
+v0.12.2 released by Min-Hua, 2022.11.13
+[change]
+1. 調整FnCntProxy的寫法，不再使用dynamicProperties。
+2. Biz Process Unit: 重新命名IssueFacade為BpuFacade，並以Bpu取代BizObjBuilder。
+
+[bug]
+1. Fix 'loadObjectList' error in AbstractMySqlDao.
+
+------------------------------------------------------------------------------
+v0.12.1 released by Min-Hua, 2022.11.12
+[change]
+1. 調整MainPage的system name顯示。
+
+[deployment]
+1. System-conf.properties
+  -1. Add attributes: system.id, system.name
+  -2. Change attributes: version -> system.version 
+
+------------------------------------------------------------------------------
+v0.12.0 released by Min-Hua, 2022.11.12
+[change]
+1. 新增stepbar模組。
+
+[lib]
+1. zk: 9.6.0.1 -> 9.6.3 (eval)
+
+------------------------------------------------------------------------------
+v0.11.2 released by Min-Hua, 2022.11.05
+[change]
+1. AbstractMySqlDao
+  -1. 擴充QueryOperation。
+  -2. 擴充Skewer。
+  -3. DbColumn新增字串長度限制檢查。
+
+------------------------------------------------------------------------------
+v0.11.1 released by Min-Hua, 2022.11.05
+[change]
+1. 新增BizObjBuilder架構。
+1. AbstractMySqlDao擴充loadObjectList的服務介面。
+
+------------------------------------------------------------------------------
+v0.11.0 released by Min-Hua, 2022.09.22
+[change]
+1. [系統]新增「關於」頁面，先僅顯示系統版本。
+  - 由SystemInfo出取出在system-conf.properties中的版本號。
+2. 新增ObjectModelInfo和ObjectModelInfoDto。
+  - ObjectModel主要用於底層架構環境，包含了各式方法的實作。這邊新增的Info和InfoDto，僅封裝由ObjectModel的uid、objectCreateTime、和objectUpdateTime等屬性，以使應用端的使用更輕量化。
+3. 新增Fsm類別，用來控制狀態變化。
+4. 新增TimeTraveler工具類別，在程式碼中進行rollback程序。
+5. AbstractMySqlDao的DbColumn新增支援DOUBLE型別。
+6. 改寫IdxEnum介面，以legion.type下的為主。
+
+------------------------------------------------------------------------------
+v0.10.4 released by Min-Hua, 2022.09.05
+[change]
+1. 新增RmiSsl相關類別架構。
+  - RmiSslDso
+  - RmiSslClientSocketFactory
+  - RmiSslServerSocketFactory
+2. 新增抽象的ObjectModelRemote類別，實作Serializable並及ObjectModel的基礎屬性。
+
+------------------------------------------------------------------------------
+v0.10.3 released by Min-Hua, 2022.08.20
+[change]
+1. 把主頁main.zul併入legionmodule中，讓各專案可以共用。
+
+------------------------------------------------------------------------------
+v0.10.2 released by Min-Hua, 2022.08.15
+[change]
+1. 新增SysAttr系統屬性。
+2. 目錄引進menu-conf架構。
+
+[deployment]
+1. 新增資料表sys_attr。
+
+------------------------------------------------------------------------------
+v0.10.1 released by Min-Hua, 2022.04.10
+1. 新增QueryOperation架構。
+
+------------------------------------------------------------------------------
+v0.10.0 released by Min-Hua, 2022.04.10
+[change]
+1. 調整網頁應用程式架構。
+  -1. 在InitWebAppsListener中實作logback、datasource、service module等設定檔。
+  -2. 把Legionmodule的核心和lab區隔。
+
+[lib]
+1. 設定slf4j+logback架構
+  -1. slf4j-1.7.36
+  -2. logback-core-1.2.11
+  -3. logback-classic-1.2.11
+2. 新增commons_configuration_1.10.jar。
+3. 新增jdom_2.0.6.1。
+
+[deployment]
+1. 調整web.xml設定並新增相關設定檔。
+  -1. logback-conf.xml
+  -2. system-conf.properties
+  -3. datasource.xml
+  -4. ServiceModule.xml
+  -5. menu-conf.xml
+2. 新增deployment資料夾，把WEB-INF的內容放一份在該資料夾中，並在.gitignore中過濾掉WEB-INF。
+3. 新增資料表system_seq。
+
+------------------------------------------------------------------------------
+v0.7.1 released by Jason, 2018.12.30
+[change]
+1. [LUIS]Add attribute 'resolution' to LuisEntity.
+
+v0.7.0 released by Jason, 2018.12.30
+[change]
+1. Add security module.
+
+v0.6.7 released by Jason, 2018.12.30
+[bug]
+1. [DAO]Fix some bugs.
+
+v0.6.6 released by Jason, 2018.12.30
+[change]
+1. [LUIS]Add 'publish' method.
+
+v0.6.5 released by Jason, 2018.12.29
+[change]
+1. [LUIS]Add 'addUtterance' and 'train' methods.
+
+v0.6.4 released by Jason, 2018.12.29
+[change]
+1. [LUIS]Add 'getAllIntents', 'getIntent', and 'createIntent' methods.
+
+v0.6.3 released by Jason, 2018.12.27
+[change]
+1. Offer google search funtion.
+
+v0.6.2 released by Jason, 2018.12.27
+[bug]
+1. Fix bugs.
+
+v0.6.1 released by Jason, 2018.12.25
+[bug]
+1. Fix bugs.
+
+v0.6.0 released by Jason, 2018.12.25
+[change]
+1. 提供Luis模組。
+
+v0.5.1 released by Jason, 2018.12.22
+[bug]
+1. Fix minor errors.
+
+v0.5.0 released by Jason, 2018.12.22
+[change]
+1. 提供SearchOperation框架。
+
+v0.4.0 released by Jason, 2018.12.21
+[change]
+1. 提供DocFile檔案儲存機制。
+
+v0.3.0 released by Jason, 2018.12.19
+[change]
+1. 調整LegionObject架構。
+  -1. 時間改用LocalDateTime。
+2. [DataFO]提供自動補足字串的功能。
+
+[bug]
+1. [CSS]修正gridBorderNone的bug。
+
+[deployment]
+1. 調整LegionObject架構。
+
+v0.2.0 released by Jason, 2018.12.16
+[change]
+1. 提供FnCntTemplate框架。
+
+v0.1.1 released by Jason, 2018.12.16
+
+v0.1.0 released by Jason, 2018.12.16
+重新訂版 
+
+v0.0.4 released by Jason, 2018.03.06
+[change]
+1. 調整LegionObject結構。
+2. JsonUtil和DateFormatUtil新增方法。
+
+v0.0.3 released by Jason, 2017.12.31
+[changes]
+1. 新增font-awesome。
+2. minor fix.
+
+v0.0.2 released by Jason, 2017.10
+[changes]
+1. 新增各項基本工具類別。
+2. 新增Field介面，有在資料庫存取的類型列舉，必須實作此介面。
+3. 新增LegionObject，
+
+# annotations
+ - [changes]
+ - [bugs]
+ - [lab]
+ - [lib]
+ - [deployment]

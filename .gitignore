@@ -2,6 +2,9 @@ syntax: glob
 .classpath
 .settings/*
 .project
-WebContent/WEB-INF/lib/*
-WebContent/META-INF/MANIFEST.MF
+WebContent/WEB-INF/*
 *.class
+/bin/
+classes/*
+/WEB-INF/
+srcTest/conf/*

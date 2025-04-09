@@ -1,0 +1,21 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<panel vflex="1" hflex="1" apply="legion.web.control.zk.legionmodule.MainComposer">
+		<panelchildren>
+			<grid sclass="gridBordnerNone gridBgTransparent">
+				<rows>
+					<row>
+						<cell align="left">
+							<label id="lbSysName" value="Legion Module" />
+						</cell>
+						<cell align="right">
+							<toolbarbutton id="btnHome" label="home"></toolbarbutton>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<menubar id="menubar" />
+			<include id="iclMain" vflex="1" width="100%"></include>
+		</panelchildren>
+	</panel>
+</zk>
