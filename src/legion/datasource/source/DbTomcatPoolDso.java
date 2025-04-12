@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
+import legion.DebugLogMark;
 import legion.datasource.UrlDs;
 import legion.datasource.manager.ResourceInfo;
 import legion.util.LogUtil;
@@ -24,7 +25,8 @@ import legion.util.RetryUtil;
  *
  */
 public class DbTomcatPoolDso extends Dso {
-	private Logger log = LoggerFactory.getLogger(DbTomcatPoolDso.class);
+//	private Logger log = LoggerFactory.getLogger(DbTomcatPoolDso.class);
+	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 
 	private volatile DataSource ds;
 
@@ -92,6 +94,8 @@ public class DbTomcatPoolDso extends Dso {
 		if (ds == null)
 			return null;
 
+		log.debug("_urlDs.getUrl(): {} ", _urlDs.getUrl());
+		
 		/* 設定嘗試取得連線次數3次，嘗試間隔0.2秒。 */
 		Connection conn = RetryUtil.workRetryWithException(3, 200, () -> {
 			Connection _conn = null;

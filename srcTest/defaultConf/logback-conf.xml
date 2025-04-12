@@ -34,29 +34,8 @@
 		<appender-ref ref="StdOut" />
 	</logger>
 	
-	<!-- developing debug -->
-	<logger name="legion.SystemInfoDefault" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.web.InitLegionWebAppsListener" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.LegionContext" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.web.MenuRepository" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.util" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.data" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.datasource" additivity="false" level="DEBUG">
-		<appender-ref ref="StdOut" />
-	</logger>
-	<logger name="legion.DataServiceFactory" additivity="false" level="DEBUG">
+	<!-- Debug -->
+	<logger name="legion.DebugLogMark" additivity="false" level="DEBUG">
 		<appender-ref ref="StdOut" />
 	</logger>
 	

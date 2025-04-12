@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Deprecated
 public abstract class AccessDao extends Dao{
 
 //	private final static String DATA_SOURCE = "jdbc:ucanaccess://d:/MyModule/database/DatabaseAccount.accdb"; // 正式資料庫

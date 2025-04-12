@@ -1,41 +1,26 @@
 package legion.data.service.system;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.event.Level;
 
-import legion.data.service.AbstractMySqlDao;
+import legion.data.service.PgDao;
 import legion.system.SysAttr;
 import legion.system.type.SysAttrType;
 import legion.util.LogUtil;
 
-public class SysAttrDao extends AbstractMySqlDao {
+public class SysAttrDaoPg extends PgDao {
 
-	SysAttrDao(String source) {
+	protected SysAttrDaoPg(String source) {
 		super(source);
 	}
 
-	boolean testCallback() {
-		Connection conn = getConn();
-		log.debug("conn: {}", conn);
-		if (conn == null)
-			return false;
-		try {
-			log.debug("conn.getSchema(): {}", conn.getSchema());
-			log.debug("conn.getClientInfo(): {}", conn.getClientInfo());
-		} catch (SQLException e) {
-			LogUtil.log(e);
-		}
-		return true;
-	}
-	
-	
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	private final static String TB_SYS_ATTR = "sys_attr";
+//	private final static String TB_SYS_ATTR = "legionmodule.sys_attr";
 	private final static String COL_SYS_ATTR_TYPE_IDX = "type_idx";
 	private final static String COL_SYS_ATTR_KEY = "attr_key";
 	private final static String COL_SYS_ATTR_VALUE = "attr_value";
@@ -56,7 +41,7 @@ public class SysAttrDao extends AbstractMySqlDao {
 		SysAttr sa = null;
 		try {
 			SysAttrType type = SysAttrType.get(_rs.getInt(COL_SYS_ATTR_TYPE_IDX));
-			sa = SysAttr.getInstance(parseUid(_rs),type,  parseObjectCreateTime(_rs), parseObjectUpdateTime(_rs));
+			sa = SysAttr.getInstance(parseUid(_rs), type, parseObjectCreateTime(_rs), parseObjectUpdateTime(_rs));
 			/* pack attributes */
 			sa.setKey(_rs.getString(COL_SYS_ATTR_KEY));
 			sa.setValue(_rs.getString(COL_SYS_ATTR_VALUE));

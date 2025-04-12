@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import legion.BusinessServiceFactory;
+import legion.DebugLogMark;
 import legion.LegionContext;
 import legion.datasource.DatasourceInfo;
 import legion.datasource.DefaultTransactionInfoDto;
@@ -28,7 +29,8 @@ import legion.util.DateUtil;
  *
  */
 public class DSManager {
-	private static Logger log = LoggerFactory.getLogger(DSManager.class);
+//	private static Logger log = LoggerFactory.getLogger(DSManager.class);
+	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 	
 	// -------------------------------------------------------------------------------
 	/* Singleton */
@@ -124,6 +126,10 @@ public class DSManager {
 		dsDao.releaseAllDatasources();
 	}
 
+	public DatasourceInfo getDatasourceInfo(String _resourceName) {
+		return dsDao.getDatasourceInfo(_resourceName);
+	}
+	
 	public List<DatasourceInfo> getDatasourceInfos(){
 		return dsDao.getDatasourceInfos();
 	}
@@ -134,29 +140,29 @@ public class DSManager {
 	}
 
 	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
+	@Deprecated
 	public Object getConn(UrlDs _urlDs) {
 		return getConn(_urlDs, Integer.toString(Thread.currentThread().hashCode()));
 	}
 	
 	/**
 	 * 取得所需的Datasource Connection並以指定的ID為登記使用標的
-	 * @param _url
+	 * @param _resourceName
 	 * @param _id
 	 * @return Object
-	 * @deprecated 不支援多執行緒進行單一交易
 	 */
-	@Deprecated
-	public Object getConn(String _url, String _id) {
+	public Object getConn(String _resourceName, String _id) {
+		log.debug("_resourceName: {}\t id: {}", _resourceName, _id);
 		UrlDs urlDs;
-		if (urlDsMap.containsKey(_url))
-			urlDs = urlDsMap.get(_url);
+		if (urlDsMap.containsKey(_resourceName))
+			urlDs = urlDsMap.get(_resourceName);
 		else {
 			synchronized (urlDsMap) {
-				if(urlDsMap.containsKey(_url))
-					urlDs = urlDsMap.get(_url);
+				if(urlDsMap.containsKey(_resourceName))
+					urlDs = urlDsMap.get(_resourceName);
 				else {
-					urlDs = new UrlDs(_url);
-					urlDsMap.put(_url, urlDs);
+					urlDs = new UrlDs(_resourceName);
+					urlDsMap.put(_resourceName, urlDs);
 				}
 			}
 		}

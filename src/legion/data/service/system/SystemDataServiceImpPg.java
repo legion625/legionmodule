@@ -9,17 +9,15 @@ import org.slf4j.LoggerFactory;
 import legion.data.SystemDataService;
 import legion.system.SysAttr;
 
-public class SystemDataServiceImp implements SystemDataService {
-	private Logger log = LoggerFactory.getLogger(SystemDataServiceImp.class);
-	
+public class SystemDataServiceImpPg implements SystemDataService {
+	private Logger log = LoggerFactory.getLogger(SystemDataServiceImpPg.class);
+
 	private String source;
-//	private String srcPg;
-	
-	
+
 	// dao
-	private SysAttrDao sysAttrDao;
 //	private AbstractPostgreSqlDao pgSqlDao;
-	
+	private SysAttrDaoPg sysAttrDao;
+
 	@Override
 	public void register(Map<String, String> _params) {
 		log.debug("SystemDataServiceImp register...");
@@ -30,9 +28,9 @@ public class SystemDataServiceImp implements SystemDataService {
 //		srcPg = _params.get("srcPg");
 
 		// dao
-		sysAttrDao = new SysAttrDao(source);
+		sysAttrDao = new SysAttrDaoPg(source);
 		log.debug("sysAttrDao: {}", sysAttrDao);
-		
+
 //		pgSqlDao = new AbstractPostgreSqlDao(srcPg);
 //		log.debug("pgSqlDao: {}", pgSqlDao);
 
@@ -41,18 +39,14 @@ public class SystemDataServiceImp implements SystemDataService {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public boolean testCallback() {
 		return sysAttrDao.testCallback();
 	}
-	
-//	@Override
-//	public boolean testPgSqlCallback() {
-//		return pgSqlDao.testCallback();
-//	}
-	
+
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	@Override

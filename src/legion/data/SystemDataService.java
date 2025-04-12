@@ -9,6 +9,8 @@ public interface SystemDataService extends IntegrationService {
 	
 	boolean testCallback();
 	
+//	boolean testPgSqlCallback();
+	
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	boolean saveSysAttr(SysAttr _sysAttr);
