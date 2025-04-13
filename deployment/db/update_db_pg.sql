@@ -1,11 +1,5 @@
-
-
 -- dev_mh_pc
 
-
--- unstaging
-
--- 0.14.0 -> unstaging
 CREATE TABLE sys_attr (
   uid VARCHAR NOT NULL,
   type_idx SMALLINT,
@@ -23,3 +17,14 @@ CREATE TABLE system_seq (
   max_num BIGINT,
   PRIMARY KEY (item_id)
 );
+
+CREATE TABLE sys_doc_file (
+  uid varchar NOT NULL,
+  path varchar DEFAULT NULL,
+  file_name varchar DEFAULT NULL,
+  object_create_time BIGINT,
+  object_update_time BIGINT,
+  PRIMARY KEY (uid)
+);
+
+-- unstaging

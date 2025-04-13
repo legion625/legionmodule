@@ -33,8 +33,8 @@ import legion.util.LogUtil;
  *
  */
 public class DSManager {
-//	private static Logger log = LoggerFactory.getLogger(DSManager.class);
-	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	private static Logger log = LoggerFactory.getLogger(DSManager.class);
+//	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 	
 	// -------------------------------------------------------------------------------
 	/* Singleton */

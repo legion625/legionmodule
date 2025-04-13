@@ -5,6 +5,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 
 import legion.util.LogUtil;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class AboutComposer extends SelectorComposer<Component>{
@@ -14,9 +15,9 @@ public class AboutComposer extends SelectorComposer<Component>{
 	public void doAfterCompose(Component comp) {
 		try {
 			super.doAfterCompose(comp);
-			ZkUtil.showNotificationError();
+			ZkNotification.error();
 		} catch (Throwable e) {
-			ZkUtil.showNotificationError();
+			ZkNotification.error();
 			LogUtil.log(e, Level.ERROR);
 		}
 	}

@@ -37,10 +37,9 @@ public class SysAttrDaoPg extends PgDao {
 	}
 
 	private SysAttr parseSysAttr(ResultSet _rs) {
-		SysAttr sa = null;
 		try {
 			SysAttrType type = SysAttrType.get(_rs.getInt(COL_SYS_ATTR_TYPE_IDX));
-			sa = SysAttr.getInstance(parseUid(_rs), type, parseObjectCreateTime(_rs), parseObjectUpdateTime(_rs));
+			SysAttr sa = SysAttr.getInstance(parseUid(_rs), type, parseObjectCreateTime(_rs), parseObjectUpdateTime(_rs));
 			/* pack attributes */
 			sa.setKey(_rs.getString(COL_SYS_ATTR_KEY));
 			sa.setValue(_rs.getString(COL_SYS_ATTR_VALUE));

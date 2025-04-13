@@ -1,21 +1,30 @@
-package legion.docRepo;
+package legion.system;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import legion.AbstractLegionInitTest;
+import legion.DataServiceFactory;
 import legion.TestUtil;
 import legion.data.MySqlDataSource;
-import legionLab.DataSource;
-import legionLab.docRepo.MyDocFileDao;
+import legion.data.SystemDataService;
+import legion.system.DocFile;
+import legion.system.type.SysAttrType;
 
-public class BizObjDocFileTest {
-	private static MySqlDataSource ds = DataSource.getMySqlDs();
-	private static MyDocFileDao dao = MyDocFileDao.getInstance();
-	private static String targetDocFileUid;
+public class BizObjDocFileTest extends AbstractLegionInitTest {
+	private static SystemDataService dataService = DataServiceFactory.getInstance().getService(SystemDataService.class);
 
-	private Target target1 = new Target("fileName1", "path1");
-	private Target target2 = new Target("fileName2", "path2");
+	private static String targetUid;
+
+	private Target target1, target2;
+
+	@Before
+	public void initMethod() {
+		target1 = new Target("fileName1", "path1");
+		target2 = new Target("fileName2", "path2");
+	}
 
 	@Test
 	public void testCRUD() throws Throwable {
@@ -28,33 +37,33 @@ public class BizObjDocFileTest {
 	@Ignore
 	public void testCreateDocFile() throws Throwable {
 		/* create */
-		DocFile obj = DocFile.newInstance(ds, target1.fileName, target1.path);
+		DocFile obj = DocFile.newInstance();
 		PropertyUtils.copyProperties(obj, target1);
 		assert obj.save();
-		targetDocFileUid = obj.getUid();
-
+		targetUid = obj.getUid();
 		/* load */
-		obj = dao.loadDocFile(targetDocFileUid);
+		obj = dataService.loadDocFile(targetUid);
 		TestUtil.assertObjEqual(target1, obj);
 	}
 
 	@Test
 	@Ignore
 	public void testUpdateDocFile() throws Throwable {
-		DocFile obj = dao.loadDocFile(targetDocFileUid);
+		DocFile obj = dataService.loadDocFile(targetUid);
 		PropertyUtils.copyProperties(obj, target2);
 		assert obj.save();
 		/* load */
-		obj = dao.loadDocFile(targetDocFileUid);
+		obj = dataService.loadDocFile(targetUid);
 		TestUtil.assertObjEqual(target2, obj);
 	}
 
 	@Test
 	@Ignore
 	public void testDeleteDocFile() {
-		assert dao.loadDocFile(targetDocFileUid).delete();
+		assert dataService.loadDocFile(targetUid).delete();
 	}
 
+	// -------------------------------------------------------------------------------
 	public class Target {
 		private String fileName;
 		private String path;

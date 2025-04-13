@@ -32,10 +32,6 @@ public class SysAttr extends SysObjectModel {
 		return sa;
 	}
 
-//	protected static SysAttr load(String _uid) {
-//		return DataServiceFactory.getInstance().getService(SystemDataService.class).loadSysAttr(_uid);
-//	}
-
 	// -------------------------------------------------------------------------------
 	// ---------------------------------getter&setter---------------------------------
 	public SysAttrType getType() {
@@ -76,32 +72,6 @@ public class SysAttr extends SysObjectModel {
 	@Override
 	protected boolean delete() {
 		return DataServiceFactory.getInstance().getService(SystemDataService.class).deleteSysAttr(getUid());
-//		// 進行交易處理
-//		if (!DSManager.getInstance().beginTransaction()) {
-//			log.error("beginTransaction return false.");
-//			return false;
-//		}
-//
-//		try {
-//			// 更新所有相關資訊
-//			// TODO
-//
-//			// 刪除本身
-//			if (!DataServiceFactory.getInstance().getService(SystemDataService.class).deleteSysAttr(this)) {
-//				log.error("deleteSysAttr return false.");
-//				DSManager.getInstance().failTransaction();
-//				return false;
-//			}
-//
-//			DSManager.getInstance().endTransaction();
-//			return true;
-//		} catch (Throwable e) {
-//			// rollback transaction it there is one.
-//			DSManager.getInstance().failTransaction();
-//			log.error(e.getMessage());
-//			e.printStackTrace();
-//			return false;
-//		}
 	}
 
 	// -------------------------------------------------------------------------------

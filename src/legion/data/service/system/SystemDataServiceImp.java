@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import legion.data.SystemDataService;
+import legion.system.DocFile;
 import legion.system.SysAttr;
 
 public class SystemDataServiceImp implements SystemDataService {
@@ -73,6 +74,32 @@ public class SystemDataServiceImp implements SystemDataService {
 	@Override
 	public List<SysAttr> loadSysAttrList() {
 		return sysAttrDao.loadSysAttrList();
+	}
+
+	// -------------------------------------------------------------------------------
+	// ------------------------------------DocFile------------------------------------
+	@Override
+	public boolean saveDocFile(DocFile _docFile) {
+		// TODO not implemented yet...
+		return false;
+	}
+
+	@Override
+	public boolean deleteDocFile(String _uid) {
+		// TODO not implemented yet...
+		return false;
+	}
+
+	@Override
+	public DocFile loadDocFile(String _uid) {
+		// TODO not implemented yet...
+		return null;
+	}
+	
+	@Override
+	public List<DocFile> loadDocFileList() {
+		// TODO not implemented yet...
+		return null;
 	}
 
 }

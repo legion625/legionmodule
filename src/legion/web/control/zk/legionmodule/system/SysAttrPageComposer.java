@@ -26,6 +26,7 @@ import legion.system.SysAttr;
 import legion.system.SystemService;
 import legion.util.DataFO;
 import legion.util.LogUtil;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class SysAttrPageComposer extends SelectorComposer<Component> {
@@ -62,24 +63,24 @@ public class SysAttrPageComposer extends SelectorComposer<Component> {
 			btnDelete.addEventListener(Events.ON_CLICK, el -> {
 				ListModelList<SysAttr> model =(ListModelList) gridSysAttr.getListModel();
 				if(sysService.deleteSysAttr(sa.getUid())) {
-					ZkUtil.showNotificationInfo("刪除系統屬性成功。");
+					ZkNotification.info("刪除系統屬性成功。");
 					model.remove(sa);
 				}else {
-					ZkUtil.showNotificationError();
+					ZkNotification.error();
 				}
 			});
 			row.appendChild(btnDelete);
 			//
-			row.appendChild(new Label(sa.getType().getDesp()));
+			row.appendChild(new Label(sa.getType().getName()));
 			// key
 			Textbox txbKey = new Textbox(sa.getKey());
 			txbKey.addEventListener(Events.ON_CHANGE, evt -> {
 				String key = DataFO.orElse(txbKey.getValue(), "");
 				sa.setKey(key);
 				if (sysService.saveSysAttr(sa))
-					ZkUtil.showNotificationInfo("更新系統屬性成功。");
+					ZkNotification.info("更新系統屬性成功。");
 				else
-					ZkUtil.showNotificationError();
+					ZkNotification.error();
 			});
 			row.appendChild(txbKey);
 			// value
@@ -88,9 +89,9 @@ public class SysAttrPageComposer extends SelectorComposer<Component> {
 				String value = DataFO.orElse(txbValue.getValue(), "");
 				sa.setValue(value);
 				if (sysService.saveSysAttr(sa))
-					ZkUtil.showNotificationInfo("更新系統屬性成功。");
+					ZkNotification.info("更新系統屬性成功。");
 				else
-					ZkUtil.showNotificationError();
+					ZkNotification.error();
 			});
 			row.appendChild(txbValue);
 		};
@@ -110,10 +111,10 @@ public class SysAttrPageComposer extends SelectorComposer<Component> {
 		SysAttr newSysAttr = sysService.createSysAttr();
 		if (newSysAttr != null) {
 			model.add(newSysAttr);
-			ZkUtil.showNotificationInfo("新增系統屬性成功。");
+			ZkNotification.info("新增系統屬性成功。");
 			return;
 		} else {
-			ZkUtil.showNotificationError();
+			ZkNotification.error();
 		}
 	}
 	

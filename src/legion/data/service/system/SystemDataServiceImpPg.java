@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import legion.data.SystemDataService;
+import legion.system.DocFile;
 import legion.system.SysAttr;
 
 public class SystemDataServiceImpPg implements SystemDataService {
@@ -15,8 +16,9 @@ public class SystemDataServiceImpPg implements SystemDataService {
 	private String source;
 
 	// dao
-//	private AbstractPostgreSqlDao pgSqlDao;
 	private SysAttrDaoPg sysAttrDao;
+	private DocFileDao docFileDao;
+	
 
 	@Override
 	public void register(Map<String, String> _params) {
@@ -25,15 +27,11 @@ public class SystemDataServiceImpPg implements SystemDataService {
 			return;
 
 		source = _params.get("source");
-//		srcPg = _params.get("srcPg");
 
 		// dao
 		sysAttrDao = new SysAttrDaoPg(source);
 		log.debug("sysAttrDao: {}", sysAttrDao);
-
-//		pgSqlDao = new AbstractPostgreSqlDao(srcPg);
-//		log.debug("pgSqlDao: {}", pgSqlDao);
-
+		docFileDao = new DocFileDao(source);
 	}
 
 	@Override
@@ -67,6 +65,28 @@ public class SystemDataServiceImpPg implements SystemDataService {
 	@Override
 	public List<SysAttr> loadSysAttrList() {
 		return sysAttrDao.loadSysAttrList();
+	}
+
+	// -------------------------------------------------------------------------------
+	// ------------------------------------DocFile------------------------------------
+	@Override
+	public boolean saveDocFile(DocFile _docFile) {
+		return docFileDao.saveDocFile(_docFile);
+	}
+
+	@Override
+	public boolean deleteDocFile(String _uid) {
+		return docFileDao.deleteDocFile(_uid);
+	}
+
+	@Override
+	public DocFile loadDocFile(String _uid) {
+		return docFileDao.loadDocFile(_uid);
+	}
+	
+	@Override
+	public List<DocFile> loadDocFileList() {
+		return docFileDao.loadDocFileList();
 	}
 
 }

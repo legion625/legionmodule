@@ -9,7 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UrlDs {
-	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	private Logger log = LoggerFactory.getLogger(UrlDs.class);
+//	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 	
 	private String name = "";
 	private String protocol = "";

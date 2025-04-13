@@ -25,8 +25,8 @@ import legion.util.RetryUtil;
  *
  */
 public class DbTomcatPoolDso extends Dso {
-//	private Logger log = LoggerFactory.getLogger(DbTomcatPoolDso.class);
-	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	private Logger log = LoggerFactory.getLogger(DbTomcatPoolDso.class);
+//	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 
 	private volatile DataSource ds;
 

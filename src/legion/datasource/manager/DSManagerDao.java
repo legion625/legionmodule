@@ -23,8 +23,8 @@ import legion.util.DataFO;
 import legion.util.LogUtil;
 
 public class DSManagerDao {
-//	private static Logger log = LoggerFactory.getLogger(DSManagerDao.class);
-	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	private static Logger log = LoggerFactory.getLogger(DSManagerDao.class);
+//	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 
 	/* 若是SourceConfiguration沒有Resource註冊資料，則預設以該檔案進行初始資料來源。 */
 	private static final String DEF_CFG_FILE_DATASOURCE = "/opt/DataSource/datasource.xml";
