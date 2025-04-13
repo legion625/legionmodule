@@ -28,6 +28,7 @@ import legion.web.MenuInfo;
 import legion.web.MenuItemInfo;
 import legion.web.MenuRepository;
 import legion.web.control.zk.legionmodule.system.SysAttrPageComposer;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class MainComposer extends SelectorComposer<Component> {
@@ -87,7 +88,6 @@ public class MainComposer extends SelectorComposer<Component> {
 
 		// 子階為0視為最末階，建menuitem。
 		if (itemSize == 0) {
-//			Menuitem menuitem = createMenuitem(mi.getText(),mi.getIconSclass(), mi.getNavigateUrl());
 			Menuitem menuitem = createMenuitem(mi);
 			_parentComponent.appendChild(menuitem);
 		}
@@ -118,16 +118,12 @@ public class MainComposer extends SelectorComposer<Component> {
 	}
 	
 	
-//	private Menuitem createMenuitem(String _label, String _iconSclass, String _navigateUrl) {
 	private Menuitem createMenuitem(MenuItemInfo _mi) {
-//		Menuitem menuitem = new Menuitem(_label);
 		Menuitem menuitem = new Menuitem(_mi.getText());
-//		menuitem.setIconSclass(_iconSclass);
 		menuitem.setIconSclass(_mi.getIconSclass());
-//		if (DataFO.isEmptyString(_navigateUrl))
 		String navigateUrl = _mi.getNavigateUrl(); 
 		if (DataFO.isEmptyString(navigateUrl))
-			menuitem.addEventListener(Events.ON_CLICK, evt -> ZkUtil.showNotificationError("未指定目錄選單內容。"));
+			menuitem.addEventListener(Events.ON_CLICK, evt -> ZkNotification.error("未指定目錄選單內容。"));
 		else
 			menuitem.addEventListener(Events.ON_CLICK, evt -> iclMain.setSrc(navigateUrl));
 		return menuitem;

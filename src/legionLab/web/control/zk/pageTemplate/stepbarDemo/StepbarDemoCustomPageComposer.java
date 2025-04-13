@@ -15,6 +15,7 @@ import org.zkoss.zul.Panel;
 import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Step;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
@@ -79,21 +80,21 @@ public class StepbarDemoCustomPageComposer extends SelectorComposer<Component> {
 	public void btn1_clicked() {
 		stepbarProxy.navigateTo(0);
 		toggleBtnVisible();
-		ZkUtil.showNotificationInfo("btn1_clicked");
+		ZkNotification.info("btn1_clicked");
 	}
 
 	@Listen(Events.ON_CLICK + "=#btn2")
 	public void btn2_clicked() {
 		stepbarProxy.navigateTo(1);
 		toggleBtnVisible();
-		ZkUtil.showNotificationInfo("btn2_clicked");
+		ZkNotification.info("btn2_clicked");
 	}
 
 	@Listen(Events.ON_CLICK + "=#btn3")
 	public void btn3_clicked() {
 		stepbarProxy.navigateTo(2);
 		toggleBtnVisible();
-		ZkUtil.showNotificationInfo("btn3_clicked");
+		ZkNotification.info("btn3_clicked");
 	}
 	
 	private void toggleBtnVisible() {

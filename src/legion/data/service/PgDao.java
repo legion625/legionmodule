@@ -1,14 +1,15 @@
 package legion.data.service;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,34 +17,131 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
+import legion.DebugLogMark;
 import legion.ObjectModel;
 import legion.ObjectSkewer;
 import legion.data.AbstractDao;
 import legion.data.skewer.TableColPack;
 import legion.data.skewer.TableRel;
+import legion.datasource.DatasourceInfo;
+import legion.datasource.UrlDs;
 import legion.util.DataFO;
 import legion.util.LogUtil;
 import legion.util.query.QueryOperation;
+import legion.util.query.QueryParam;
 import legion.util.query.QueryOperation.ConjunctiveOp;
 import legion.util.query.QueryOperation.QueryValue;
-import legion.util.query.QueryParam;
 
-public abstract class AbstractMySqlDao extends AbstractDao {
+public abstract class PgDao extends AbstractDao {
+	protected static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	
 	protected final static String COL_UID = "uid";
 	protected final static String COL_OBJECT_CREATE_TIME = "object_create_time";
 	protected final static String COL_OBJECT_UPDATE_TIME = "object_update_time";
 
 	private String source;
 
-	protected AbstractMySqlDao(String source) {
+	protected PgDao(String source) {
 		this.source = source;
 	}
 
 	protected Connection getConn() {
-		log.debug("source: {}", source);
-		return DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
+//		Connection conn = DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
+//		log.debug("source: {}", source);
+////		List<DatasourceInfo> dsList  =getDsManager().getDatasourceInfos(); 
+//		
+//		DatasourceInfo dsInfo = getDsManager().getDatasourceInfo(source);
+////		ConcurrentHashMap<String, UrlDs> urlDsMap  =getDsManager(). getUrlDsMap();
+////		for(String  key: urlDsMap.keySet()) {
+////			log.debug("key: {}\t url: {}", key, urlDsMap.get(key).getUrl());
+////		}
+//		
+////		log.debug("dsList.size(): {}", dsList.size());
+////		for(DatasourceInfo ds:dsList) {
+////			log.debug("ds.getName(): {}", ds.getName());
+////			log.debug("ds.getUrl(): {}", ds.getUrl());
+////			
+////		}
+//		try {
+//			if (dsInfo != null) {
+//				log.debug("dsInfo.getUrl(): {}", dsInfo.getUrl());
+//				String currentSchema = extractCurrentSchema(dsInfo.getUrl());
+//				log.debug("currentSchema: {}", currentSchema);
+//				conn.setSchema(currentSchema==null?"":currentSchema);
+////				conn.setSchema("legionmodule");
+//				log.debug("conn.getSchema(): {}", conn.getSchema());
+//				
+////				if(!DataFO.isEmptyString(currentSchema))
+//			}
+////			String currentSchema = extractCurrentSchema();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return conn;
+		return getDsManager().getConn(source);
 	}
+	
+//	private String extractCurrentSchema(String jdbcUrl) {
+//        if (jdbcUrl == null || !jdbcUrl.contains("currentSchema=")) {
+//            return null;
+//        }
+//
+//        // 抓取 currentSchema 後的字串
+//        int start = jdbcUrl.indexOf("currentSchema=") + "currentSchema=".length();
+//        int end = jdbcUrl.indexOf('&', start); // 如果有其他參數
+//        if (end == -1) {
+//            end = jdbcUrl.length();
+//        }
+//
+//        return jdbcUrl.substring(start, end);
+//    }
+	
 
+	public boolean testCallback() {
+		Connection conn = getConn();
+		log.debug("conn: {}", conn);
+		if (conn == null)
+			return false;
+		try {
+			log.debug("conn.getSchema(): {}", conn.getSchema());
+			log.debug("conn.getClientInfo(): {}", conn.getClientInfo());
+			
+			// 1. 建立連線
+//			System.out.println("✅ 成功連線到 PostgreSQL！");
+			log.debug("✅ 成功連線到 PostgreSQL！");
+
+			// 2. 查詢資料庫版本（測試用）
+			PreparedStatement stmt = conn.prepareStatement("SELECT version()");
+			ResultSet rs = stmt.executeQuery();
+
+			if (rs.next()) {
+//				System.out.println("📦 PostgreSQL version: " + rs.getString(1));
+				log.debug("📦 PostgreSQL version: {}",  rs.getString(1));
+			}
+			
+			stmt = conn.prepareStatement("show search_path");
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+//				System.out.println("📦 PostgreSQL version: " + rs.getString(1));
+				log.debug("search path: {}",  rs.getString(1));
+			}
+			
+			
+			
+
+			// 3. 關閉資源
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+		} catch (Throwable e) {
+			LogUtil.log(e);
+		}
+		return true;
+	}
+	
+	
 	// -------------------------------------------------------------------------------
 	protected String parseUid(ResultSet _rs) throws SQLException {
 		return _rs.getString(COL_UID);
@@ -83,27 +181,59 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 
 		// ---------------------------------------------------------------------------
 		private void configPstmt(PreparedStatement pstmt, int _colIndex, T _obj) throws SQLException {
+			Object value = fnGetValue.apply(_obj);
+			
 			switch (colType) {
 			case STRING:
-				String str = (String) fnGetValue.apply(_obj);
-				if (str != null && strDataLength > 0 && str.length() > strDataLength)
-					str = str.substring(0, strDataLength);
-				pstmt.setString(_colIndex, str);
+//				String str = (String) fnGetValue.apply(_obj);
+//				if (str != null && strDataLength > 0 && str.length() > strDataLength)
+//					str = str.substring(0, strDataLength);
+//				pstmt.setString(_colIndex, str);
+				
+				String str = (String) value;
+	            if (str != null && strDataLength > 0 && str.length() > strDataLength)
+	                str = str.substring(0, strDataLength);
+	            pstmt.setString(_colIndex, str);
 				break;
 			case INT:
-				pstmt.setInt(_colIndex, (int) fnGetValue.apply(_obj));
+//				pstmt.setInt(_colIndex, (int) fnGetValue.apply(_obj));
+				if (value == null) {
+	                pstmt.setNull(_colIndex, java.sql.Types.INTEGER);
+	            } else {
+	                pstmt.setInt(_colIndex, (int) value);
+	            }
 				break;
 			case LONG:
-				pstmt.setLong(_colIndex, (long) fnGetValue.apply(_obj));
+//				pstmt.setLong(_colIndex, (long) fnGetValue.apply(_obj));
+				 if (value == null) {
+		                pstmt.setNull(_colIndex, java.sql.Types.BIGINT);
+		            } else {
+		                pstmt.setLong(_colIndex, (long) value);
+		            }
 				break;
 			case FLOAT:
-				pstmt.setFloat(_colIndex, (float) fnGetValue.apply(_obj));
+//				pstmt.setFloat(_colIndex, (float) fnGetValue.apply(_obj));
+				 if (value == null) {
+		                pstmt.setNull(_colIndex, java.sql.Types.FLOAT);
+		            } else {
+		                pstmt.setFloat(_colIndex, (float) value);
+		            }
 				break;
 			case DOUBLE:
-				pstmt.setDouble(_colIndex, (double) fnGetValue.apply(_obj));
+//				pstmt.setDouble(_colIndex, (double) fnGetValue.apply(_obj));
+				if (value == null) {
+	                pstmt.setNull(_colIndex, java.sql.Types.DOUBLE);
+	            } else {
+	                pstmt.setDouble(_colIndex, (double) value);
+	            }
 				break;
 			case BOOLEAN:
 				pstmt.setBoolean(_colIndex, (boolean) fnGetValue.apply(_obj));
+				if (value == null) {
+	                pstmt.setNull(_colIndex, java.sql.Types.BOOLEAN);
+	            } else {
+	                pstmt.setBoolean(_colIndex, (boolean) value);
+	            }
 				break;
 			}
 		}
@@ -207,17 +337,31 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 				sb.append(",?");
 			sb.append(",?,?)");
 
-			// on duplicate key
-			sb.append(" on duplicate key update ");
-			boolean b = false;
+			
+			// on conflict for PostgreSQL (ON CONFLICT)
+			sb.append(" on conflict (").append(COL_UID).append(") do update set ");
+			boolean first = true;
 			for (DbColumn<T> _col : _updateCols) {
-				if (b == false)
-					b = true;
-				else
+				if (first) {
+					first = false;
+				} else {
 					sb.append(" , ");
+				}
 				sb.append(_col.name).append(" =? ");
 			}
 			sb.append(" , ").append(COL_OBJECT_UPDATE_TIME).append(" =? ");
+			
+//			// on duplicate key
+//			sb.append(" on duplicate key update ");
+//			boolean b = false;
+//			for (DbColumn<T> _col : _updateCols) {
+//				if (b == false)
+//					b = true;
+//				else
+//					sb.append(" , ");
+//				sb.append(_col.name).append(" =? ");
+//			}
+//			sb.append(" , ").append(COL_OBJECT_UPDATE_TIME).append(" =? ");
 
 			//
 			String sql = sb.toString();
@@ -267,8 +411,11 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 		try {
 			// 連結資料庫
 			// statement
-			String qstr = "delete from " + _table + " where " + COL_UID + "='" + _uid + "'";
+//			String qstr = "delete from " + _table + " where " + COL_UID + "='" + _uid + "'";
+			String qstr = "delete from " + _table + " where " + COL_UID + "=?";
+//			pstmt = conn.prepareStatement(qstr);
 			pstmt = conn.prepareStatement(qstr);
+			pstmt.setString(1, _uid);
 			System.out.println("pstmt.executeUpdate(): " + pstmt.executeUpdate());
 			return true;
 		} catch (SQLException e) {
@@ -307,11 +454,17 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 			sb.append(" where ").append(COL_UID).append(" is not null");
 			if (_colValueMap != null) {
 				for (String _key : _colValueMap.keySet()) {
-					sb.append(" and ").append(_key).append("='").append(_colValueMap.get(_key)).append("'");
+//					sb.append(" and ").append(_key).append("='").append(_colValueMap.get(_key)).append("'");
+					 sb.append(" and ").append(_key).append("=?");
 				}
 			}
 
 			pstmt = conn.prepareStatement(sb.toString());
+			int index = 1;
+			for (String _key : _colValueMap.keySet()) {
+			    pstmt.setString(index++, _colValueMap.get(_key));
+			}
+			//
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				obj = _fnParseObj.apply(rs);
@@ -325,6 +478,11 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 		return obj;
 	}
 
+	@Deprecated 
+	/**
+	建議改為 batch load 的查詢（使用 IN (...)），效率更好。例如：
+	select * from table where uid in (?, ?, ?, ...)
+	*/
 	protected final <T extends ObjectModel> List<T> batchLoadObjects(String _table, List<String> _uidList,
 			Function<ResultSet, T> _fnParseObj) {
 		return _uidList.parallelStream().map(_uid -> loadObject(_table, _uid, _fnParseObj))
@@ -423,7 +581,8 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 			int[] limit = _param.getLimit();
 			boolean appendLimit = false;
 			if (limit[0] >= 0 && limit[1] >= 0) {
-				sb.append(" limit ").append(limit[0]).append(",").append(limit[1]);
+//				sb.append(" limit ").append(limit[0]).append(",").append(limit[1]);
+				sb.append(" limit ").append(limit[1]).append(" offset ").append(limit[0]);
 				appendLimit = true;
 			}
 
@@ -499,7 +658,8 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 			String _detailTable, String _detailMasterKey, Map<String, String> _fixConditionMap) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("(");
-		sb.append("select group_concat( distinct( ").append(_targetDetailField).append(" )) from ")
+//		sb.append("select group_concat( distinct( ").append(_targetDetailField).append(" )) from ")
+		sb.append("select string_agg(distinct ").append(_targetDetailField).append(", ',') from ")
 				.append(_detailTable);
 		sb.append(" where ").append(_detailMasterKey).append(" = ").append(_masterTable).append(".").append(_masterKey);
 		if (_fixConditionMap != null)
@@ -508,21 +668,6 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 		sb.append(")");
 		return sb.toString();
 	}
-//	
-//	protected static String packDetailQueryField(String _targetDetailField, String _detailTable
-//			, String _conditionSql) {
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("(");
-//		sb.append("select group_concat( distinct( ").append(_targetDetailField).append(" )) from ")
-//				.append(_detailTable);
-//		sb.append(" where ").append(_conditionSql);
-////		append(_detailMasterKey).append(" = ").append(_masterTable).append(".").append(_masterKey);
-////		if (_fixConditionMap != null)
-////			for (String _key : _fixConditionMap.keySet())
-////				sb.append(" and ").append(_key).append(" = ").append(_fixConditionMap.get(_key));
-////		sb.append(")");
-//		return sb.toString();
-//	}
 
 	protected static String packConjQueryField(String _targetField2, String _table1, String _table2, String _conjTable,
 			String _conjUid1, String _conjUid2) {
@@ -533,7 +678,12 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 			String _conjUid1, String _conjUid2, Map<String, String> _conjFixConditionMap) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("(");
-		sb.append("select group_concat( distinct( ").append(_targetField2).append(" )) from ").append(_table2);
+//		sb.append("select group_concat( distinct( ").append(_targetField2).append(" )) from ").append(_table2);
+		
+		sb.append("select string_agg(distinct ")
+		  .append(_targetField2).append("::text, ',') from ")
+		  .append(_table2);
+		
 		sb.append(" where ").append(COL_UID).append(" in (");
 		sb.append("select ").append(_conjUid2).append(" from ").append(_conjTable).append(" where ").append(_conjUid1)
 				.append(" = ").append(_table1).append(".").append(COL_UID);
@@ -969,4 +1119,5 @@ public abstract class AbstractMySqlDao extends AbstractDao {
 			LogUtil.log(log, e, Level.ERROR);
 		}
 	}
+
 }

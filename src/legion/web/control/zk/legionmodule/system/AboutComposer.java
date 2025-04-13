@@ -8,6 +8,7 @@ import org.zkoss.zul.Label;
 
 import legion.SystemInfoDefault;
 import legion.util.LogUtil;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class AboutComposer extends SelectorComposer<Component> {
@@ -24,7 +25,7 @@ public class AboutComposer extends SelectorComposer<Component> {
 			init();
 		} catch (Throwable e) {
 			LogUtil.log(e, Level.ERROR);
-			ZkUtil.showNotificationError();
+			ZkNotification.error();
 		}
 	}
 

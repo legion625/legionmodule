@@ -10,17 +10,16 @@ import legion.data.SystemDataService;
 import legion.system.DocFile;
 import legion.system.SysAttr;
 
-public class SystemDataServiceImp implements SystemDataService {
-	private Logger log = LoggerFactory.getLogger(SystemDataServiceImp.class);
-	
+public class SystemDataServiceImpPg implements SystemDataService {
+	private Logger log = LoggerFactory.getLogger(SystemDataServiceImpPg.class);
+
 	private String source;
-//	private String srcPg;
-	
-	
+
 	// dao
-	private SysAttrDao sysAttrDao;
-//	private AbstractPostgreSqlDao pgSqlDao;
+	private SysAttrDaoPg sysAttrDao;
+	private DocFileDao docFileDao;
 	
+
 	@Override
 	public void register(Map<String, String> _params) {
 		log.debug("SystemDataServiceImp register...");
@@ -28,32 +27,24 @@ public class SystemDataServiceImp implements SystemDataService {
 			return;
 
 		source = _params.get("source");
-//		srcPg = _params.get("srcPg");
 
 		// dao
-		sysAttrDao = new SysAttrDao(source);
+		sysAttrDao = new SysAttrDaoPg(source);
 		log.debug("sysAttrDao: {}", sysAttrDao);
-		
-//		pgSqlDao = new AbstractPostgreSqlDao(srcPg);
-//		log.debug("pgSqlDao: {}", pgSqlDao);
-
+		docFileDao = new DocFileDao(source);
 	}
 
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public boolean testCallback() {
 		return sysAttrDao.testCallback();
 	}
-	
-//	@Override
-//	public boolean testPgSqlCallback() {
-//		return pgSqlDao.testCallback();
-//	}
-	
+
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	@Override
@@ -80,26 +71,22 @@ public class SystemDataServiceImp implements SystemDataService {
 	// ------------------------------------DocFile------------------------------------
 	@Override
 	public boolean saveDocFile(DocFile _docFile) {
-		// TODO not implemented yet...
-		return false;
+		return docFileDao.saveDocFile(_docFile);
 	}
 
 	@Override
 	public boolean deleteDocFile(String _uid) {
-		// TODO not implemented yet...
-		return false;
+		return docFileDao.deleteDocFile(_uid);
 	}
 
 	@Override
 	public DocFile loadDocFile(String _uid) {
-		// TODO not implemented yet...
-		return null;
+		return docFileDao.loadDocFile(_uid);
 	}
 	
 	@Override
 	public List<DocFile> loadDocFileList() {
-		// TODO not implemented yet...
-		return null;
+		return docFileDao.loadDocFileList();
 	}
 
 }

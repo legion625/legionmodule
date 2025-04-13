@@ -1,6 +1,8 @@
 package legion.datasource.manager;
 
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,8 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import legion.BusinessServiceFactory;
+import legion.DebugLogMark;
 import legion.LegionContext;
 import legion.datasource.DatasourceInfo;
 import legion.datasource.DefaultTransactionInfoDto;
@@ -18,6 +22,7 @@ import legion.datasource.TransactionInfo;
 import legion.datasource.UrlDs;
 import legion.util.DateFormatUtil;
 import legion.util.DateUtil;
+import legion.util.LogUtil;
 
 /**
  * 提供資料來源服務的窗口，包含Connection和Transaction管控機制。
@@ -29,6 +34,7 @@ import legion.util.DateUtil;
  */
 public class DSManager {
 	private static Logger log = LoggerFactory.getLogger(DSManager.class);
+//	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 	
 	// -------------------------------------------------------------------------------
 	/* Singleton */
@@ -124,39 +130,75 @@ public class DSManager {
 		dsDao.releaseAllDatasources();
 	}
 
+	public DatasourceInfo getDatasourceInfo(String _resourceName) {
+		return dsDao.getDatasourceInfo(_resourceName);
+	}
+	
 	public List<DatasourceInfo> getDatasourceInfos(){
 		return dsDao.getDatasourceInfos();
 	}
 	
 	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
-	public Object getConn(String _url) {
-		return getConn(_url, Integer.toString(Thread.currentThread().hashCode()));
+//	public Object getConn(String _url) {
+	public Connection getConn(String _resourceName) {
+		Connection conn = (Connection) getConn(_resourceName, Integer.toString(Thread.currentThread().hashCode()));
+		DatasourceInfo dsInfo = getDatasourceInfo(_resourceName);
+		try {
+			if (dsInfo != null) {
+				log.debug("dsInfo.getUrl(): {}", dsInfo.getUrl());
+				String currentSchema = extractCurrentSchema(dsInfo.getUrl());
+				log.debug("currentSchema: {}", currentSchema);
+				conn.setSchema(currentSchema==null?"":currentSchema);
+				log.debug("conn.getSchema(): {}", conn.getSchema());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
+		}
+		
+		return conn;
 	}
+	
+	/** for PostgreSql，如果在url後面接上schema，要在conn中設定。 */
+	private String extractCurrentSchema(String jdbcUrl) {
+        if (jdbcUrl == null || !jdbcUrl.contains("currentSchema=")) {
+            return null;
+        }
+
+        // 抓取 currentSchema 後的字串
+        int start = jdbcUrl.indexOf("currentSchema=") + "currentSchema=".length();
+        int end = jdbcUrl.indexOf('&', start); // 如果有其他參數
+        if (end == -1) {
+            end = jdbcUrl.length();
+        }
+
+        return jdbcUrl.substring(start, end);
+    }
 
 	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
+	@Deprecated
 	public Object getConn(UrlDs _urlDs) {
 		return getConn(_urlDs, Integer.toString(Thread.currentThread().hashCode()));
 	}
 	
 	/**
 	 * 取得所需的Datasource Connection並以指定的ID為登記使用標的
-	 * @param _url
+	 * @param _resourceName
 	 * @param _id
 	 * @return Object
-	 * @deprecated 不支援多執行緒進行單一交易
 	 */
-	@Deprecated
-	public Object getConn(String _url, String _id) {
+	public Object getConn(String _resourceName, String _id) {
+		log.debug("_resourceName: {}\t id: {}", _resourceName, _id);
 		UrlDs urlDs;
-		if (urlDsMap.containsKey(_url))
-			urlDs = urlDsMap.get(_url);
+		if (urlDsMap.containsKey(_resourceName))
+			urlDs = urlDsMap.get(_resourceName);
 		else {
 			synchronized (urlDsMap) {
-				if(urlDsMap.containsKey(_url))
-					urlDs = urlDsMap.get(_url);
+				if(urlDsMap.containsKey(_resourceName))
+					urlDs = urlDsMap.get(_resourceName);
 				else {
-					urlDs = new UrlDs(_url);
-					urlDsMap.put(_url, urlDs);
+					urlDs = new UrlDs(_resourceName);
+					urlDsMap.put(_resourceName, urlDs);
 				}
 			}
 		}

@@ -68,4 +68,62 @@
 			<value>legion625@gmail.com</value>
 		</parameter>
 	</Resource>
+	<Resource name="legion_pg">
+		<parameter>
+			<name>dsoClassName</name>
+			<value>legion.datasource.source.DbTomcatPoolDso</value>
+		</parameter>
+		<parameter>
+			<name>driverClassName</name>
+			<value>org.postgresql.Driver</value>
+		</parameter>
+		<parameter>
+			<name>url</name>
+			<value>jdbc:postgresql://dpg-cvrf5vre5dus7387koag-a.singapore-postgres.render.com:5432/legion_h3u9?currentSchema=legionmodule</value>
+		</parameter>
+		<parameter>
+			<name>username</name>
+			<value>legion_user</value>
+		</parameter>
+		<parameter>
+			<name>password</name>
+			<value>JaNibhJzdkjNm62MvX7SVJt4oSPH39qW</value>
+		</parameter>
+		<parameter>
+			<name>testOnBorrow</name>
+			<value>true</value>
+		</parameter>
+		<parameter>
+			<name>validationQuery</name>
+			<value>select 1</value>
+		</parameter>
+		<parameter>
+			<name>maxActive</name>
+			<value>15</value>
+		</parameter>
+		<parameter>
+			<name>maxIdle</name>
+			<value>8</value>
+		</parameter>
+		<parameter>
+			<name>minIdle</name>
+			<value>2</value>
+		</parameter>
+		<parameter>
+			<name>initialSize</name>
+			<value>1</value>
+		</parameter>
+		<parameter>
+			<name>maxWait</name>
+			<value>5000</value>
+		</parameter>
+		<parameter>
+			<name>alertMailPeriod</name>
+			<value>300</value>
+		</parameter>
+		<parameter>
+			<name>alertMail</name>
+			<value>legion625@gmail.com</value>
+		</parameter>
+	</Resource>
 </context>

@@ -12,6 +12,7 @@ import org.zkoss.zul.Toolbarbutton;
 
 import legion.util.LogUtil;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.Stepbar;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class StepbarCtrl1Composer extends SelectorComposer<Component> {
@@ -43,9 +44,9 @@ public class StepbarCtrl1Composer extends SelectorComposer<Component> {
 	}
 
 	// -------------------------------------------------------------------------------
-	private final Runnable runBackDefault = () -> ZkUtil.showNotificationError();
-	private final Runnable runNextDefault = () -> ZkUtil.showNotificationError();
-	private final Runnable runSubmitDefault = () -> ZkUtil.showNotificationError();
+	private final Runnable runBackDefault = () -> ZkNotification.error();
+	private final Runnable runNextDefault = () -> ZkNotification.error();
+	private final Runnable runSubmitDefault = () -> ZkNotification.error();
 
 	private Runnable runBack;
 	private Runnable runNext;

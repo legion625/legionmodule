@@ -15,6 +15,7 @@ import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarProxy;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.StepbarTemplateComposer;
 import legion.web.control.zk.legionmodule.pageTemplate.stepbar.app.StepbarMainPage1Composer;
 import legion.web.zk.ZkMsgBox;
+import legion.web.zk.ZkNotification;
 import legion.web.zk.ZkUtil;
 
 public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
@@ -67,20 +68,18 @@ public class StepbarDemo1PageComposer extends SelectorComposer<Component> {
 
 		/**/
 		stepbarComposer.setRunBack(() -> {
-
-			ZkUtil.showNotificationInfo("Run back custom");
-
+			ZkNotification.info("Run back custom");
 			stepbarComposer.back();
 		});
 
 		stepbarComposer.setRunNext(() -> {
-			ZkUtil.showNotificationInfo("Run next custom");
+			ZkNotification.info("Run next custom");
 			stepbarComposer.next();
 		});
 
 		stepbarComposer.setRunSubmit(() -> {
 			ZkMsgBox.confirm("Run next custom?", () -> {
-				ZkUtil.showNotificationInfo("Run next custom");
+				ZkNotification.info("Run next custom");
 				stepbarComposer.next();
 			});
 		});

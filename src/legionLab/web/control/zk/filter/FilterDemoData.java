@@ -80,7 +80,9 @@ public class FilterDemoData {
 			));
 		return list;
 	}
-
+	
+	private static final String COMMON_CHINESE =
+            "的一是在不了有和人這中大為上個國我以要他時來用們生到作地於出就分對成會可主發年動同工也能下過子說產種面而方後多定行學法所民得經之進著等部度家電力裡如水化高自二理起小物現實加量都兩體制機當使點從業本去把性好應開它合還因由其些然前外天政四日那社義事平形相全表間樣與關各重新線內數正心反你明看原麼利比但質氣第向道命此變條沒結解問意建月公無系軍很情者最立代想已通並提直題黨程展果料象員革位常文總次品式活設及管特件長求老頭基資邊流路少圖山統接知將組見計別她手角期根論運農指區強放決西幹做戰先回則任據處隊南給色光門即保治北造百規熱領海口東導壓志世金增爭階思術極交受聯認共權收證改清己美再轉更單風節萬青";
 
 	public static String generateRandomString(int length) {
 		Random random = new Random();
@@ -95,7 +97,9 @@ public class FilterDemoData {
 			} else if (randomType == 1) {
 				randomChar = (char) (random.nextInt(10) + '0'); // 數字
 			} else {
-				randomChar = (char) (random.nextInt(20902 - 19968 + 1) + 19968); // 中文字符的Unicode範圍
+				int index = random.nextInt(COMMON_CHINESE.length());
+				randomChar = 	COMMON_CHINESE.charAt(index);
+//				randomChar = (char) (random.nextInt( 0x9FFF - 0x4E00 + 1) + 0x4E00); // 中文字符的Unicode範圍
 			}
 
 			sb.append(randomChar);

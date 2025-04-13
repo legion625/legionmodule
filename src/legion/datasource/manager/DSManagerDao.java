@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.event.Level;
 
+import legion.DebugLogMark;
+import legion.TestLogMark;
 import legion.datasource.DatasourceInfo;
 import legion.datasource.DefaultDatasourceInfoDto;
 import legion.datasource.UrlDs;
@@ -22,6 +24,7 @@ import legion.util.LogUtil;
 
 public class DSManagerDao {
 	private static Logger log = LoggerFactory.getLogger(DSManagerDao.class);
+//	private static Logger log = LoggerFactory.getLogger(DebugLogMark.class);
 
 	/* 若是SourceConfiguration沒有Resource註冊資料，則預設以該檔案進行初始資料來源。 */
 	private static final String DEF_CFG_FILE_DATASOURCE = "/opt/DataSource/datasource.xml";
@@ -64,13 +67,20 @@ public class DSManagerDao {
 
 				//
 				String cls = resourceCfg.getParameter(ResourceInfo.Resource_IMP_CLASS);
+//				log.error("cls: {} ", cls);
 				dso = (Dso) Class.forName(cls).newInstance();
+				log.debug("dso.getUrl(): {} ", dso.getUrl());
 				if (!dso.initial(resourceCfg)) {
 					log.error("dso.initial return false.");
 					return null;
 				}
+				log.debug("dso.getUrl(): {} ", dso.getUrl());
 				dsCache.put(_urlDs.getName(), dso);
+				log.debug("dso.getUrl(): {} ", dso.getUrl());
 			}
+			log.debug("dso.getUrl(): {} ", dso.getUrl());
+			
+			
 			return dso.getConn(_urlDs);
 		} catch (Exception e) {
 			log.error("getConn[{}] Error: {}", _urlDs.getName(), e.getMessage());
@@ -79,6 +89,23 @@ public class DSManagerDao {
 		}
 	}
 
+	
+	/** 取得已經建構的DataSource */
+	protected DatasourceInfo getDatasourceInfo(String _resourceName) {
+		Dso dso = dsCache.get(_resourceName);
+		DefaultDatasourceInfoDto item = new DefaultDatasourceInfoDto();
+		item.setName(dso.getName());
+		item.setUrl(dso.getUrl());
+		item.setActive(dso.getActive());
+		item.setIdle(dso.getIdle());
+		item.setMaxActive(dso.getMaxActive());
+		item.setMaxIdle(dso.getMaxIdle());
+		item.setMaxWait(dso.getMaxWait());
+		item.setValidationQuery(dso.getValidationQuery());
+		item.setAlertMail(dso.getAlertMail());
+		return item;
+	}
+	
 	/** 取得已經建構的DataSource列表 */
 	protected List<DatasourceInfo> getDatasourceInfos() {
 		List<DatasourceInfo> list = new ArrayList<>();

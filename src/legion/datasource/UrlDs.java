@@ -3,7 +3,15 @@ package legion.datasource;
 import java.util.HashMap;
 import java.util.Map;
 
+import legion.DebugLogMark;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class UrlDs {
+	private Logger log = LoggerFactory.getLogger(UrlDs.class);
+//	private Logger log = LoggerFactory.getLogger(DebugLogMark.class);
+	
 	private String name = "";
 	private String protocol = "";
 	private String user = "";
@@ -18,12 +26,20 @@ public class UrlDs {
 	public UrlDs() {
 	}
 
+	/** 在DB的連線類型，_url放的是resourceName。如果要拿url，必須要從DSManager的datasourceInfo拿，不能從UrlDs拿。 */
 	public UrlDs(String _url) {
+		log.debug("_url: {} ", _url);
 		String str;
 		url = _url;
 		Map<String, String> map = parse(_url);
+		log.debug("map: {}", map);
 		if (map == null)
 			return;
+		log.debug("map.size(): {}", map.size());
+		for(String key: map.keySet()) {
+			log.debug("key: {}\t value:{}", key, map.get(key));
+		}
+		
 		if ((str = map.get("Name")) != null)
 			name = str;
 		if ((str = map.get("Protocal")) != null)

@@ -1,3 +1,24 @@
+Min-Hua, 2025.04.14
+[change]
+1. 新增對PostgreSQL資料庫的支援。
+2. 把DocRepo移到system的package下，先在SystemService範疇內共用。
+3. 刪除已不適用的舊程式碼。
+  -1. 資料連線相關物件。
+    -1. legion.data: Dao, MySqlDao, ObjSeqDao
+    -2. legionLab.DataSource
+  -2. ObjectModel相關：legion.kernel package下的Field, IdxEnum, LegionObject
+
+[lab]
+1. 改寫DocRepo架構。
+  - 改用ServiceModule.xml和datasource.xml架構支援。
+
+[deployment]
+1. 新增對PostgreSQL資料庫的支援。
+  -1. ServiceModule.xml預設改以PostgreSQL設定。
+  -2. datasource.xml新增PostgreSQL的連線設定。
+  -3. 執行update_db_pg.sql。
+
+
 ------------------------------------------------------------------------------
 v0.14.0 released by Min-Hua, 2023.08.14
 [change]
