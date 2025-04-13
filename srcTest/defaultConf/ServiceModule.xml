@@ -6,11 +6,17 @@
 	<!-- IntegrationService -->
 	<IntegrationService>
 		<Service name="ObjectSeqDataService" interface="legion.data.ObjectSeqDataService" imp="legion.data.service.ObjectSeqDataServiceImp">
-			<Parameter name="source" value="legionmodule" />
+			<!--<Parameter name="source" value="legionmodule" />-->
+			<Parameter name="source" value="legion_pg" />
 			<Parameter name="serverId" value="0" />
 		</Service>
+		<!--
 		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.service.system.SystemDataServiceImp">
 			<Parameter name="source" value="legionmodule" />
+		</Service>
+		-->
+		<Service name="SystemDataService" interface="legion.data.SystemDataService" imp="legion.data.service.system.SystemDataServiceImpPg">
+			<Parameter name="source" value="legion_pg" />
 		</Service>
 	</IntegrationService>
 </root>

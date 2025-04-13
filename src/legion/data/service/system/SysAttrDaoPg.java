@@ -20,7 +20,6 @@ public class SysAttrDaoPg extends PgDao {
 	// -------------------------------------------------------------------------------
 	// ------------------------------------SysAttr------------------------------------
 	private final static String TB_SYS_ATTR = "sys_attr";
-//	private final static String TB_SYS_ATTR = "legionmodule.sys_attr";
 	private final static String COL_SYS_ATTR_TYPE_IDX = "type_idx";
 	private final static String COL_SYS_ATTR_KEY = "attr_key";
 	private final static String COL_SYS_ATTR_VALUE = "attr_value";

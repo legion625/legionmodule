@@ -1,3 +1,18 @@
+Min-Hua, 2025.04.13
+[change]
+1. 新增對PostgreSQL資料庫的支援。
+
+[lab]
+1. 改寫DocRepo架構。
+  - 改用ServiceModule.xml和datasource.xml架構支援。
+
+[deployment]
+1. 新增對PostgreSQL資料庫的支援。
+  -1. ServiceModule.xml預設改以PostgreSQL設定。
+  -2. datasource.xml新增PostgreSQL的連線設定。
+  -3. 執行update_db_pg.sql。
+
+
 ------------------------------------------------------------------------------
 v0.14.0 released by Min-Hua, 2023.08.14
 [change]

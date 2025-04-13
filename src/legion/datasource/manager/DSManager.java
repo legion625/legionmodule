@@ -1,6 +1,8 @@
 package legion.datasource.manager;
 
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import legion.BusinessServiceFactory;
 import legion.DebugLogMark;
@@ -19,6 +22,7 @@ import legion.datasource.TransactionInfo;
 import legion.datasource.UrlDs;
 import legion.util.DateFormatUtil;
 import legion.util.DateUtil;
+import legion.util.LogUtil;
 
 /**
  * 提供資料來源服務的窗口，包含Connection和Transaction管控機制。
@@ -135,9 +139,41 @@ public class DSManager {
 	}
 	
 	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
-	public Object getConn(String _url) {
-		return getConn(_url, Integer.toString(Thread.currentThread().hashCode()));
+//	public Object getConn(String _url) {
+	public Connection getConn(String _resourceName) {
+		Connection conn = (Connection) getConn(_resourceName, Integer.toString(Thread.currentThread().hashCode()));
+		DatasourceInfo dsInfo = getDatasourceInfo(_resourceName);
+		try {
+			if (dsInfo != null) {
+				log.debug("dsInfo.getUrl(): {}", dsInfo.getUrl());
+				String currentSchema = extractCurrentSchema(dsInfo.getUrl());
+				log.debug("currentSchema: {}", currentSchema);
+				conn.setSchema(currentSchema==null?"":currentSchema);
+				log.debug("conn.getSchema(): {}", conn.getSchema());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			LogUtil.log(log, e, Level.ERROR);
+		}
+		
+		return conn;
 	}
+	
+	/** for PostgreSql，如果在url後面接上schema，要在conn中設定。 */
+	private String extractCurrentSchema(String jdbcUrl) {
+        if (jdbcUrl == null || !jdbcUrl.contains("currentSchema=")) {
+            return null;
+        }
+
+        // 抓取 currentSchema 後的字串
+        int start = jdbcUrl.indexOf("currentSchema=") + "currentSchema=".length();
+        int end = jdbcUrl.indexOf('&', start); // 如果有其他參數
+        if (end == -1) {
+            end = jdbcUrl.length();
+        }
+
+        return jdbcUrl.substring(start, end);
+    }
 
 	/** 取得所需的Datasource Connection並以目前Thread物件的hashCode為登記使用標的。 */
 	@Deprecated

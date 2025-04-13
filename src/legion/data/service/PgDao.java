@@ -46,55 +46,56 @@ public abstract class PgDao extends AbstractDao {
 	}
 
 	protected Connection getConn() {
-		Connection conn = DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
-		log.debug("source: {}", source);
-//		List<DatasourceInfo> dsList  =getDsManager().getDatasourceInfos(); 
-		
-		DatasourceInfo dsInfo = getDsManager().getDatasourceInfo(source);
-//		ConcurrentHashMap<String, UrlDs> urlDsMap  =getDsManager(). getUrlDsMap();
-//		for(String  key: urlDsMap.keySet()) {
-//			log.debug("key: {}\t url: {}", key, urlDsMap.get(key).getUrl());
+//		Connection conn = DataFO.isEmptyString(source) ? null : (Connection) getDsManager().getConn(source);
+//		log.debug("source: {}", source);
+////		List<DatasourceInfo> dsList  =getDsManager().getDatasourceInfos(); 
+//		
+//		DatasourceInfo dsInfo = getDsManager().getDatasourceInfo(source);
+////		ConcurrentHashMap<String, UrlDs> urlDsMap  =getDsManager(). getUrlDsMap();
+////		for(String  key: urlDsMap.keySet()) {
+////			log.debug("key: {}\t url: {}", key, urlDsMap.get(key).getUrl());
+////		}
+//		
+////		log.debug("dsList.size(): {}", dsList.size());
+////		for(DatasourceInfo ds:dsList) {
+////			log.debug("ds.getName(): {}", ds.getName());
+////			log.debug("ds.getUrl(): {}", ds.getUrl());
+////			
+////		}
+//		try {
+//			if (dsInfo != null) {
+//				log.debug("dsInfo.getUrl(): {}", dsInfo.getUrl());
+//				String currentSchema = extractCurrentSchema(dsInfo.getUrl());
+//				log.debug("currentSchema: {}", currentSchema);
+//				conn.setSchema(currentSchema==null?"":currentSchema);
+////				conn.setSchema("legionmodule");
+//				log.debug("conn.getSchema(): {}", conn.getSchema());
+//				
+////				if(!DataFO.isEmptyString(currentSchema))
+//			}
+////			String currentSchema = extractCurrentSchema();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 //		}
-		
-//		log.debug("dsList.size(): {}", dsList.size());
-//		for(DatasourceInfo ds:dsList) {
-//			log.debug("ds.getName(): {}", ds.getName());
-//			log.debug("ds.getUrl(): {}", ds.getUrl());
-//			
-//		}
-		try {
-			if (dsInfo != null) {
-				log.debug("dsInfo.getUrl(): {}", dsInfo.getUrl());
-				String currentSchema = extractCurrentSchema(dsInfo.getUrl());
-				log.debug("currentSchema: {}", currentSchema);
-				conn.setSchema(currentSchema==null?"":currentSchema);
-//				conn.setSchema("legionmodule");
-				log.debug("conn.getSchema(): {}", conn.getSchema());
-				
-//				if(!DataFO.isEmptyString(currentSchema))
-			}
-//			String currentSchema = extractCurrentSchema();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return conn;
+//		return conn;
+		return getDsManager().getConn(source);
 	}
 	
-	private String extractCurrentSchema(String jdbcUrl) {
-        if (jdbcUrl == null || !jdbcUrl.contains("currentSchema=")) {
-            return null;
-        }
-
-        // 抓取 currentSchema 後的字串
-        int start = jdbcUrl.indexOf("currentSchema=") + "currentSchema=".length();
-        int end = jdbcUrl.indexOf('&', start); // 如果有其他參數
-        if (end == -1) {
-            end = jdbcUrl.length();
-        }
-
-        return jdbcUrl.substring(start, end);
-    }
+//	private String extractCurrentSchema(String jdbcUrl) {
+//        if (jdbcUrl == null || !jdbcUrl.contains("currentSchema=")) {
+//            return null;
+//        }
+//
+//        // 抓取 currentSchema 後的字串
+//        int start = jdbcUrl.indexOf("currentSchema=") + "currentSchema=".length();
+//        int end = jdbcUrl.indexOf('&', start); // 如果有其他參數
+//        if (end == -1) {
+//            end = jdbcUrl.length();
+//        }
+//
+//        return jdbcUrl.substring(start, end);
+//    }
 	
 
 	public boolean testCallback() {
