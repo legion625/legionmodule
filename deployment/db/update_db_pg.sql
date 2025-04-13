@@ -1,5 +1,4 @@
--- dev_mh_pc
-
+-- 0.14.0 -> 0.15.0
 CREATE TABLE sys_attr (
   uid VARCHAR NOT NULL,
   type_idx SMALLINT,
@@ -26,5 +25,7 @@ CREATE TABLE sys_doc_file (
   object_update_time BIGINT,
   PRIMARY KEY (uid)
 );
+
+-- dev_mh_pc
 
 -- unstaging

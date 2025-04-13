@@ -1,17 +1,17 @@
 CREATE TABLE sys_attr (
-  uid VARCHAR NOT NULL,
-  type_idx SMALLINT,
-  attr_key VARCHAR,
-  attr_value VARCHAR,
-  object_create_time BIGINT,
-  object_update_time BIGINT,
-  PRIMARY KEY (uid)
+    uid character varying NOT NULL,
+    type_idx smallint,
+    attr_key character varying,
+    attr_value character varying,
+    object_create_time bigint,
+    object_update_time bigint,
+    PRIMARY KEY (uid)
 );
 
 CREATE TABLE system_seq (
-  item_id VARCHAR NOT NULL,
-  current_num BIGINT,
-  last_num BIGINT,
-  max_num BIGINT,
-  PRIMARY KEY (item_id)
+    item_id character varying NOT NULL,
+    current_num bigint,
+    last_num bigint,
+    max_num bigint,
+    PRIMARY KEY (item_id)
 );
