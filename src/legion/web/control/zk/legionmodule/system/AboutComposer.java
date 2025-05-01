@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Label;
 
+import legion.LegionContext;
 import legion.SystemInfoDefault;
 import legion.util.LogUtil;
 import legion.web.zk.ZkNotification;
@@ -16,6 +17,8 @@ public class AboutComposer extends SelectorComposer<Component> {
 	// -------------------------------------------------------------------------------
 	@Wire
 	private Label lbSysVer;
+	@Wire
+	private Label lbLegionmoduleVer;
 
 	// -------------------------------------------------------------------------------
 	@Override
@@ -31,5 +34,6 @@ public class AboutComposer extends SelectorComposer<Component> {
 
 	private void init() {
 		lbSysVer.setValue(SystemInfoDefault.getInstance().getVersion());
+		lbLegionmoduleVer.setValue(LegionContext.getInstance().getVersion());
 	}
 }

@@ -1,3 +1,17 @@
+Min-Hua, 2025.05.01
+[change]
+1. 調整About.zul：新增ZK version和Legionmodule顯示。
+2. 提供HealthCheckServlet，作為在Render上部署時，用來回應Health Check的Java servlet(伺服器端程式)。
+  - 當部署於Renderer時，需在web.xml新增servlet的宣告。
+    <servlet>
+        <servlet-name>HealthCheckServlet</servlet-name>
+        <servlet-class>legion.web.HealthCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HealthCheckServlet</servlet-name> <!-- 和servlet的name要對應。 -->
+        <url-pattern>/healthz</url-pattern> <!-- render上的預設值-->
+    </servlet-mapping>
+
 ------------------------------------------------------------------------------
 v0.15.0 released by Min-Hua, 2025.04.14
 [change]
