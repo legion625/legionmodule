@@ -30,9 +30,8 @@
 		navigateUrl="/legionLab/filter/filterDemo.zul"></MenuItem>
 	</MenuItem>
 	<MenuItem text="進階管理"></MenuItem>
-	<MenuItem text="系統管理">
-		<MenuItem text="系統資訊" iconSclass="fa fa-caret-right fa-fw"
-		navigateUrl="/legionmodule/system/sysAttrPage.zul"
-		></MenuItem>
+	<MenuItem text="System">
+		<MenuItem text="About" iconSclass="fa fa-genderless fa-fw" navigateUrl="/legionmodule/system/about.zul"></MenuItem>
+		<MenuItem text="系統資訊" iconSclass="fa fa-genderless fa-fw" navigateUrl="/legionmodule/system/sysAttrPage.zul"></MenuItem>
 	</MenuItem>
 </Menu>
