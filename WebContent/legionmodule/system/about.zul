@@ -1,12 +1,17 @@
 <?page title="new page title" contentType="text/html;charset=UTF-8"?>
 <zk>
-<div align="center">
-
-<window title="About" border="normal" width="500px" apply="legion.web.control.zk.legionmodule.system.AboutComposer">
-<hlayout>
-<label value="System version: "/>
-<label id="lbSysVer"></label>
-</hlayout>
-</window>
-</div>
+	<div align="center">
+		<window title="About" border="normal" width="500px"
+			apply="legion.web.control.zk.legionmodule.system.AboutComposer">
+			<hlayout>
+				<label value="System version: " />
+				<label id="lbSysVer"></label>
+			</hlayout>
+			<hlayout>
+				<label value="Legionmodule version: " />
+				<label id="lbLegionmoduleVer"></label>
+			</hlayout>
+			<label value="ZK version: ${desktop.webApp.version}" />
+		</window>
+	</div>
 </zk>
