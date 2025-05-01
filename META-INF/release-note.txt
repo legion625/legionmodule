@@ -11,6 +11,7 @@ Min-Hua, 2025.05.01
         <servlet-name>HealthCheckServlet</servlet-name> <!-- 和servlet的name要對應。 -->
         <url-pattern>/healthz</url-pattern> <!-- render上的預設值-->
     </servlet-mapping>
+3. 提供AesEncryptionUtil和StrHasher的工具類別。
 
 ------------------------------------------------------------------------------
 v0.15.0 released by Min-Hua, 2025.04.14

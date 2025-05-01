@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import legion.data.SystemDataService;
 import legion.system.SysAttr;
+import legion.util.AesEncryptionUtil;
+import legion.util.StrHasher;
 
 public class LegionTest extends AbstractLegionInitTest {
 	
@@ -59,4 +61,25 @@ public class LegionTest extends AbstractLegionInitTest {
 		log.debug("{}\t{}", str1, str2);
 	}
 	
+	@Test
+	public void testAesEncrptionUtil() throws Exception {
+		String aesKey = "MySecret16KeyABC";
+		String text1 = "abcdefgABCDEFG123456789!@#";
+		String text2 =AesEncryptionUtil.encrypt(aesKey, text1);
+		String text3 =AesEncryptionUtil.decrypt(aesKey, text2);
+		log.debug("text1: {}", text1);
+		log.debug("text2: {}", text2);
+		log.debug("text3: {}", text3);
+		
+	}
+	
+	@Test
+	public void testStrHasher() throws Exception {
+		String text1 = "abcdefgABCDEFG123456789!@#";
+		String text2 = StrHasher.hashPassword(text1);
+		boolean b = StrHasher.verifyPassword(text1, text2);
+		log.debug("text1: {}", text1);
+		log.debug("text2: {}", text2);
+		log.debug("verifyPassword: {}", b);
+	}
 }
